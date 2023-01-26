@@ -1,0 +1,37 @@
+{
+	"schemaVersion": 1,
+	"id": "ancientartifacts",
+	"version": "${version}",
+	"name": "Ancient Artifacts Mod",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"EA6LE WIN6S"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "MIT License",
+	"icon": "assets/ancientartifacts/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.eagle.ancientartifacts.AncientArtifacts"
+		],
+		"client": [
+			"net.eagle.ancientartifacts.AncientArtifactsClient"
+		]
+	},
+	"mixins": [
+		"ancientartifacts.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.14.13",
+		"minecraft": "~1.19.2",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
