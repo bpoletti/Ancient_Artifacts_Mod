@@ -10,7 +10,9 @@ import net.minecraft.util.registry.Registry;
 public class ModItems {
     
     public static final Item WARDEN_HEART = registerItem("warden_heart",
-    new Item(new FabricItemSettings().group(ItemGroup.MISC)));
+        new Item(new FabricItemSettings().group(ItemGroup.MISC)));
+    public static final Item ENDER_ROD = registerItem("ender_rod",
+        new Item(new FabricItemSettings().group(ItemGroup.MISC)));
 
     
 
