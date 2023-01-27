@@ -11,7 +11,11 @@ public class ModItems {
     
     public static final Item WARDEN_HEART = registerItem("warden_heart",
         new Item(new FabricItemSettings().group(ItemGroup.MISC)));
+    
     public static final Item ENDER_ROD = registerItem("ender_rod",
+        new Item(new FabricItemSettings().group(ItemGroup.MISC)));
+    
+    public static final Item MYCELIUM_DUST = registerItem("mycelium_dust",
         new Item(new FabricItemSettings().group(ItemGroup.MISC)));
 
     
