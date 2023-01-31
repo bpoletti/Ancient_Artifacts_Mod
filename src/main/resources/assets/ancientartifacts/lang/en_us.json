@@ -1,6 +1,13 @@
 {
     "item.ancientartifacts.warden_heart": "Warden's Heart",
     "item.ancientartifacts.ender_rod": "Ender Rod",
-    "item.ancientartifacts.mycelium_dust": "Mycelium Dust"
+    "item.ancientartifacts.mycelium_dust": "Mycelium Dust",
+    "item.ancientartifacts.black_ice": "Black Ice",
+    "item.ancientartifacts.red_ice": "Red Ice",
+    "item.ancientartifacts.nether_grass": "Nether Grass",
+    "item.ancientartifacts.ochre_firefly_bud": "Ochre Firefly Bud",
+    "item.ancientartifacts.verdant_firefly_bud": "Verdant Firefly Bud",
+    "item.ancientartifacts.pearlescent_firefly_bud": "Pearlescent Firefly Bud",
+    "item.ancientartifacts.firefly_orb": "Firefly Orb"
     
 }

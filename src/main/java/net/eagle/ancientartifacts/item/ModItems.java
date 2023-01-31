@@ -17,6 +17,27 @@ public class ModItems {
     
     public static final Item MYCELIUM_DUST = registerItem("mycelium_dust",
         new Item(new FabricItemSettings().group(ItemGroup.MISC)));
+    
+    public static final Item BLACK_ICE = registerItem("black_ice",
+        new Item(new FabricItemSettings().group(ItemGroup.MISC)));
+        
+    public static final Item RED_ICE = registerItem("red_ice",
+        new Item(new FabricItemSettings().group(ItemGroup.MISC)));
+        
+    public static final Item NETHER_GRASS = registerItem("nether_grass",
+        new Item(new FabricItemSettings().group(ItemGroup.MISC)));
+        
+    public static final Item OCHRE_FIREFLY_BUD = registerItem("ochre_firefly_bud",
+        new Item(new FabricItemSettings().group(ItemGroup.MISC)));
+        
+    public static final Item VERDANT_FIREFLY_BUD = registerItem("verdant_firefly_bud",
+        new Item(new FabricItemSettings().group(ItemGroup.MISC)));
+        
+    public static final Item PEARLESCENT_FIREFLY_BUD = registerItem("pearlescent_firefly_bud",
+        new Item(new FabricItemSettings().group(ItemGroup.MISC)));
+        
+    public static final Item FIREFLY_ORB = registerItem("firefly_orb",
+        new Item(new FabricItemSettings().group(ItemGroup.MISC)));
 
     
 
