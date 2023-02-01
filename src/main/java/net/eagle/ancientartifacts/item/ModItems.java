@@ -25,7 +25,7 @@ public class ModItems {
         new Item(new FabricItemSettings().group(ItemGroup.MISC)));
         
     public static final Item NETHER_GRASS = registerItem("nether_grass",
-        new Item(new FabricItemSettings().group(ItemGroup.MISC)));
+        new Item(new FabricItemSettings().group(ItemGroup.BREWING)));
         
     public static final Item OCHRE_FIREFLY_BUD = registerItem("ochre_firefly_bud",
         new Item(new FabricItemSettings().group(ItemGroup.MISC)));
@@ -37,7 +37,28 @@ public class ModItems {
         new Item(new FabricItemSettings().group(ItemGroup.MISC)));
         
     public static final Item FIREFLY_ORB = registerItem("firefly_orb",
+        new Item(new FabricItemSettings().group(ItemGroup.BREWING))); 
+        
+    public static final Item TOTEM_OF_ORDER = registerItem("totem_of_order",
+        new Item(new FabricItemSettings().group(ItemGroup.MISC))); 
+        
+    public static final Item TOTEM_OF_CHAOS = registerItem("totem_of_chaos",
         new Item(new FabricItemSettings().group(ItemGroup.MISC)));
+        
+    public static final Item EVOKER_KEY = registerItem("evoker_key",
+        new Item(new FabricItemSettings().group(ItemGroup.MISC)));
+        
+    public static final Item ELDER_GUARDIAN_SCALES = registerItem("elder_guardian_scales",
+        new Item(new FabricItemSettings().group(ItemGroup.BREWING)));
+        
+    public static final Item END_STAFF = registerItem("end_staff",
+        new Item(new FabricItemSettings().group(ItemGroup.COMBAT)));
+        
+    public static final Item ETHER_LEVER = registerItem("ether_lever",
+        new Item(new FabricItemSettings().group(ItemGroup.MISC)));
+        
+    public static final Item ELIXER_OF_DRAKE = registerItem("elixer_of_drake",
+        new Item(new FabricItemSettings().group(ItemGroup.BREWING)));
 
     
 
