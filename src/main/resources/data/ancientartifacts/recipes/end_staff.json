@@ -1,0 +1,22 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "  I",
+        " S ",
+        "E  "
+    ],
+    "key": {
+        "I": {
+            "item": "minecraft:ender_eye"
+        },
+        "S": {
+            "item": "minecraft:nether_star"
+        },
+        "E": {
+            "item": "ancientartifacts:ender_rod"
+        }
+    },
+    "result": {
+        "item": "ancientartifacts:end_staff"
+    }
+}
