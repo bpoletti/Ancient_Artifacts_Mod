@@ -57,10 +57,6 @@ public class ModItems {
     public static final Item ETHER_LEVER = registerItem("ether_lever",
         new Item(new FabricItemSettings().group(ItemGroup.MISC)));
         
-    public static final Item ELIXER_OF_DRAKE = registerItem("elixer_of_drake",
-        new Item(new FabricItemSettings().group(ItemGroup.BREWING)));
-
-    
 
 
     private static Item registerItem(String name, Item item) {
