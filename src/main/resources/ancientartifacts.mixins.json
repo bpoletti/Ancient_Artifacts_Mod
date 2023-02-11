@@ -4,8 +4,9 @@
 	"package": "net.eagle.ancientartifacts.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-		
+		"DisabledEndPortal"
 	],
+	"client": [],
 	"injectors": {
 		"defaultRequire": 1
 	}
