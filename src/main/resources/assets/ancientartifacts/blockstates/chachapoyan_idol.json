@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "ancientartifacts:block/chachapoyan_idol"
+    },
+    "facing=south": {
+      "model": "ancientartifacts:block/chachapoyan_idol",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "ancientartifacts:block/chachapoyan_idol",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "ancientartifacts:block/chachapoyan_idol",
+      "y": 90
+    }
+  }
+}
