@@ -56,6 +56,9 @@ public class ModItems {
         
     public static final Item ETHER_LEVER = registerItem("ether_lever",
         new Item(new FabricItemSettings().group(ItemGroup.MISC)));
+
+    public static final Item ANKH_PENDANT = registerItem("ankh_pendant",
+        new Item(new FabricItemSettings().group(ItemGroup.MISC)));
         
 
 
