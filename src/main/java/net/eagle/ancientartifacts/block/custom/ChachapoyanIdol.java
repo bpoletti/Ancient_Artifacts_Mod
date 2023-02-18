@@ -22,7 +22,7 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
         super(settings);
     }
 
-    private static VoxelShape SHAPE = Block.createCuboidShape(2, 0, 1, 14, 15.5, 14.5);
+    private static VoxelShape SHAPE = Block.createCuboidShape(1, 0, 2, 14, 15.5, 14);
 
 
     @Override

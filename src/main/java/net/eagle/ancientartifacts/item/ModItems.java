@@ -59,6 +59,9 @@ public class ModItems {
 
     public static final Item ANKH_PENDANT = registerItem("ankh_pendant",
         new Item(new FabricItemSettings().group(ItemGroup.MISC)));
+
+    public static final Item ORB_INFINIUM = registerItem("orb_infinium",
+        new Item(new FabricItemSettings().group(ItemGroup.MISC)));
         
 
 
