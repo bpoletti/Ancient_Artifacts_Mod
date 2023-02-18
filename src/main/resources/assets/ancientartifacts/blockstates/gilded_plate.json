@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "ancientartifacts:block/gilded_plate"
+    },
+    "facing=south": {
+      "model": "ancientartifacts:block/gilded_plate",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "ancientartifacts:block/gilded_plate",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "ancientartifacts:block/gilded_plate",
+      "y": 90
+    }
+  }
+}

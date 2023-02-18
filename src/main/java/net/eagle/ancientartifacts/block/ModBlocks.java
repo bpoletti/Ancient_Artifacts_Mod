@@ -2,6 +2,7 @@ package net.eagle.ancientartifacts.block;
 
 import net.eagle.ancientartifacts.AncientArtifacts;
 import net.eagle.ancientartifacts.block.custom.ChachapoyanIdol;
+import net.eagle.ancientartifacts.block.custom.GildedPlate;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
@@ -20,6 +21,9 @@ public class ModBlocks {
     public static final Block CHACHAPOYAN_IDOL = registerBlock("chachapoyan_idol",
     new ChachapoyanIdol(FabricBlockSettings.of(Material.METAL).strength(4f).
             requiresTool().nonOpaque()), ItemGroup.MISC);
+
+    public static final Block GILDED_PLATE = registerBlock("gilded_plate",
+            new GildedPlate(FabricBlockSettings.of(Material.STONE).strength(4f).requiresTool()), ItemGroup.MISC);
 
 
     private static Block registerBlock(String name, Block block, ItemGroup tab) {
