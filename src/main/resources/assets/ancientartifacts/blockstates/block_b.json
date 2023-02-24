@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "ancientartifacts:block/block_b"
+    },
+    "facing=south": {
+      "model": "ancientartifacts:block/block_b",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "ancientartifacts:block/block_b",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "ancientartifacts:block/block_b",
+      "y": 90
+    }
+  }
+}

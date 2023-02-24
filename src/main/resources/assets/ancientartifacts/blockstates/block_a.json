@@ -1,0 +1,10 @@
+{
+  "variants": {
+     "block_a_v2=false": {
+      "model": "ancientartifacts:block/block_a"
+    },
+    "block_a_v2=true": {
+      "model": "ancientartifacts:block/block_a_v2"
+    }
+  }
+}
