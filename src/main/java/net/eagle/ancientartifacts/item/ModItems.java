@@ -1,6 +1,7 @@
 package net.eagle.ancientartifacts.item;
 
 import net.eagle.ancientartifacts.AncientArtifacts;
+import net.eagle.ancientartifacts.item.custom.ItemC;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -40,13 +41,13 @@ public class ModItems {
         new Item(new FabricItemSettings().group(ItemGroup.BREWING))); 
         
     public static final Item TOTEM_OF_ORDER = registerItem("totem_of_order",
-        new Item(new FabricItemSettings().group(ItemGroup.MISC))); 
+        new Item(new FabricItemSettings().group(ItemGroup.MISC).maxCount(1)));
         
     public static final Item TOTEM_OF_CHAOS = registerItem("totem_of_chaos",
-        new Item(new FabricItemSettings().group(ItemGroup.MISC)));
+        new Item(new FabricItemSettings().group(ItemGroup.MISC).maxCount(1)));
         
     public static final Item EVOKER_KEY = registerItem("evoker_key",
-        new Item(new FabricItemSettings().group(ItemGroup.MISC)));
+        new Item(new FabricItemSettings().group(ItemGroup.MISC).maxCount(1)));
         
     public static final Item ELDER_GUARDIAN_SCALES = registerItem("elder_guardian_scales",
         new Item(new FabricItemSettings().group(ItemGroup.BREWING)));
@@ -58,10 +59,13 @@ public class ModItems {
         new Item(new FabricItemSettings().group(ItemGroup.MISC)));
 
     public static final Item ANKH_PENDANT = registerItem("ankh_pendant",
-        new Item(new FabricItemSettings().group(ItemGroup.MISC)));
+        new Item(new FabricItemSettings().group(ItemGroup.MISC).maxCount(1)));
 
     public static final Item ORB_INFINIUM = registerItem("orb_infinium",
-        new Item(new FabricItemSettings().group(ItemGroup.MISC)));
+        new Item(new FabricItemSettings().group(ItemGroup.MISC).maxCount(1)));
+
+    public static final Item ITEM_C = registerItem("item_c",
+        new ItemC(new FabricItemSettings().group(ItemGroup.MISC)));
         
 
 
