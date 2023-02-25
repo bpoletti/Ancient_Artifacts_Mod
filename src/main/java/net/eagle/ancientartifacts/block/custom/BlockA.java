@@ -62,6 +62,9 @@ public class BlockA extends Block {
                     return ActionResult.SUCCESS;
                 } else {
                     BlockState blockState2 = state.with(BlockA.BLOCK_A_V4, true);
+                    if(!player.isCreative()) {
+                        player.getStackInHand(hand).decrement(1);
+                    }
                     world.setBlockState(pos, blockState2);
                     return ActionResult.CONSUME;
                 }
