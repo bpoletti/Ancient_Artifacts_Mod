@@ -20,7 +20,7 @@ public class ItemC extends Item {
         BlockPos blockPos = context.getBlockPos();
         BlockState blockState = world.getBlockState(blockPos);
 
-        if (blockState.isOf(ModBlocks.BLOCK_A) && !(Boolean) blockState.get(BlockA.BLOCK_A_V3)) {
+        if (blockState.isOf(ModBlocks.BLOCK_A) && !(Boolean) blockState.get(BlockA.BLOCK_A_V3) && blockState.get(BlockA.BLOCK_A_V2)) {
             if (world.isClient) {
                 return ActionResult.SUCCESS;
             } else {
