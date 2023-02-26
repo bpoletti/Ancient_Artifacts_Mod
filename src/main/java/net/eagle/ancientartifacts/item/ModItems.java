@@ -50,7 +50,7 @@ public class ModItems {
         new Item(new FabricItemSettings().group(ItemGroup.MISC).maxCount(1)));
         
     public static final Item ELDER_GUARDIAN_SCALES = registerItem("elder_guardian_scales",
-        new Item(new FabricItemSettings().group(ItemGroup.BREWING)));
+        new Item(new FabricItemSettings().group(ItemGroup.MISC)));
         
     public static final Item END_STAFF = registerItem("end_staff",
         new Item(new FabricItemSettings().group(ItemGroup.COMBAT)));

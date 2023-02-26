@@ -1,18 +1,33 @@
 {
   "variants": {
-    "facing=north": {
+    "facing=north,key=false": {
       "model": "ancientartifacts:block/chachapoyan_idol"
     },
-    "facing=south": {
+    "facing=south,key=false": {
       "model": "ancientartifacts:block/chachapoyan_idol",
       "y": 180
     },
-    "facing=west": {
+    "facing=west,key=false": {
       "model": "ancientartifacts:block/chachapoyan_idol",
       "y": 270
     },
-    "facing=east": {
+    "facing=east,key=false": {
       "model": "ancientartifacts:block/chachapoyan_idol",
+      "y": 90
+    },
+    "facing=north,key=true": {
+      "model": "ancientartifacts:block/chachapoyan_idol_key"
+    },
+    "facing=south,key=true": {
+      "model": "ancientartifacts:block/chachapoyan_idol_key",
+      "y": 180
+    },
+    "facing=west,key=true": {
+      "model": "ancientartifacts:block/chachapoyan_idol_key",
+      "y": 270
+    },
+    "facing=east,key=true": {
+      "model": "ancientartifacts:block/chachapoyan_idol_key",
       "y": 90
     }
   }
