@@ -31,12 +31,14 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
 
     public static final BooleanProperty KEY = BooleanProperty.of("key");
     public static final BooleanProperty PENDANT = BooleanProperty.of("pendant");
+    public static final BooleanProperty SCALES = BooleanProperty.of("scales");
     public ChachapoyanIdol(Settings settings) {
         super(settings);
         setDefaultState(getStateManager().getDefaultState()
         .with(FACING, Direction.NORTH)
         .with(KEY, false)
-        .with(PENDANT, false));
+        .with(PENDANT, false)
+        .with(SCALES, false));
     }
 
     @Override
@@ -47,23 +49,33 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack heldItem = player.getStackInHand(hand);
-        if(heldItem.getItem() == ModItems.ANKH_PENDANT
-                && !state.get(ChachapoyanIdol.PENDANT)
-                && state.get(ChachapoyanIdol.KEY)){
-            world.setBlockState(pos, state.with(ChachapoyanIdol.PENDANT, true));
-            if(!player.isCreative()){
-                player.getStackInHand(hand).decrement(1);
+        if (heldItem.getItem() == ModItems.ELDER_GUARDIAN_SCALES) {
+            if (!state.get(ChachapoyanIdol.SCALES)
+                    && state.get(ChachapoyanIdol.PENDANT)) {
+                world.setBlockState(pos, state.with(ChachapoyanIdol.SCALES, true));
+                if (!player.isCreative()) {
+                    heldItem.decrement(1);
+                }
+                return ActionResult.CONSUME;
             }
-            return ActionResult.CONSUME;
-        } else {
-            if(heldItem.getItem() == ModItems.EVOKER_KEY
-                    && !state.get(ChachapoyanIdol.KEY)){
+        } else if (heldItem.getItem() == ModItems.ANKH_PENDANT) {
+            if (!state.get(ChachapoyanIdol.PENDANT)
+                    && state.get(ChachapoyanIdol.KEY)) {
+                world.setBlockState(pos, state.with(ChachapoyanIdol.PENDANT, true));
+                if (!player.isCreative()) {
+                    heldItem.decrement(1);
+                }
+                return ActionResult.CONSUME;
+            }
+        } else if (heldItem.getItem() == ModItems.EVOKER_KEY) {
+            if (!state.get(ChachapoyanIdol.KEY)) {
                 world.setBlockState(pos, state.with(ChachapoyanIdol.KEY, true));
                 return ActionResult.CONSUME;
-            } else {
-                return ActionResult.PASS;
             }
         }
+        return ActionResult.PASS;
+
+
 
     }
 
@@ -86,7 +98,7 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
 
-        builder.add(FACING, KEY, PENDANT);
+        builder.add(FACING, KEY, PENDANT, SCALES);
     }
 
     static {
