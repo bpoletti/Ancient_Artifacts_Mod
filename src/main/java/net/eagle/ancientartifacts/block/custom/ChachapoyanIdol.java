@@ -1,13 +1,18 @@
 package net.eagle.ancientartifacts.block.custom;
 
 import net.eagle.ancientartifacts.item.ModItems;
+import net.eagle.ancientartifacts.potion.ModPotions;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.ShapeContext;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.PotionItem;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionUtil;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
@@ -32,13 +37,16 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
     public static final BooleanProperty KEY = BooleanProperty.of("key");
     public static final BooleanProperty PENDANT = BooleanProperty.of("pendant");
     public static final BooleanProperty SCALES = BooleanProperty.of("scales");
+    public static final BooleanProperty ELDERIAN_MONUMENT = BooleanProperty.of("elderian_monument");
+
     public ChachapoyanIdol(Settings settings) {
         super(settings);
         setDefaultState(getStateManager().getDefaultState()
-        .with(FACING, Direction.NORTH)
-        .with(KEY, false)
-        .with(PENDANT, false)
-        .with(SCALES, false));
+                .with(FACING, Direction.NORTH)
+                .with(KEY, false)
+                .with(PENDANT, false)
+                .with(SCALES, false)
+                .with(ELDERIAN_MONUMENT, false));
     }
 
     @Override
@@ -49,7 +57,21 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack heldItem = player.getStackInHand(hand);
-        if (heldItem.getItem() == ModItems.ELDER_GUARDIAN_SCALES) {
+        Potion elixir = PotionUtil.getPotion(heldItem);
+        if (heldItem.getItem() instanceof PotionItem
+                && elixir == ModPotions.ELIXIR_OF_DRAKE) {
+            if(!state.get(ChachapoyanIdol.ELDERIAN_MONUMENT)
+                    && state.get(ChachapoyanIdol.SCALES)){
+                world.setBlockState(pos, state.with(ChachapoyanIdol.ELDERIAN_MONUMENT, true));
+                if(!player.isCreative()){
+                    heldItem.decrement(1);
+                }
+                ItemStack orb = new ItemStack(ModItems.ORB_INFINIUM);
+                BlockPos dropPos = pos.up();
+                world.spawnEntity(new ItemEntity(world, dropPos.getX(), dropPos.getY(), dropPos.getZ(), orb));
+                return ActionResult.CONSUME;
+            }
+        } else if (heldItem.getItem() == ModItems.ELDER_GUARDIAN_SCALES) {
             if (!state.get(ChachapoyanIdol.SCALES)
                     && state.get(ChachapoyanIdol.PENDANT)) {
                 world.setBlockState(pos, state.with(ChachapoyanIdol.SCALES, true));
@@ -76,7 +98,6 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
         return ActionResult.PASS;
 
 
-
     }
 
     @Nullable
@@ -98,7 +119,7 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
 
-        builder.add(FACING, KEY, PENDANT, SCALES);
+        builder.add(FACING, KEY, PENDANT, SCALES, ELDERIAN_MONUMENT);
     }
 
     static {

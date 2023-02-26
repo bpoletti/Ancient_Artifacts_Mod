@@ -24,6 +24,25 @@
     "block.ancientartifacts.chachapoyan_idol": "Chachapoyan Idol",
     "block.ancientartifacts.gilded_plate": "Gilded Plate",
     "block.ancientartifacts.block_a": "Block A",
-    "block.ancientartifacts.block_b": "Block B"
+    "block.ancientartifacts.block_b": "Block B",
+
+    "item.minecraft.potion.effect.elixir_base_i": "Elixir Base I",
+    "item.minecraft.splash_potion.effect.elixir_base_i": "Splash Elixir Base I",
+    "item.minecraft.lingering_potion.effect.elixir_base_i": "Lingering Elixir Base I",
+    "item.minecraft.potion.effect.elixir_base_ii": "Elixir Base II",
+    "item.minecraft.splash_potion.effect.elixir_base_ii": "Splash Elixir Base II",
+    "item.minecraft.lingering_potion.effect.elixir_base_ii": "Lingering Elixir Base II",
+    "item.minecraft.potion.effect.elixir_base_iii": "Elixir Base III",
+    "item.minecraft.splash_potion.effect.elixir_base_iii": "Splash Elixir Base III",
+    "item.minecraft.lingering_potion.effect.elixir_base_iii": "Lingering Elixir Base III",
+    "item.minecraft.potion.effect.elixir_base_iv": "Elixir Base IV",
+    "item.minecraft.splash_potion.effect.elixir_base_iv": "Splash Elixir Base IV",
+    "item.minecraft.lingering_potion.effect.elixir_base_iv": "Lingering Elixir Base IV",
+    "item.minecraft.potion.effect.elixir_base_v": "Elixir Base V",
+    "item.minecraft.splash_potion.effect.elixir_base_v": "Splash Elixir Base V",
+    "item.minecraft.lingering_potion.effect.elixir_base_v": "Lingering Elixir Base V",
+    "item.minecraft.potion.effect.elixir_of_drake": "Elixir of Drake",
+    "item.minecraft.splash_potion.effect.elixir_of_drake": "Splash Elixir of Drake",
+    "item.minecraft.lingering_potion.effect.elixir_of_drake": "Lingering Elixir of Drake"
 
 }
