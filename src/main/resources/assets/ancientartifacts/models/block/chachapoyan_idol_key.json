@@ -22,7 +22,7 @@
 		"19": "ancientartifacts:block/nose_gold",
 		"20": "ancientartifacts:block/top_head",
 		"21": "ancientartifacts:block/upper_eye_gold",
-		"particle": "ancientartifacts:block/brow_gold"
+		"particle": "ancientartifacts:block/gold_base"
 	},
 	"elements": [
 		{

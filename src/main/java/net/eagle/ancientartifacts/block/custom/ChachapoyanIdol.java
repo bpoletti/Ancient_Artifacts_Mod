@@ -30,11 +30,13 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
     private static VoxelShape SHAPE;
 
     public static final BooleanProperty KEY = BooleanProperty.of("key");
+    public static final BooleanProperty PENDANT = BooleanProperty.of("pendant");
     public ChachapoyanIdol(Settings settings) {
         super(settings);
         setDefaultState(getStateManager().getDefaultState()
         .with(FACING, Direction.NORTH)
-        .with(KEY, false));
+        .with(KEY, false)
+        .with(PENDANT, false));
     }
 
     @Override
@@ -45,12 +47,24 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack heldItem = player.getStackInHand(hand);
-        if(heldItem.getItem() == ModItems.EVOKER_KEY && !state.get(ChachapoyanIdol.KEY)){
-            world.setBlockState(pos, state.with(ChachapoyanIdol.KEY, true));
+        if(heldItem.getItem() == ModItems.ANKH_PENDANT
+                && !state.get(ChachapoyanIdol.PENDANT)
+                && state.get(ChachapoyanIdol.KEY)){
+            world.setBlockState(pos, state.with(ChachapoyanIdol.PENDANT, true));
+            if(!player.isCreative()){
+                player.getStackInHand(hand).decrement(1);
+            }
             return ActionResult.CONSUME;
         } else {
-            return ActionResult.PASS;
+            if(heldItem.getItem() == ModItems.EVOKER_KEY
+                    && !state.get(ChachapoyanIdol.KEY)){
+                world.setBlockState(pos, state.with(ChachapoyanIdol.KEY, true));
+                return ActionResult.CONSUME;
+            } else {
+                return ActionResult.PASS;
+            }
         }
+
     }
 
     @Nullable
@@ -72,7 +86,7 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
 
-        builder.add(FACING, KEY);
+        builder.add(FACING, KEY, PENDANT);
     }
 
     static {

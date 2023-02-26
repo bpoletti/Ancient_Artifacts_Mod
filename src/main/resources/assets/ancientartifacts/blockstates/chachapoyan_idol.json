@@ -1,33 +1,48 @@
 {
   "variants": {
-    "facing=north,key=false": {
+    "facing=north,key=false,pendant=false": {
       "model": "ancientartifacts:block/chachapoyan_idol"
     },
-    "facing=south,key=false": {
+    "facing=south,key=false,pendant=false": {
       "model": "ancientartifacts:block/chachapoyan_idol",
       "y": 180
     },
-    "facing=west,key=false": {
+    "facing=west,key=false,pendant=false": {
       "model": "ancientartifacts:block/chachapoyan_idol",
       "y": 270
     },
-    "facing=east,key=false": {
+    "facing=east,key=false,pendant=false": {
       "model": "ancientartifacts:block/chachapoyan_idol",
       "y": 90
     },
-    "facing=north,key=true": {
+    "facing=north,key=true,pendant=false": {
       "model": "ancientartifacts:block/chachapoyan_idol_key"
     },
-    "facing=south,key=true": {
+    "facing=south,key=true,pendant=false": {
       "model": "ancientartifacts:block/chachapoyan_idol_key",
       "y": 180
     },
-    "facing=west,key=true": {
+    "facing=west,key=true,pendant=false": {
       "model": "ancientartifacts:block/chachapoyan_idol_key",
       "y": 270
     },
-    "facing=east,key=true": {
+    "facing=east,key=true,pendant=false": {
       "model": "ancientartifacts:block/chachapoyan_idol_key",
+      "y": 90
+    },
+    "facing=north,key=true,pendant=true": {
+      "model": "ancientartifacts:block/chachapoyan_idol_pendant"
+    },
+    "facing=south,key=true,pendant=true": {
+      "model": "ancientartifacts:block/chachapoyan_idol_pendant",
+      "y": 180
+    },
+    "facing=west,key=true,pendant=true": {
+      "model": "ancientartifacts:block/chachapoyan_idol_pendant",
+      "y": 270
+    },
+    "facing=east,key=true,pendant=true": {
+      "model": "ancientartifacts:block/chachapoyan_idol_pendant",
       "y": 90
     }
   }
