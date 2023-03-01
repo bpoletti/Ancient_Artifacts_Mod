@@ -22,7 +22,7 @@ public class GildedPlate extends HorizontalFacingBlock {
         super(settings);
     }
 
-    private static VoxelShape SHAPE = Block.createCuboidShape(1, 0, 1, 15, 1, 15);
+    private static final VoxelShape SHAPE;
 
 
     @Override
@@ -50,4 +50,9 @@ public class GildedPlate extends HorizontalFacingBlock {
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(FACING);
     }
+
+    static {
+        SHAPE = Block.createCuboidShape(1, 0, 1, 15, 1, 15);
+    }
+
 }

@@ -1,10 +1,7 @@
 package net.eagle.ancientartifacts.block;
 
 import net.eagle.ancientartifacts.AncientArtifacts;
-import net.eagle.ancientartifacts.block.custom.BlockA;
-import net.eagle.ancientartifacts.block.custom.BlockB;
-import net.eagle.ancientartifacts.block.custom.ChachapoyanIdol;
-import net.eagle.ancientartifacts.block.custom.GildedPlate;
+import net.eagle.ancientartifacts.block.custom.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
@@ -26,6 +23,9 @@ public class ModBlocks {
 
     public static final Block GILDED_PLATE = registerBlock("gilded_plate",
             new GildedPlate(FabricBlockSettings.of(Material.STONE).strength(4f).requiresTool()), ItemGroup.MISC);
+
+    public static final Block DRAGON_PEDESTAL = registerBlock("dragon_pedestal",
+            new DragonPedestal(FabricBlockSettings.of(Material.STONE).strength(4f).requiresTool()), ItemGroup.MISC);
 
     public static final Block BLOCK_A = registerBlock("block_a",
             new BlockA(FabricBlockSettings.of(Material.STONE).strength(4f).requiresTool()), ItemGroup.MISC);
