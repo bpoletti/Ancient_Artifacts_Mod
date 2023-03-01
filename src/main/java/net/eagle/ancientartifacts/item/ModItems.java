@@ -1,7 +1,6 @@
 package net.eagle.ancientartifacts.item;
 
 import net.eagle.ancientartifacts.AncientArtifacts;
-import net.eagle.ancientartifacts.item.custom.ItemC;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -64,8 +63,6 @@ public class ModItems {
     public static final Item ORB_INFINIUM = registerItem("orb_infinium",
         new Item(new FabricItemSettings().group(ItemGroup.MISC).maxCount(1)));
 
-    public static final Item ITEM_C = registerItem("item_c",
-        new ItemC(new FabricItemSettings().group(ItemGroup.MISC)));
         
 
 

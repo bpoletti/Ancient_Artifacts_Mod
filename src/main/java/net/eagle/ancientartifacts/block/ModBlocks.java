@@ -27,12 +27,6 @@ public class ModBlocks {
     public static final Block DRAGON_PEDESTAL = registerBlock("dragon_pedestal",
             new DragonPedestal(FabricBlockSettings.of(Material.STONE).strength(4f).requiresTool()), ItemGroup.MISC);
 
-    public static final Block BLOCK_A = registerBlock("block_a",
-            new BlockA(FabricBlockSettings.of(Material.STONE).strength(4f).requiresTool()), ItemGroup.MISC);
-
-    public static final Block BLOCK_B = registerBlock("block_b",
-            new BlockB(FabricBlockSettings.of(Material.STONE).strength(4f).requiresTool()), ItemGroup.MISC);
-
 
     private static Block registerBlock(String name, Block block, ItemGroup tab) {
         registerBlockItem(name, block, tab);
