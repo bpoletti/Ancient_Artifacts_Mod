@@ -9,6 +9,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.enums.DoubleBlockHalf;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
@@ -27,6 +28,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
@@ -166,42 +168,42 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack heldItem = player.getStackInHand(hand);
-        if(heldItem.getItem() == ModItems.ORB_INFINIUM) {
-            if(!state.get(DragonPedestal.ORB_INFINIUM)
-            && state.get(DragonPedestal.HEART_SEA)) {
-                world.setBlockState(pos, state.with(ORB_INFINIUM, true)
-                        .with(HALF, DoubleBlockHalf.UPPER));
-                world.playSound(null, pos, SoundEvents.BLOCK_BEACON_ACTIVATE, SoundCategory.AMBIENT, 0.6f, 0.6f);
+            if(heldItem.getItem() == ModItems.ORB_INFINIUM) {
+                if(!state.get(DragonPedestal.ORB_INFINIUM)
+                        && state.get(DragonPedestal.HEART_SEA)) {
+                    world.setBlockState(pos, state.with(ORB_INFINIUM, true)
+                            .with(HALF, DoubleBlockHalf.UPPER));
+                    world.playSound(null, pos, SoundEvents.BLOCK_BEACON_ACTIVATE, SoundCategory.AMBIENT, 0.6f, 0.6f);
+                    if (!player.isCreative()) {
+                        heldItem.decrement(1);
+                    }
+                }
+                return ActionResult.CONSUME;
             }
-            if (!player.isCreative()) {
-                heldItem.decrement(1);
+            else if (heldItem.getItem() == Items.HEART_OF_THE_SEA) {
+                if (!state.get(DragonPedestal.HEART_SEA)
+                        && state.get(DragonPedestal.FOSSIL_HEAD)) {
+                    world.setBlockState(pos, state.with(HEART_SEA, true)
+                            .with(HALF, DoubleBlockHalf.UPPER));
+                    world.playSound(null, pos, SoundEvents.BLOCK_CONDUIT_ACTIVATE, SoundCategory.BLOCKS, 0.5f, 0.4f);
+                    if (!player.isCreative()) {
+                        heldItem.decrement(1);
+                    }
+                }
+                return ActionResult.CONSUME;
+            } else if (heldItem.getItem() == ModItems.DRAGON_FOSSIL) {
+                if (!state.get(DragonPedestal.FOSSIL_HEAD)
+                        && state.get(DragonPedestal.GILDED)
+                        && !state.get(DragonPedestal.HEART_SEA)) {
+                    world.setBlockState(pos.up(), state.with(FOSSIL_HEAD, true)
+                            .with(HALF, DoubleBlockHalf.UPPER));
+                    world.playSound(null, pos, SoundEvents.BLOCK_BONE_BLOCK_PLACE, SoundCategory.BLOCKS, 0.5f, 0.3f);
+                    if (!player.isCreative()) {
+                        heldItem.decrement(1);
+                    }
+                }
+                return ActionResult.CONSUME;
             }
-            return ActionResult.CONSUME;
-        }
-        else if (heldItem.getItem() == Items.HEART_OF_THE_SEA) {
-            if (!state.get(DragonPedestal.HEART_SEA)
-                    && state.get(DragonPedestal.FOSSIL_HEAD)) {
-                world.setBlockState(pos, state.with(HEART_SEA, true)
-                        .with(HALF, DoubleBlockHalf.UPPER));
-                world.playSound(null, pos, SoundEvents.BLOCK_CONDUIT_ACTIVATE, SoundCategory.BLOCKS, 0.5f, 0.4f);
-            }
-            if (!player.isCreative()) {
-                heldItem.decrement(1);
-            }
-            return ActionResult.CONSUME;
-        } else if (heldItem.getItem() == ModItems.DRAGON_FOSSIL) {
-            if (!state.get(DragonPedestal.FOSSIL_HEAD)
-                    && state.get(DragonPedestal.GILDED)
-                    && !state.get(DragonPedestal.HEART_SEA)) {
-                world.setBlockState(pos.up(), state.with(FOSSIL_HEAD, true)
-                        .with(HALF, DoubleBlockHalf.UPPER));
-                world.playSound(null, pos, SoundEvents.BLOCK_BONE_BLOCK_PLACE, SoundCategory.BLOCKS, 0.5f, 0.3f);
-            }
-            if (!player.isCreative()) {
-                heldItem.decrement(1);
-            }
-            return ActionResult.CONSUME;
-        }
         return ActionResult.PASS;
     }
 
@@ -210,6 +212,11 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return state.get(HALF) == DoubleBlockHalf.UPPER ? null : new DragonPedestalEntity(pos, state);
     }
+
+//    @Override
+//    public void onBlockBreakStart(BlockState state, World world, BlockPos pos, PlayerEntity player) {
+//        super.onBlockBreakStart(state, world, pos, player);
+//    }
 
     @Override
     public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
@@ -227,6 +234,29 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
         world.updateNeighbors(topPos, Blocks.AIR);
 
         super.onBreak(world, pos, state, player);
+
+        if (!player.isCreative()) {
+            ItemStack pedestal = new ItemStack(ModBlocks.DRAGON_PEDESTAL);
+            world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), pedestal));
+            if(state.get(DragonPedestal.GILDED)){
+                ItemStack plate = new ItemStack(ModBlocks.GILDED_PLATE);
+                BlockPos dropPos = pos.up();
+                world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), plate));
+                if(state.get(DragonPedestal.FOSSIL_HEAD)){
+                    ItemStack fossil = new ItemStack(ModItems.DRAGON_FOSSIL);
+                    world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), fossil));
+                    if(state.get(DragonPedestal.HEART_SEA)){
+                        ItemStack heart_sea = new ItemStack(Items.HEART_OF_THE_SEA);
+                        world.spawnEntity(new ItemEntity(world, dropPos.getX(), dropPos.getY(), dropPos.getZ(), heart_sea));
+                        if(state.get(DragonPedestal.ORB_INFINIUM)){
+                            ItemStack orb_infinuim = new ItemStack(ModItems.ORB_INFINIUM);
+                            world.spawnEntity(new ItemEntity(world, dropPos.getX(), dropPos.getY(), dropPos.getZ(), orb_infinuim));
+                        }
+                    }
+                }
+            }
+        }
+
     }
 
     @Nullable

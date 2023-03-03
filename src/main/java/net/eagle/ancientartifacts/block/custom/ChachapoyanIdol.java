@@ -114,6 +114,20 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
 
     }
 
+    @Override
+    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+        super.onBreak(world, pos, state, player);
+        if(state.get(ChachapoyanIdol.PENDANT)){
+            ItemStack pendant = new ItemStack(ModItems.ANKH_PENDANT);
+            BlockPos dropPos = pos.up();
+            world.spawnEntity(new ItemEntity(world, dropPos.getX(), dropPos.getY(), dropPos.getZ(), pendant));
+            if(state.get(ChachapoyanIdol.SCALES)){
+                ItemStack scales = new ItemStack(ModItems.ELDER_GUARDIAN_SCALES);
+                world.spawnEntity(new ItemEntity(world, dropPos.getX(), dropPos.getY(), dropPos.getZ(), scales));
+            }
+        }
+    }
+
     @Nullable
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {

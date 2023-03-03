@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 160,
+  "experience": 0.1,
+  "ingredient": {
+    "item": "minecraft:ochre_froglight"
+  },
+  "result": "ancientartifacts:ochre_firefly_bud"
+}

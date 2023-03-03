@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 160,
+  "experience": 0.1,
+  "ingredient": {
+    "item": "minecraft:verdant_froglight"
+  },
+  "result": "ancientartifacts:verdant_firefly_bud"
+}
