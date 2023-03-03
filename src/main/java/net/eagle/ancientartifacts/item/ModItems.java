@@ -1,6 +1,7 @@
 package net.eagle.ancientartifacts.item;
 
 import net.eagle.ancientartifacts.AncientArtifacts;
+import net.eagle.ancientartifacts.item.custom.DragonFossil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -10,19 +11,19 @@ import net.minecraft.util.registry.Registry;
 public class ModItems {
     
     public static final Item WARDEN_HEART = registerItem("warden_heart",
-        new Item(new FabricItemSettings().group(ItemGroup.MISC)));
+        new Item(new FabricItemSettings().group(ItemGroup.BREWING)));
     
     public static final Item ENDER_ROD = registerItem("ender_rod",
         new Item(new FabricItemSettings().group(ItemGroup.MISC)));
     
     public static final Item MYCELIUM_DUST = registerItem("mycelium_dust",
-        new Item(new FabricItemSettings().group(ItemGroup.MISC)));
+        new Item(new FabricItemSettings().group(ItemGroup.BREWING)));
     
     public static final Item BLACK_ICE = registerItem("black_ice",
-        new Item(new FabricItemSettings().group(ItemGroup.MISC)));
+        new Item(new FabricItemSettings().group(ItemGroup.BREWING)));
         
     public static final Item RED_ICE = registerItem("red_ice",
-        new Item(new FabricItemSettings().group(ItemGroup.MISC)));
+        new Item(new FabricItemSettings().group(ItemGroup.BREWING)));
         
     public static final Item NETHER_GRASS = registerItem("nether_grass",
         new Item(new FabricItemSettings().group(ItemGroup.BREWING)));
@@ -53,15 +54,15 @@ public class ModItems {
         
     public static final Item END_STAFF = registerItem("end_staff",
         new Item(new FabricItemSettings().group(ItemGroup.COMBAT)));
-        
-    public static final Item ETHER_LEVER = registerItem("ether_lever",
-        new Item(new FabricItemSettings().group(ItemGroup.MISC)));
 
     public static final Item ANKH_PENDANT = registerItem("ankh_pendant",
         new Item(new FabricItemSettings().group(ItemGroup.MISC).maxCount(1)));
 
     public static final Item ORB_INFINIUM = registerItem("orb_infinium",
         new Item(new FabricItemSettings().group(ItemGroup.MISC).maxCount(1)));
+
+    public static final Item DRAGON_FOSSIL = registerItem("dragon_fossil",
+        new DragonFossil(new FabricItemSettings().group(ItemGroup.MISC).maxCount(1)));
 
         
 

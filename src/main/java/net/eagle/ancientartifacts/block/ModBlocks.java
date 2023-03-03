@@ -5,6 +5,7 @@ import net.eagle.ancientartifacts.block.custom.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
+import net.minecraft.block.LeverBlock;
 import net.minecraft.block.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -26,6 +27,9 @@ public class ModBlocks {
 
     public static final Block DRAGON_PEDESTAL = registerBlock("dragon_pedestal",
             new DragonPedestal(FabricBlockSettings.of(Material.STONE).strength(4f).requiresTool()), ItemGroup.MISC);
+
+    public static final Block ETHER_LEVER = registerBlock("ether_lever",
+            new EtherLever(FabricBlockSettings.of(Material.STONE).strength(4f).requiresTool()), ItemGroup.MISC);
 
 
     private static Block registerBlock(String name, Block block, ItemGroup tab) {

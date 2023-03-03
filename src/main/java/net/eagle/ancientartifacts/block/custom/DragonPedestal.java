@@ -3,6 +3,7 @@ package net.eagle.ancientartifacts.block.custom;
 import net.eagle.ancientartifacts.block.ModBlocks;
 import net.eagle.ancientartifacts.block.entity.DragonPedestalEntity;
 import net.eagle.ancientartifacts.block.entity.ModBlockEntities;
+import net.eagle.ancientartifacts.item.ModItems;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -33,11 +34,13 @@ import org.jetbrains.annotations.Nullable;
 public class DragonPedestal extends BlockWithEntity implements BlockEntityProvider {
 
     public static final BooleanProperty GILDED = BooleanProperty.of("gilded");
-//    public static final BooleanProperty FOSSIL_HEAD = BooleanProperty.of("fossil_head");
+    public static final BooleanProperty FOSSIL_HEAD = BooleanProperty.of("fossil_head");
 //    public static final BooleanProperty HEART_SEA = BooleanProperty.of("heart_sea");
 //    public static final BooleanProperty ORB_INFINIUM = BooleanProperty.of("orb_of_infinium");
     public final static DirectionProperty FACING = HorizontalFacingBlock.FACING;
     protected static final VoxelShape SHAPE_UPPER;
+
+    protected static final VoxelShape SHAPE_UPPER_F;
     protected static final VoxelShape SHAPE_LOWER;
     protected static final VoxelShape SHAPE_LOWER_G;
 
@@ -45,6 +48,7 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
         //TOP
         VoxelShape su1 = Block.createCuboidShape(5.5,0,5.5,10.5,1,10.5);
         VoxelShape su2 = Block.createCuboidShape(3.5,1,3.5,12.5,4,12.5);
+        VoxelShape su3_f = Block.createCuboidShape(1,3,3.25,15.5,11.7,12.75);
         VoxelShape su3 = Block.createCuboidShape(3.5,3,3.25,12.5,6,12.75);
 
         //BOTTOM
@@ -54,8 +58,10 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
         VoxelShape sl3 = Block.createCuboidShape(5.5,3,5.5,10.5,12,10.5);
 
         SHAPE_UPPER = VoxelShapes.union(su1, su2, su3).simplify();
+        SHAPE_UPPER_F = VoxelShapes.union(su1, su2, su3_f).simplify();
         SHAPE_LOWER = VoxelShapes.union(sl1, sl2, sl3).simplify();
         SHAPE_LOWER_G = VoxelShapes.union(sl1_g, sl2, sl3).simplify();
+
     }
     public static final EnumProperty<DoubleBlockHalf> HALF = Properties.DOUBLE_BLOCK_HALF;
 
@@ -65,12 +71,19 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
         this.setDefaultState(getStateManager().getDefaultState()
                 .with(HALF, DoubleBlockHalf.LOWER)
                 .with(FACING, Direction.NORTH)
-                .with(GILDED, false));
+                .with(GILDED, false)
+                .with(FOSSIL_HEAD, false));
     }
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return state.get(HALF) == DoubleBlockHalf.LOWER ? (state.get(GILDED) ? SHAPE_LOWER_G : SHAPE_LOWER) : SHAPE_UPPER;
+        return state.get(HALF) == DoubleBlockHalf.LOWER
+                ? (state.get(GILDED)
+                ? state.get(FOSSIL_HEAD)
+                ? SHAPE_UPPER_F
+                : SHAPE_LOWER_G
+                : SHAPE_LOWER)
+                : SHAPE_UPPER;
     }
 
     @Override
@@ -121,7 +134,7 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(HALF, FACING, GILDED);
+        builder.add(HALF, FACING, GILDED, FOSSIL_HEAD);
     }
 
     @Override
@@ -142,7 +155,19 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        return super.onUse(state, world, pos, player, hand, hit);
+        ItemStack heldItem = player.getStackInHand(hand);
+        if(heldItem.getItem() == ModItems.DRAGON_FOSSIL){
+            if(!state.get(DragonPedestal.FOSSIL_HEAD)
+            && state.get(DragonPedestal.GILDED)) {
+                world.setBlockState(pos.up(), state.with(FOSSIL_HEAD, true)
+                        .with(HALF, DoubleBlockHalf.UPPER));
+                if (!player.isCreative()) {
+                    heldItem.decrement(1);
+                }
+                return ActionResult.CONSUME;
+            }
+        }
+        return ActionResult.PASS;
     }
 
     @Nullable
