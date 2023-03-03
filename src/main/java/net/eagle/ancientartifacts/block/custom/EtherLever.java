@@ -37,14 +37,14 @@ public class EtherLever extends WallMountedBlock {
     protected static final VoxelShape CEILING_X_AXIS_SHAPE;
 
     static {
-        NORTH_WALL_SHAPE = Block.createCuboidShape(5.0, 4.0, 4.0, 11.0, 11.0, 16.0);
-        SOUTH_WALL_SHAPE = Block.createCuboidShape(5.0, 4.0, 0.0, 11.0, 12.0, 6.0);
-        WEST_WALL_SHAPE = Block.createCuboidShape(4.0, 4.0, 5.0, 16.0, 10.0, 11.0);
-        EAST_WALL_SHAPE = Block.createCuboidShape(0.0, 4.0, 6.0, 12.0, 11.0, 10.0);
-        FLOOR_Z_AXIS_SHAPE = Block.createCuboidShape(6.0, 0.0, 4.0, 10.0, 12.0, 11.0);
-        FLOOR_X_AXIS_SHAPE = Block.createCuboidShape(4.0, 0.0, 6.0, 11.0, 12.0, 10.0);
-        CEILING_Z_AXIS_SHAPE = Block.createCuboidShape(6.0, 4.0, 4.0, 10.0, 16.0, 11.0);
-        CEILING_X_AXIS_SHAPE = Block.createCuboidShape(4.0, 4.0, 6.0, 11.0, 16.0, 10.0);
+        NORTH_WALL_SHAPE = Block.createCuboidShape(6.0, 5.0, 4.0, 10.0, 11.0, 16.0);
+        SOUTH_WALL_SHAPE = Block.createCuboidShape(6.0, 5.0, 0.0, 10.0, 11.0, 10.0);
+        WEST_WALL_SHAPE = Block.createCuboidShape(4.0, 5.0, 6.0, 16.0, 11.0, 10.0);
+        EAST_WALL_SHAPE = Block.createCuboidShape(0.0, 5.0, 6.0, 12.0, 11.0, 10.0);
+        FLOOR_Z_AXIS_SHAPE = Block.createCuboidShape(6.0, 0.0, 5.0, 10.0, 12.0, 11.0);
+        FLOOR_X_AXIS_SHAPE = Block.createCuboidShape(5.0, 0.0, 6.0, 11.0, 12.0, 10.0);
+        CEILING_Z_AXIS_SHAPE = Block.createCuboidShape(6.0, 4.0, 5.0, 10.0, 16.0, 11.0);
+        CEILING_X_AXIS_SHAPE = Block.createCuboidShape(5.0, 4.0, 6.0, 11.0, 16.0, 10.0);
     }
     
     public EtherLever(Settings settings) {

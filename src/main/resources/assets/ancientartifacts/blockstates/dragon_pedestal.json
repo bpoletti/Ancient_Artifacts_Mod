@@ -1,91 +1,149 @@
 {
   "variants": {
-    "facing=north,half=lower,gilded=false,fossil_head=false": {
+    "facing=north,half=lower,gilded=false,fossil_head=false,heart_sea=false,orb_of_infinium=false": {
       "model": "ancientartifacts:block/dragon_pedestal_lower"
     },
-    "facing=south,half=lower,gilded=false,fossil_head=false": {
+    "facing=south,half=lower,gilded=false,fossil_head=false,heart_sea=false,orb_of_infinium=false": {
       "model": "ancientartifacts:block/dragon_pedestal_lower",
       "y": 180
     },
-    "facing=west,half=lower,gilded=false,fossil_head=false": {
+    "facing=west,half=lower,gilded=false,fossil_head=false,heart_sea=false,orb_of_infinium=false": {
       "model": "ancientartifacts:block/dragon_pedestal_lower",
       "y": 270
     },
-    "facing=east,half=lower,gilded=false,fossil_head=false": {
+    "facing=east,half=lower,gilded=false,fossil_head=false,heart_sea=false,orb_of_infinium=false": {
       "model": "ancientartifacts:block/dragon_pedestal_lower",
       "y": 90
-    },"facing=north,half=lower,gilded=true,fossil_head=false": {
+    },"facing=north,half=lower,gilded=true,fossil_head=false,heart_sea=false,orb_of_infinium=false": {
       "model": "ancientartifacts:block/dragon_pedestal_lower_g"
     },
-    "facing=south,half=lower,gilded=true,fossil_head=false": {
+    "facing=south,half=lower,gilded=true,fossil_head=false,heart_sea=false,orb_of_infinium=false": {
       "model": "ancientartifacts:block/dragon_pedestal_lower_g",
       "y": 180
     },
-    "facing=west,half=lower,gilded=true,fossil_head=false": {
+    "facing=west,half=lower,gilded=true,fossil_head=false,heart_sea=false,orb_of_infinium=false": {
       "model": "ancientartifacts:block/dragon_pedestal_lower_g",
       "y": 270
     },
-    "facing=east,half=lower,gilded=true,fossil_head=false": {
+    "facing=east,half=lower,gilded=true,fossil_head=false,heart_sea=false,orb_of_infinium=false": {
       "model": "ancientartifacts:block/dragon_pedestal_lower_g",
       "y": 90
-    },"facing=north,half=lower,gilded=true,fossil_head=true": {
+    },"facing=north,half=lower,gilded=true,fossil_head=true,heart_sea=false,orb_of_infinium=false": {
       "model": "ancientartifacts:block/dragon_pedestal_lower_g"
     },
-    "facing=south,half=lower,gilded=true,fossil_head=true": {
+    "facing=south,half=lower,gilded=true,fossil_head=true,heart_sea=false,orb_of_infinium=false": {
       "model": "ancientartifacts:block/dragon_pedestal_lower_g",
       "y": 180
     },
-    "facing=west,half=lower,gilded=true,fossil_head=true": {
+    "facing=west,half=lower,gilded=true,fossil_head=true,heart_sea=false,orb_of_infinium=false": {
       "model": "ancientartifacts:block/dragon_pedestal_lower_g",
       "y": 270
     },
-    "facing=east,half=lower,gilded=true,fossil_head=true": {
+    "facing=east,half=lower,gilded=true,fossil_head=true,heart_sea=false,orb_of_infinium=false": {
+      "model": "ancientartifacts:block/dragon_pedestal_lower_g",
+      "y": 90
+    },"facing=north,half=lower,gilded=true,fossil_head=true,heart_sea=true,orb_of_infinium=false": {
+      "model": "ancientartifacts:block/dragon_pedestal_lower_g"
+    },
+    "facing=south,half=lower,gilded=true,fossil_head=true,heart_sea=true,orb_of_infinium=false": {
+      "model": "ancientartifacts:block/dragon_pedestal_lower_g",
+      "y": 180
+    },
+    "facing=west,half=lower,gilded=true,fossil_head=true,heart_sea=true,orb_of_infinium=false": {
+      "model": "ancientartifacts:block/dragon_pedestal_lower_g",
+      "y": 270
+    },
+    "facing=east,half=lower,gilded=true,fossil_head=true,heart_sea=true,orb_of_infinium=false": {
+      "model": "ancientartifacts:block/dragon_pedestal_lower_g",
+      "y": 90
+    },"facing=north,half=lower,gilded=true,fossil_head=true,heart_sea=true,orb_of_infinium=true": {
+      "model": "ancientartifacts:block/dragon_pedestal_lower_g"
+    },
+    "facing=south,half=lower,gilded=true,fossil_head=true,heart_sea=true,orb_of_infinium=true": {
+      "model": "ancientartifacts:block/dragon_pedestal_lower_g",
+      "y": 180
+    },
+    "facing=west,half=lower,gilded=true,fossil_head=true,heart_sea=true,orb_of_infinium=true": {
+      "model": "ancientartifacts:block/dragon_pedestal_lower_g",
+      "y": 270
+    },
+    "facing=east,half=lower,gilded=true,fossil_head=true,heart_sea=true,orb_of_infinium=true": {
       "model": "ancientartifacts:block/dragon_pedestal_lower_g",
       "y": 90
     },
-    "facing=north,half=upper,gilded=false,fossil_head=false": {
+    "facing=north,half=upper,gilded=false,fossil_head=false,heart_sea=false,orb_of_infinium=false": {
       "model": "ancientartifacts:block/dragon_pedestal_upper"
     },
-    "facing=south,half=upper,gilded=false,fossil_head=false": {
+    "facing=south,half=upper,gilded=false,fossil_head=false,heart_sea=false,orb_of_infinium=false": {
       "model": "ancientartifacts:block/dragon_pedestal_upper",
       "y": 180
     },
-    "facing=west,half=upper,gilded=false,fossil_head=false": {
+    "facing=west,half=upper,gilded=false,fossil_head=false,heart_sea=false,orb_of_infinium=false": {
       "model": "ancientartifacts:block/dragon_pedestal_upper",
       "y": 270
     },
-    "facing=east,half=upper,gilded=false,fossil_head=false": {
+    "facing=east,half=upper,gilded=false,fossil_head=false,heart_sea=false,orb_of_infinium=false": {
       "model": "ancientartifacts:block/dragon_pedestal_upper",
       "y": 90
     },
-    "facing=north,half=upper,gilded=true,fossil_head=false": {
+    "facing=north,half=upper,gilded=true,fossil_head=false,heart_sea=false,orb_of_infinium=false": {
       "model": "ancientartifacts:block/dragon_pedestal_upper"
     },
-    "facing=south,half=upper,gilded=true,fossil_head=false": {
+    "facing=south,half=upper,gilded=true,fossil_head=false,heart_sea=false,orb_of_infinium=false": {
       "model": "ancientartifacts:block/dragon_pedestal_upper",
       "y": 180
     },
-    "facing=west,half=upper,gilded=true,fossil_head=false": {
+    "facing=west,half=upper,gilded=true,fossil_head=false,heart_sea=false,orb_of_infinium=false": {
       "model": "ancientartifacts:block/dragon_pedestal_upper",
       "y": 270
     },
-    "facing=east,half=upper,gilded=true,fossil_head=false": {
+    "facing=east,half=upper,gilded=true,fossil_head=false,heart_sea=false,orb_of_infinium=false": {
       "model": "ancientartifacts:block/dragon_pedestal_upper",
       "y": 90
     },
-    "facing=north,half=upper,gilded=true,fossil_head=true": {
+    "facing=north,half=upper,gilded=true,fossil_head=true,heart_sea=false,orb_of_infinium=false": {
       "model": "ancientartifacts:block/dragon_pedestal_upper_f"
     },
-    "facing=south,half=upper,gilded=true,fossil_head=true": {
+    "facing=south,half=upper,gilded=true,fossil_head=true,heart_sea=false,orb_of_infinium=false": {
       "model": "ancientartifacts:block/dragon_pedestal_upper_f",
       "y": 180
     },
-    "facing=west,half=upper,gilded=true,fossil_head=true": {
+    "facing=west,half=upper,gilded=true,fossil_head=true,heart_sea=false,orb_of_infinium=false": {
       "model": "ancientartifacts:block/dragon_pedestal_upper_f",
       "y": 270
     },
-    "facing=east,half=upper,gilded=true,fossil_head=true": {
+    "facing=east,half=upper,gilded=true,fossil_head=true,heart_sea=false,orb_of_infinium=false": {
       "model": "ancientartifacts:block/dragon_pedestal_upper_f",
+      "y": 90
+    },
+    "facing=north,half=upper,gilded=true,fossil_head=true,heart_sea=true,orb_of_infinium=false": {
+      "model": "ancientartifacts:block/dragon_pedestal_upper_hts"
+    },
+    "facing=south,half=upper,gilded=true,fossil_head=true,heart_sea=true,orb_of_infinium=false": {
+      "model": "ancientartifacts:block/dragon_pedestal_upper_hts",
+      "y": 180
+    },
+    "facing=west,half=upper,gilded=true,fossil_head=true,heart_sea=true,orb_of_infinium=false": {
+      "model": "ancientartifacts:block/dragon_pedestal_upper_hts",
+      "y": 270
+    },
+    "facing=east,half=upper,gilded=true,fossil_head=true,heart_sea=true,orb_of_infinium=false": {
+      "model": "ancientartifacts:block/dragon_pedestal_upper_hts",
+      "y": 90
+    },
+    "facing=north,half=upper,gilded=true,fossil_head=true,heart_sea=true,orb_of_infinium=true": {
+      "model": "ancientartifacts:block/dragon_pedestal_upper_oi"
+    },
+    "facing=south,half=upper,gilded=true,fossil_head=true,heart_sea=true,orb_of_infinium=true": {
+      "model": "ancientartifacts:block/dragon_pedestal_upper_oi",
+      "y": 180
+    },
+    "facing=west,half=upper,gilded=true,fossil_head=true,heart_sea=true,orb_of_infinium=true": {
+      "model": "ancientartifacts:block/dragon_pedestal_upper_oi",
+      "y": 270
+    },
+    "facing=east,half=upper,gilded=true,fossil_head=true,heart_sea=true,orb_of_infinium=true": {
+      "model": "ancientartifacts:block/dragon_pedestal_upper_oi",
       "y": 90
     }
   }

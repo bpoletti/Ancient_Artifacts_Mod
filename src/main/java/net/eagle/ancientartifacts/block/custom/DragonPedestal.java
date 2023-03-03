@@ -13,6 +13,10 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
@@ -35,27 +39,27 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
 
     public static final BooleanProperty GILDED = BooleanProperty.of("gilded");
     public static final BooleanProperty FOSSIL_HEAD = BooleanProperty.of("fossil_head");
-//    public static final BooleanProperty HEART_SEA = BooleanProperty.of("heart_sea");
-//    public static final BooleanProperty ORB_INFINIUM = BooleanProperty.of("orb_of_infinium");
+    public static final BooleanProperty HEART_SEA = BooleanProperty.of("heart_sea");
+    public static final BooleanProperty ORB_INFINIUM = BooleanProperty.of("orb_of_infinium");
     public final static DirectionProperty FACING = HorizontalFacingBlock.FACING;
+    public static final EnumProperty<DoubleBlockHalf> HALF = Properties.DOUBLE_BLOCK_HALF;
     protected static final VoxelShape SHAPE_UPPER;
-
     protected static final VoxelShape SHAPE_UPPER_F;
     protected static final VoxelShape SHAPE_LOWER;
     protected static final VoxelShape SHAPE_LOWER_G;
 
     static {
         //TOP
-        VoxelShape su1 = Block.createCuboidShape(5.5,0,5.5,10.5,1,10.5);
-        VoxelShape su2 = Block.createCuboidShape(3.5,1,3.5,12.5,4,12.5);
-        VoxelShape su3_f = Block.createCuboidShape(1,3,3.25,15.5,11.7,12.75);
-        VoxelShape su3 = Block.createCuboidShape(3.5,3,3.25,12.5,6,12.75);
+        VoxelShape su1 = Block.createCuboidShape(5.5, 0, 5.5, 10.5, 1, 10.5);
+        VoxelShape su2 = Block.createCuboidShape(3.5, 1, 3.5, 12.5, 4, 12.5);
+        VoxelShape su3_f = Block.createCuboidShape(1, 3, 3.25, 15.5, 11.7, 12.75);
+        VoxelShape su3 = Block.createCuboidShape(3.5, 3, 3.25, 12.5, 6, 12.75);
 
         //BOTTOM
         VoxelShape sl1_g = Block.createCuboidShape(1, 0, 1, 15, 1, 15);
-        VoxelShape sl1 = Block.createCuboidShape(2,0,2,14,1,14);
-        VoxelShape sl2 = Block.createCuboidShape(3,1,3,13,3,13);
-        VoxelShape sl3 = Block.createCuboidShape(5.5,3,5.5,10.5,12,10.5);
+        VoxelShape sl1 = Block.createCuboidShape(2, 0, 2, 14, 1, 14);
+        VoxelShape sl2 = Block.createCuboidShape(3, 1, 3, 13, 3, 13);
+        VoxelShape sl3 = Block.createCuboidShape(5.5, 3, 5.5, 10.5, 12, 10.5);
 
         SHAPE_UPPER = VoxelShapes.union(su1, su2, su3).simplify();
         SHAPE_UPPER_F = VoxelShapes.union(su1, su2, su3_f).simplify();
@@ -63,7 +67,6 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
         SHAPE_LOWER_G = VoxelShapes.union(sl1_g, sl2, sl3).simplify();
 
     }
-    public static final EnumProperty<DoubleBlockHalf> HALF = Properties.DOUBLE_BLOCK_HALF;
 
 
     public DragonPedestal(Settings settings) {
@@ -72,7 +75,9 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
                 .with(HALF, DoubleBlockHalf.LOWER)
                 .with(FACING, Direction.NORTH)
                 .with(GILDED, false)
-                .with(FOSSIL_HEAD, false));
+                .with(FOSSIL_HEAD, false)
+                .with(HEART_SEA, false)
+                .with(ORB_INFINIUM, false));
     }
 
     @Override
@@ -95,12 +100,12 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
     public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
 
         super.onBlockAdded(state, world, pos, oldState, notify);
-        if(!world.isClient){
+        if (!world.isClient) {
             Block down = world.getBlockState(pos.down()).getBlock();
             if (down == ModBlocks.GILDED_PLATE && !state.get(DragonPedestal.GILDED)) {
                 world.removeBlock(pos, false);
                 world.setBlockState(pos.down(), state.with(HALF, DoubleBlockHalf.LOWER)
-                        .with(GILDED,true), 3);
+                        .with(GILDED, true), 3);
                 world.setBlockState(pos, state.with(HALF, DoubleBlockHalf.UPPER));
             }
         }
@@ -134,7 +139,12 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(HALF, FACING, GILDED, FOSSIL_HEAD);
+        builder.add(HALF,
+                FACING,
+                GILDED,
+                FOSSIL_HEAD,
+                HEART_SEA,
+                ORB_INFINIUM);
     }
 
     @Override
@@ -144,10 +154,10 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
 
     @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-        if(state.getBlock() != newState.getBlock()) {
+        if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if(blockEntity instanceof DragonPedestalEntity) {
-                world.updateComparators(pos,this);
+            if (blockEntity instanceof DragonPedestalEntity) {
+                world.updateComparators(pos, this);
             }
             super.onStateReplaced(state, world, pos, newState, moved);
         }
@@ -156,16 +166,41 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack heldItem = player.getStackInHand(hand);
-        if(heldItem.getItem() == ModItems.DRAGON_FOSSIL){
-            if(!state.get(DragonPedestal.FOSSIL_HEAD)
-            && state.get(DragonPedestal.GILDED)) {
+        if(heldItem.getItem() == ModItems.ORB_INFINIUM) {
+            if(!state.get(DragonPedestal.ORB_INFINIUM)
+            && state.get(DragonPedestal.HEART_SEA)) {
+                world.setBlockState(pos, state.with(ORB_INFINIUM, true)
+                        .with(HALF, DoubleBlockHalf.UPPER));
+                world.playSound(null, pos, SoundEvents.BLOCK_BEACON_ACTIVATE, SoundCategory.AMBIENT, 0.6f, 0.6f);
+            }
+            if (!player.isCreative()) {
+                heldItem.decrement(1);
+            }
+            return ActionResult.CONSUME;
+        }
+        else if (heldItem.getItem() == Items.HEART_OF_THE_SEA) {
+            if (!state.get(DragonPedestal.HEART_SEA)
+                    && state.get(DragonPedestal.FOSSIL_HEAD)) {
+                world.setBlockState(pos, state.with(HEART_SEA, true)
+                        .with(HALF, DoubleBlockHalf.UPPER));
+                world.playSound(null, pos, SoundEvents.BLOCK_CONDUIT_ACTIVATE, SoundCategory.BLOCKS, 0.5f, 0.4f);
+            }
+            if (!player.isCreative()) {
+                heldItem.decrement(1);
+            }
+            return ActionResult.CONSUME;
+        } else if (heldItem.getItem() == ModItems.DRAGON_FOSSIL) {
+            if (!state.get(DragonPedestal.FOSSIL_HEAD)
+                    && state.get(DragonPedestal.GILDED)
+                    && !state.get(DragonPedestal.HEART_SEA)) {
                 world.setBlockState(pos.up(), state.with(FOSSIL_HEAD, true)
                         .with(HALF, DoubleBlockHalf.UPPER));
-                if (!player.isCreative()) {
-                    heldItem.decrement(1);
-                }
-                return ActionResult.CONSUME;
+                world.playSound(null, pos, SoundEvents.BLOCK_BONE_BLOCK_PLACE, SoundCategory.BLOCKS, 0.5f, 0.3f);
             }
+            if (!player.isCreative()) {
+                heldItem.decrement(1);
+            }
+            return ActionResult.CONSUME;
         }
         return ActionResult.PASS;
     }

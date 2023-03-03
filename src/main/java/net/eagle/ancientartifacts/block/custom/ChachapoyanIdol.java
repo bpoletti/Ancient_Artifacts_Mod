@@ -7,12 +7,16 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.PotionItem;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtil;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
@@ -55,6 +59,12 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
     }
 
     @Override
+    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        world.playSound(null, pos, SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.BLOCKS,0.2f, 0.4f);
+        super.onPlaced(world, pos, state, placer, itemStack);
+    }
+
+    @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack heldItem = player.getStackInHand(hand);
         Potion elixir = PotionUtil.getPotion(heldItem);
@@ -69,6 +79,7 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
                 ItemStack orb = new ItemStack(ModItems.ORB_INFINIUM);
                 BlockPos dropPos = pos.up();
                 world.spawnEntity(new ItemEntity(world, dropPos.getX(), dropPos.getY(), dropPos.getZ(), orb));
+                world.playSound(null, pos, SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.NEUTRAL,0.5f, 1.0f);
                 return ActionResult.CONSUME;
             }
         } else if (heldItem.getItem() == ModItems.ELDER_GUARDIAN_SCALES) {
@@ -78,6 +89,7 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
                 if (!player.isCreative()) {
                     heldItem.decrement(1);
                 }
+                world.playSound(null, pos, SoundEvents.BLOCK_FLOWERING_AZALEA_PLACE, SoundCategory.NEUTRAL,0.5f, 0.2f);
                 return ActionResult.CONSUME;
             }
         } else if (heldItem.getItem() == ModItems.ANKH_PENDANT) {
@@ -87,11 +99,13 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
                 if (!player.isCreative()) {
                     heldItem.decrement(1);
                 }
+                world.playSound(null, pos, SoundEvents.BLOCK_AMETHYST_BLOCK_PLACE, SoundCategory.NEUTRAL,0.7f, 0.3f);
                 return ActionResult.CONSUME;
             }
         } else if (heldItem.getItem() == ModItems.EVOKER_KEY) {
             if (!state.get(ChachapoyanIdol.KEY)) {
                 world.setBlockState(pos, state.with(ChachapoyanIdol.KEY, true));
+                world.playSound(null, pos, SoundEvents.BLOCK_IRON_DOOR_OPEN, SoundCategory.NEUTRAL,0.5f, 0.45f);
                 return ActionResult.CONSUME;
             }
         }
