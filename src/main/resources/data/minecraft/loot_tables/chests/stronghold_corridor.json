@@ -7,7 +7,7 @@
         {
           "type": "minecraft:item",
           "name": "ancientartifacts:ender_rod",
-          "weight": 10,
+          "weight": 20,
           "functions": [
             {
               "function": "minecraft:set_count",

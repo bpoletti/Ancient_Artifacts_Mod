@@ -7,7 +7,7 @@
         {
           "type": "minecraft:item",
           "name": "ancientartifacts:nether_grass",
-          "weight": 20,
+          "weight": 25,
           "functions": [
             {
               "function": "minecraft:set_count",

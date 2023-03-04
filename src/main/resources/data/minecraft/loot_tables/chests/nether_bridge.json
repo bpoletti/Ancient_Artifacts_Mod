@@ -7,7 +7,7 @@
         {
           "type": "minecraft:item",
           "name": "ancientartifacts:nender_brick",
-          "weight": 7,
+          "weight": 10,
           "functions": [
             {
               "add": false,
