@@ -9,8 +9,6 @@
     "item.ancientartifacts.verdant_firefly_bud": "Verdant Firefly Bud",
     "item.ancientartifacts.pearlescent_firefly_bud": "Pearlescent Firefly Bud",
     "item.ancientartifacts.firefly_orb": "Firefly Orb",
-    "item.ancientartifacts.totem_of_order": "Totem of Order",
-    "item.ancientartifacts.totem_of_chaos": "Totem of Chaos",
     "item.ancientartifacts.evoker_key": "Evoker's Key",
     "item.ancientartifacts.elder_guardian_scales": "Elder Guardian Scales",
     "item.ancientartifacts.end_staff": "End Staff",
@@ -24,7 +22,8 @@
     "block.ancientartifacts.gilded_plate": "Gilded Plate",
     "block.ancientartifacts.dragon_pedestal": "Dragon Pedestal",
     "block.ancientartifacts.ether_lever": "Ether Lever",
-
+    "block.ancientartifacts.totem_of_order": "Totem of Order",
+    "block.ancientartifacts.totem_of_chaos": "Totem of Chaos",
 
 
     "item.minecraft.potion.effect.elixir_base_i": "Elixir Base I",

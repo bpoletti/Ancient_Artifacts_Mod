@@ -38,13 +38,7 @@ public class ModItems {
         new Item(new FabricItemSettings().group(ItemGroup.MISC)));
         
     public static final Item FIREFLY_ORB = registerItem("firefly_orb",
-        new Item(new FabricItemSettings().group(ItemGroup.BREWING))); 
-        
-    public static final Item TOTEM_OF_ORDER = registerItem("totem_of_order",
-        new Item(new FabricItemSettings().group(ItemGroup.MISC).maxCount(1)));
-        
-    public static final Item TOTEM_OF_CHAOS = registerItem("totem_of_chaos",
-        new Item(new FabricItemSettings().group(ItemGroup.MISC).maxCount(1)));
+        new Item(new FabricItemSettings().group(ItemGroup.BREWING)));
         
     public static final Item EVOKER_KEY = registerItem("evoker_key",
         new Item(new FabricItemSettings().group(ItemGroup.MISC).maxCount(1)));

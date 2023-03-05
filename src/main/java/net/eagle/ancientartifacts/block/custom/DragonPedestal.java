@@ -213,11 +213,6 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
         return state.get(HALF) == DoubleBlockHalf.UPPER ? null : new DragonPedestalEntity(pos, state);
     }
 
-//    @Override
-//    public void onBlockBreakStart(BlockState state, World world, BlockPos pos, PlayerEntity player) {
-//        super.onBlockBreakStart(state, world, pos, player);
-//    }
-
     @Override
     public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         BlockPos topPos;

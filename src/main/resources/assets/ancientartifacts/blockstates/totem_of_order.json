@@ -1,0 +1,19 @@
+{
+    "variants": {
+     "facing=north":{
+       "model": "ancientartifacts:block/totem_of_order"
+      },
+      "facing=south":{
+       "model": "ancientartifacts:block/totem_of_order",
+        "y": 180
+      },
+      "facing=west":{
+       "model": "ancientartifacts:block/totem_of_order",
+        "y": 270
+      },
+      "facing=east":{
+       "model": "ancientartifacts:block/totem_of_order",
+        "y": 90
+      }
+    }
+}

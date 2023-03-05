@@ -4,6 +4,7 @@ import net.eagle.ancientartifacts.block.ModBlocks;
 import net.eagle.ancientartifacts.block.entity.ModBlockEntities;
 import net.eagle.ancientartifacts.item.ModItems;
 import net.eagle.ancientartifacts.potion.ModPotions;
+import net.eagle.ancientartifacts.util.ModLootTableModifies;
 import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
@@ -20,7 +21,10 @@ public class AncientArtifacts implements ModInitializer {
 
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
+
 		ModBlockEntities.registerBlockEntities();
 		ModPotions.registerPotions();
+
+		ModLootTableModifies.modifyLootTables();
 	}
 }

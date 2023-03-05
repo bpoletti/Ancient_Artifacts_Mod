@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north":{
+      "model": "ancientartifacts:block/totem_of_chaos"
+    },
+    "facing=south":{
+      "model": "ancientartifacts:block/totem_of_chaos",
+      "y": 180
+    },
+    "facing=west":{
+      "model": "ancientartifacts:block/totem_of_chaos",
+      "y": 270
+    },
+    "facing=east":{
+      "model": "ancientartifacts:block/totem_of_chaos",
+      "y": 90
+    }
+  }
+}
