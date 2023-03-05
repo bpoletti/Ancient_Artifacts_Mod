@@ -2,6 +2,7 @@ package net.eagle.ancientartifacts.item;
 
 import net.eagle.ancientartifacts.AncientArtifacts;
 import net.eagle.ancientartifacts.item.custom.DragonFossil;
+import net.eagle.ancientartifacts.item.custom.EndStaff;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -47,7 +48,7 @@ public class ModItems {
         new Item(new FabricItemSettings().group(ItemGroup.MISC)));
         
     public static final Item END_STAFF = registerItem("end_staff",
-        new Item(new FabricItemSettings().group(ItemGroup.COMBAT)));
+        new EndStaff(new FabricItemSettings().group(ItemGroup.COMBAT)));
 
     public static final Item ANKH_PENDANT = registerItem("ankh_pendant",
         new Item(new FabricItemSettings().group(ItemGroup.MISC).maxCount(1)));
