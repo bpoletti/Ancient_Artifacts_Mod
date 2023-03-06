@@ -2,7 +2,9 @@ package net.eagle.ancientartifacts.block.custom;
 
 import net.minecraft.block.*;
 import net.minecraft.block.enums.WallMountLocation;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.particle.DustParticleEffect;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -19,6 +21,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.event.GameEvent;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
@@ -89,6 +92,7 @@ public class EtherLever extends WallMountedBlock {
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (world.isClient) {
             BlockState blockState = state.cycle(POWERED);
+
             if (blockState.get(POWERED)) {
                 EtherLever.spawnParticles(blockState, world, pos, 1.0f);
             }
@@ -132,8 +136,6 @@ public class EtherLever extends WallMountedBlock {
         this.updateNeighbors(state, world, pos);
         return state;
     }
-
-
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {

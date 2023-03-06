@@ -9,32 +9,37 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.enums.DoubleBlockHalf;
+import net.minecraft.block.pattern.BlockPattern;
+import net.minecraft.block.pattern.BlockPatternBuilder;
+import net.minecraft.block.pattern.CachedBlockPosition;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.predicate.block.BlockStatePredicate;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.function.MaterialPredicate;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
+
 
 @SuppressWarnings("deprecation")
 public class DragonPedestal extends BlockWithEntity implements BlockEntityProvider {
@@ -43,6 +48,8 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
     public static final BooleanProperty FOSSIL_HEAD = BooleanProperty.of("fossil_head");
     public static final BooleanProperty HEART_SEA = BooleanProperty.of("heart_sea");
     public static final BooleanProperty ORB_INFINIUM = BooleanProperty.of("orb_of_infinium");
+
+    public static final BooleanProperty END_READY = BooleanProperty.of("end_ready");
     public final static DirectionProperty FACING = HorizontalFacingBlock.FACING;
     public static final EnumProperty<DoubleBlockHalf> HALF = Properties.DOUBLE_BLOCK_HALF;
     protected static final VoxelShape SHAPE_UPPER;
@@ -50,6 +57,8 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
     protected static final VoxelShape SHAPE_LOWER;
     protected static final VoxelShape SHAPE_LOWER_G;
 
+    @Nullable
+    private BlockPattern ritualPattern;
     static {
         //TOP
         VoxelShape su1 = Block.createCuboidShape(5.5, 0, 5.5, 10.5, 1, 10.5);
@@ -79,7 +88,8 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
                 .with(GILDED, false)
                 .with(FOSSIL_HEAD, false)
                 .with(HEART_SEA, false)
-                .with(ORB_INFINIUM, false));
+                .with(ORB_INFINIUM, false)
+                .with(END_READY, false));
     }
 
     @Override
@@ -139,6 +149,20 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
         }
     }
 
+    public BlockPattern getRitualPattern() {
+        if(this.ritualPattern == null){
+            this.ritualPattern = BlockPatternBuilder.start()
+                    .aisle(" LD","P~N")
+                    .where('N', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.NENDER_BRICK)))
+                    .where('P', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.DRAGON_PEDESTAL)))
+                    .where('~', CachedBlockPosition.matchesBlockState(MaterialPredicate.create(Material.AIR)))
+                    .where('L', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.ETHER_LEVER)))
+                    .where('D', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(Blocks.DIRT)))
+                    .build();
+        }
+        return this.ritualPattern;
+    }
+
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(HALF,
@@ -146,7 +170,8 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
                 GILDED,
                 FOSSIL_HEAD,
                 HEART_SEA,
-                ORB_INFINIUM);
+                ORB_INFINIUM,
+                END_READY);
     }
 
     @Override
@@ -168,7 +193,19 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack heldItem = player.getStackInHand(hand);
-            if(heldItem.getItem() == ModItems.ORB_INFINIUM) {
+        BlockPattern.Result correctPattern;
+        correctPattern = this.getRitualPattern().searchAround(world,pos);
+            if(heldItem.getItem() == ModItems.END_STAFF){
+                if(!state.get(DragonPedestal.END_READY)
+                        && state.get(DragonPedestal.ORB_INFINIUM)) {
+                    world.setBlockState(pos, state.with(END_READY, true));
+                    if (!player.isCreative()) {
+                        player.sendMessage(Text.literal("End Gateway Activation is Complete!"));
+                    }
+                }
+            return ActionResult.PASS;
+            }
+           else if(heldItem.getItem() == ModItems.ORB_INFINIUM) {
                 if(!state.get(DragonPedestal.ORB_INFINIUM)
                         && state.get(DragonPedestal.HEART_SEA)) {
                     world.setBlockState(pos, state.with(ORB_INFINIUM, true)
@@ -194,7 +231,8 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
             } else if (heldItem.getItem() == ModItems.DRAGON_FOSSIL) {
                 if (!state.get(DragonPedestal.FOSSIL_HEAD)
                         && state.get(DragonPedestal.GILDED)
-                        && !state.get(DragonPedestal.HEART_SEA)) {
+                        && !state.get(DragonPedestal.HEART_SEA)
+                        && correctPattern != null) {
                     world.setBlockState(pos.up(), state.with(FOSSIL_HEAD, true)
                             .with(HALF, DoubleBlockHalf.UPPER));
                     world.playSound(null, pos, SoundEvents.BLOCK_BONE_BLOCK_PLACE, SoundCategory.BLOCKS, 0.5f, 0.3f);
@@ -204,6 +242,7 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
                 }
                 return ActionResult.CONSUME;
             }
+
         return ActionResult.PASS;
     }
 

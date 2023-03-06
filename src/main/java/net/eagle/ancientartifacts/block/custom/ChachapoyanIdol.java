@@ -1,11 +1,12 @@
 package net.eagle.ancientartifacts.block.custom;
 
+import net.eagle.ancientartifacts.block.ModBlocks;
 import net.eagle.ancientartifacts.item.ModItems;
 import net.eagle.ancientartifacts.potion.ModPotions;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalFacingBlock;
-import net.minecraft.block.ShapeContext;
+import net.minecraft.block.*;
+import net.minecraft.block.pattern.BlockPattern;
+import net.minecraft.block.pattern.BlockPatternBuilder;
+import net.minecraft.block.pattern.CachedBlockPosition;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -14,16 +15,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.PotionItem;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtil;
+import net.minecraft.predicate.block.BlockStatePredicate;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Hand;
+import net.minecraft.util.function.MaterialPredicate;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -32,11 +35,14 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+@SuppressWarnings("deprecation")
 public class ChachapoyanIdol extends HorizontalFacingBlock {
 
     public static final DirectionProperty FACING;
 
-    private static VoxelShape SHAPE;
+    private static final VoxelShape SHAPE;
+    @Nullable
+    private BlockPattern elderianMonumentPatter;
 
     public static final BooleanProperty KEY = BooleanProperty.of("key");
     public static final BooleanProperty PENDANT = BooleanProperty.of("pendant");
@@ -68,6 +74,9 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack heldItem = player.getStackInHand(hand);
         Potion elixir = PotionUtil.getPotion(heldItem);
+        BlockPattern.Result result;
+        result = this.getMonumentPattern().searchAround(world,pos);
+    if(result != null){
         if (heldItem.getItem() instanceof PotionItem
                 && elixir == ModPotions.ELIXIR_OF_DRAKE) {
             if(!state.get(ChachapoyanIdol.ELDERIAN_MONUMENT)
@@ -109,6 +118,11 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
                 return ActionResult.CONSUME;
             }
         }
+    }
+        if (!world.isClient) {
+            player.sendMessage(Text.literal("Full Monument needs to be built first"));
+        }
+
         return ActionResult.PASS;
 
 
@@ -117,13 +131,15 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
     @Override
     public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         super.onBreak(world, pos, state, player);
-        if(state.get(ChachapoyanIdol.PENDANT)){
-            ItemStack pendant = new ItemStack(ModItems.ANKH_PENDANT);
-            BlockPos dropPos = pos.up();
-            world.spawnEntity(new ItemEntity(world, dropPos.getX(), dropPos.getY(), dropPos.getZ(), pendant));
-            if(state.get(ChachapoyanIdol.SCALES)){
-                ItemStack scales = new ItemStack(ModItems.ELDER_GUARDIAN_SCALES);
-                world.spawnEntity(new ItemEntity(world, dropPos.getX(), dropPos.getY(), dropPos.getZ(), scales));
+        if(!player.isCreative()){
+            if(state.get(ChachapoyanIdol.PENDANT)){
+                ItemStack pendant = new ItemStack(ModItems.ANKH_PENDANT);
+                BlockPos dropPos = pos.up();
+                world.spawnEntity(new ItemEntity(world, dropPos.getX(), dropPos.getY(), dropPos.getZ(), pendant));
+                if(state.get(ChachapoyanIdol.SCALES)){
+                    ItemStack scales = new ItemStack(ModItems.ELDER_GUARDIAN_SCALES);
+                    world.spawnEntity(new ItemEntity(world, dropPos.getX(), dropPos.getY(), dropPos.getZ(), scales));
+                }
             }
         }
     }
@@ -142,6 +158,21 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
     @Override
     public BlockState mirror(BlockState state, BlockMirror mirror) {
         return state.rotate(mirror.getRotation(state.get(FACING)));
+    }
+
+    public BlockPattern getMonumentPattern() {
+        if(this.elderianMonumentPatter == null){
+            this.elderianMonumentPatter = BlockPatternBuilder.start()
+                    .aisle("OIC", "NDN", "~N~")
+                    .where('O', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.TOTEM_OF_ORDER)))
+                    .where('I', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.CHACHAPOYAN_IDOL)))
+                    .where('C', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.TOTEM_OF_CHAOS)))
+                    .where('N', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.NENDER_BRICK)))
+                    .where('D', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(Blocks.DIRT)))
+                    .where('~', CachedBlockPosition.matchesBlockState(MaterialPredicate.create(Material.AIR)))
+                    .build();
+        }
+        return this.elderianMonumentPatter;
     }
 
     @Override
