@@ -59,44 +59,28 @@ public abstract class ShovelItemMixin {
                 cir.setReturnValue(ActionResult.SUCCESS);
                 cir.cancel();
             }
-       else {
-
-            if (state.getBlock() == Blocks.MYCELIUM) {
-
+           else if (state.getBlock() == Blocks.RED_SAND) {
+                double rand = Math.random();
+                if(rand < 0.05) {
+                    ItemStack ice = new ItemStack(ModItems.RED_ICE, 1);
+                    BlockPos dropPos = pos.up();
+                    world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5, dropPos.getY(), pos.getZ() + 0.5 , ice));
+                } else {
+                    ItemStack bush = new ItemStack(Items.DEAD_BUSH, 1);
+                    BlockPos dropPos = pos.up();
+                    world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5, dropPos.getY(), pos.getZ() + 0.5 , bush));
+                }
+                // Consume the ShovelItem's durability and cancel the event
                 ShovelItem item = (ShovelItem)stack.getItem();
                 if(!player.isCreative()){
                     item.postMine(stack, world, state, pos, player);
                 }
-                BlockState concrete = Blocks.RED_CONCRETE.getDefaultState();
-                world.setBlockState(pos, concrete);
+                BlockState sand = Blocks.SAND.getDefaultState();
+                world.setBlockState(pos, sand);
                 cir.setReturnValue(ActionResult.SUCCESS);
                 cir.cancel();
             }
-
         }
-
-        if (state.getBlock() == Blocks.RED_SAND) {
-            double rand = Math.random();
-            if(rand < 0.05) {
-                ItemStack ice = new ItemStack(ModItems.RED_ICE, 1);
-                BlockPos dropPos = pos.up();
-                world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5, dropPos.getY(), pos.getZ() + 0.5 , ice));
-            } else {
-                ItemStack bush = new ItemStack(Items.DEAD_BUSH, 1);
-                BlockPos dropPos = pos.up();
-                world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5, dropPos.getY(), pos.getZ() + 0.5 , bush));
-            }
-            // Consume the ShovelItem's durability and cancel the event
-            ShovelItem item = (ShovelItem)stack.getItem();
-            if(!player.isCreative()){
-                item.postMine(stack, world, state, pos, player);
-            }
-            BlockState sand = Blocks.SAND.getDefaultState();
-            world.setBlockState(pos, sand);
-            cir.setReturnValue(ActionResult.SUCCESS);
-            cir.cancel();
-        }
-    }
 
 
 }

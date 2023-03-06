@@ -9,10 +9,10 @@
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/bpoletti/Ancient_Artifacts_Mod"
 	},
 	"license": "MIT License",
-	"icon": "assets/ancientartifacts/icon.png",
+	"icon": "assets/ancientartifacts/ancientartifactsicon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
