@@ -12,6 +12,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.PotionItem;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtil;
@@ -84,6 +85,7 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
                 world.setBlockState(pos, state.with(ChachapoyanIdol.ELDERIAN_MONUMENT, true));
                 if(!player.isCreative()){
                     heldItem.decrement(1);
+                    player.giveItemStack(new ItemStack(Items.GLASS_BOTTLE));
                 }
                 ItemStack orb = new ItemStack(ModItems.ORB_INFINIUM);
                 BlockPos dropPos = pos.up();

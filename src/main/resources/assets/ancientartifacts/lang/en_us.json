@@ -43,6 +43,8 @@
     "item.minecraft.lingering_potion.effect.elixir_base_v": "Lingering Elixir Base V",
     "item.minecraft.potion.effect.elixir_of_drake": "Elixir of Drake",
     "item.minecraft.splash_potion.effect.elixir_of_drake": "Splash Elixir of Drake",
-    "item.minecraft.lingering_potion.effect.elixir_of_drake": "Lingering Elixir of Drake"
+    "item.minecraft.lingering_potion.effect.elixir_of_drake": "Lingering Elixir of Drake",
+
+    "itemGroup.ancientartifacts.dragon_pedestal": "Ancient Artifacts"
 
 }
