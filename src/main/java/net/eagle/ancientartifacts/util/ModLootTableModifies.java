@@ -133,7 +133,7 @@ public class ModLootTableModifies {
             if (BASTION_TREASURE_ID.equals(id)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(RandomChanceLootCondition.builder(0.85f)) // Drops 58% of the time
+                        .conditionally(RandomChanceLootCondition.builder(0.85f)) // Drops 85% of the time
                         .with(ItemEntry.builder(ModBlocks.GILDED_PLATE))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
                 tableBuilder.pool(poolBuilder.build());
