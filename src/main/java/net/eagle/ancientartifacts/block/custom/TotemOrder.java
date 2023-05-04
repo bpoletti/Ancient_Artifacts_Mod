@@ -12,6 +12,7 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
@@ -19,9 +20,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class TotemOrder extends HorizontalFacingBlock {
 
-    public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
+    public static final DirectionProperty FACING;
     public TotemOrder(Settings settings) {
         super(settings);
+        setDefaultState(getStateManager().getDefaultState()
+                .with(FACING, Direction.NORTH));
     }
 
     private static final VoxelShape SHAPE;
@@ -54,8 +57,9 @@ public class TotemOrder extends HorizontalFacingBlock {
     }
 
     static {
+        FACING = HorizontalFacingBlock.FACING;
         VoxelShape vs1 = Block.createCuboidShape(6,0,6,10,4,10);
-        VoxelShape vs2 = Block.createCuboidShape(3,4,4,11,9,12);
+        VoxelShape vs2 = Block.createCuboidShape(4,4,4,12,9,12);
         VoxelShape vs3 = Block.createCuboidShape(5,9,5,11,13,11);
 
         SHAPE = VoxelShapes.union(vs1, vs2, vs3).simplify();
