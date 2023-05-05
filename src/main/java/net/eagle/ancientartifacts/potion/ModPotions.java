@@ -7,9 +7,8 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.Potions;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 public class ModPotions {
     
@@ -22,11 +21,11 @@ public class ModPotions {
 
         public static Potion registerPotion(String name) {
             if(name.equals("elixir_of_drake")) {
-                return Registry.register(Registries.POTION, new Identifier(AncientArtifacts.MOD_ID, name),
+                return Registry.register(Registry.POTION, new Identifier(AncientArtifacts.MOD_ID, name),
                         new Potion(new StatusEffectInstance(StatusEffects.LEVITATION, 200,0)));
             }
             else {
-                return Registry.register(Registries.POTION, new Identifier(AncientArtifacts.MOD_ID, name),
+                return Registry.register(Registry.POTION, new Identifier(AncientArtifacts.MOD_ID, name),
                         new Potion(new StatusEffectInstance(StatusEffects.NAUSEA, 100,0)));
             }
         }

@@ -2,7 +2,6 @@ package net.eagle.ancientartifacts;
 
 import net.eagle.ancientartifacts.block.ModBlocks;
 import net.eagle.ancientartifacts.block.entity.ModBlockEntities;
-import net.eagle.ancientartifacts.item.ModItemGroup;
 import net.eagle.ancientartifacts.item.ModItems;
 import net.eagle.ancientartifacts.potion.ModPotions;
 import net.eagle.ancientartifacts.util.ModLootTableModifies;
@@ -18,8 +17,7 @@ public class AncientArtifacts implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-
-		ModItemGroup.registerItemGroup();
+		
 
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
