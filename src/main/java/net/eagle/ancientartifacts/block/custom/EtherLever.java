@@ -11,11 +11,18 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.Style;
+import net.minecraft.text.Text;
+import net.minecraft.text.TextColor;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vec3f;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
@@ -38,6 +45,9 @@ public class EtherLever extends WallMountedBlock {
     protected static final VoxelShape FLOOR_X_AXIS_SHAPE;
     protected static final VoxelShape CEILING_Z_AXIS_SHAPE;
     protected static final VoxelShape CEILING_X_AXIS_SHAPE;
+
+    public static final Vec3f BLUE = new Vec3f((float)65 / 255, (float)102 / 255, (float)245 / 255);
+
 
     static {
         NORTH_WALL_SHAPE = Block.createCuboidShape(6.0, 5.0, 4.0, 10.0, 11.0, 16.0);
@@ -122,7 +132,7 @@ public class EtherLever extends WallMountedBlock {
         double d = (double)pos.getX() + 0.5 + 0.1 * (double)direction.getOffsetX() + 0.2 * (double)direction2.getOffsetX();
         double e = (double)pos.getY() + 0.5 + 0.1 * (double)direction.getOffsetY() + 0.2 * (double)direction2.getOffsetY();
         double f = (double)pos.getZ() + 0.5 + 0.1 * (double)direction.getOffsetZ() + 0.2 * (double)direction2.getOffsetZ();
-        world.addParticle(new DustParticleEffect(DustParticleEffect.RED, alpha), d, e, f, 0.0, 0.0, 0.0);
+        world.addParticle(new DustParticleEffect(BLUE, alpha), d, e, f, 0.0, 0.0, 0.0);
     }
 
     private void updateNeighbors(BlockState state, World world, BlockPos pos) {

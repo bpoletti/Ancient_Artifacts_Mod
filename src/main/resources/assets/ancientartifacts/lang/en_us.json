@@ -18,12 +18,12 @@
 
 
     "block.ancientartifacts.nender_brick": "Nender Brick",
-    "block.ancientartifacts.chachapoyan_idol": "Chachapoyan Idol",
+    "block.ancientartifacts.chachapoyan_idol": "§eChachapoyan Idol",
     "block.ancientartifacts.gilded_plate": "Gilded Plate",
-    "block.ancientartifacts.dragon_pedestal": "Dragon Pedestal",
-    "block.ancientartifacts.ether_lever": "Ether Lever",
-    "block.ancientartifacts.totem_of_order": "Totem of Order",
-    "block.ancientartifacts.totem_of_chaos": "Totem of Chaos",
+    "block.ancientartifacts.dragon_pedestal": "§eDragon Pedestal",
+    "block.ancientartifacts.ether_lever": "§eEther Lever",
+    "block.ancientartifacts.totem_of_order": "§eTotem of Order",
+    "block.ancientartifacts.totem_of_chaos": "§eTotem of Chaos",
 
 
     "item.minecraft.potion.effect.elixir_base_i": "Elixir Base I",
@@ -41,9 +41,9 @@
     "item.minecraft.potion.effect.elixir_base_v": "Elixir Base V",
     "item.minecraft.splash_potion.effect.elixir_base_v": "Splash Elixir Base V",
     "item.minecraft.lingering_potion.effect.elixir_base_v": "Lingering Elixir Base V",
-    "item.minecraft.potion.effect.elixir_of_drake": "Elixir of Drake",
-    "item.minecraft.splash_potion.effect.elixir_of_drake": "Splash Elixir of Drake",
-    "item.minecraft.lingering_potion.effect.elixir_of_drake": "Lingering Elixir of Drake",
+    "item.minecraft.potion.effect.elixir_of_drake": "§eElixir of Drake",
+    "item.minecraft.splash_potion.effect.elixir_of_drake": "§eSplash Elixir of Drake",
+    "item.minecraft.lingering_potion.effect.elixir_of_drake": "§eLingering Elixir of Drake",
 
     "itemGroup.ancientartifacts.dragon_pedestal": "Ancient Artifacts"
 

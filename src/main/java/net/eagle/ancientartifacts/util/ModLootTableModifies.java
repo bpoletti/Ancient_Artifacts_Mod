@@ -109,7 +109,7 @@ public class ModLootTableModifies {
             if (ABANDON_MINESHAFT_CHEST_ID.equals(id)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(RandomChanceLootCondition.builder(0.75f)) // Drops 75% of the time
+                        .conditionally(RandomChanceLootCondition.builder(0.60f)) // Drops 60% of the time
                         .with(ItemEntry.builder(ModItems.DRAGON_FOSSIL))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
                 tableBuilder.pool(poolBuilder.build());
@@ -117,7 +117,7 @@ public class ModLootTableModifies {
             if (BASTION_HOGLIN_STABLE_CHEST_ID.equals(id)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(RandomChanceLootCondition.builder(0.65f)) // Drops 65% of the time
+                        .conditionally(RandomChanceLootCondition.builder(0.60f)) // Drops 60% of the time
                         .with(ItemEntry.builder(ModBlocks.GILDED_PLATE))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
                 tableBuilder.pool(poolBuilder.build());
@@ -133,7 +133,7 @@ public class ModLootTableModifies {
             if (BASTION_TREASURE_ID.equals(id)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(RandomChanceLootCondition.builder(0.85f)) // Drops 85% of the time
+                        .conditionally(RandomChanceLootCondition.builder(0.70f)) // Drops 70% of the time
                         .with(ItemEntry.builder(ModBlocks.GILDED_PLATE))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
                 tableBuilder.pool(poolBuilder.build());
@@ -141,7 +141,7 @@ public class ModLootTableModifies {
             if (DESERT_PYRAMID_CHEST_ID.equals(id)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(RandomChanceLootCondition.builder(0.50f)) // Drops 50% of the time
+                        .conditionally(RandomChanceLootCondition.builder(0.40f)) // Drops 40% of the time
                         .with(ItemEntry.builder(ModItems.ANKH_PENDANT))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
                 tableBuilder.pool(poolBuilder.build());
@@ -149,7 +149,7 @@ public class ModLootTableModifies {
             if (JUNGLE_TEMPLE_CHEST_ID.equals(id)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(RandomChanceLootCondition.builder(0.90f)) // Drops 90% of the time
+                        .conditionally(RandomChanceLootCondition.builder(0.70f)) // Drops 70% of the time
                         .with(ItemEntry.builder(ModBlocks.CHACHAPOYAN_IDOL))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
                 tableBuilder.pool(poolBuilder.build());
@@ -165,7 +165,7 @@ public class ModLootTableModifies {
             if (PILLAGER_OUTPOST_CHEST_ID.equals(id)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(RandomChanceLootCondition.builder(0.85f)) // Drops 85% of the time
+                        .conditionally(RandomChanceLootCondition.builder(0.75f)) // Drops 75% of the time
                         .with(ItemEntry.builder(ModBlocks.TOTEM_OF_CHAOS))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
                 tableBuilder.pool(poolBuilder.build());
@@ -173,15 +173,15 @@ public class ModLootTableModifies {
             if (RUINED_PORTAL_CHEST_ID.equals(id)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(RandomChanceLootCondition.builder(0.90f)) // Drops 90% of the time
+                        .conditionally(RandomChanceLootCondition.builder(0.55f)) // Drops 55% of the time
                         .with(ItemEntry.builder(ModItems.NETHER_GRASS))
-                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 3.0f)).build());
+                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
                 tableBuilder.pool(poolBuilder.build());
             }
             if (DUNGEON_CHEST_ID.equals(id)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(RandomChanceLootCondition.builder(0.40f)) // Drops 40% of the time
+                        .conditionally(RandomChanceLootCondition.builder(0.30f)) // Drops 30% of the time
                         .with(ItemEntry.builder(ModBlocks.DRAGON_PEDESTAL))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
                 tableBuilder.pool(poolBuilder.build());
@@ -189,7 +189,7 @@ public class ModLootTableModifies {
             if (STRONGHOLD_CORRIDOR_CHEST_ID.equals(id)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(RandomChanceLootCondition.builder(0.93f)) // Drops 95% of the time
+                        .conditionally(RandomChanceLootCondition.builder(0.80f)) // Drops 80% of the time
                         .with(ItemEntry.builder(ModItems.ENDER_ROD))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
                 tableBuilder.pool(poolBuilder.build());
@@ -213,7 +213,7 @@ public class ModLootTableModifies {
             }if (DESERT_VILLAGE_CHEST_ID.equals(id)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(RandomChanceLootCondition.builder(0.40f)) // Drops 40% of the time
+                        .conditionally(RandomChanceLootCondition.builder(0.35f)) // Drops 35% of the time
                         .with(ItemEntry.builder(ModBlocks.TOTEM_OF_ORDER))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
                 tableBuilder.pool(poolBuilder.build());
@@ -227,28 +227,28 @@ public class ModLootTableModifies {
             }if (PLAINS_VILLAGE_CHEST_ID.equals(id)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(RandomChanceLootCondition.builder(0.40f)) // Drops 40% of the time
+                        .conditionally(RandomChanceLootCondition.builder(0.35f)) // Drops 35% of the time
                         .with(ItemEntry.builder(ModBlocks.TOTEM_OF_ORDER))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
                 tableBuilder.pool(poolBuilder.build());
             }if (SAVANNA_VILLAGE_CHEST_ID.equals(id)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(RandomChanceLootCondition.builder(0.40f)) // Drops 40% of the time
+                        .conditionally(RandomChanceLootCondition.builder(0.35f)) // Drops 35% of the time
                         .with(ItemEntry.builder(ModBlocks.TOTEM_OF_ORDER))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
                 tableBuilder.pool(poolBuilder.build());
             }if (SNOWY_VILLAGE_CHEST_ID.equals(id)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(RandomChanceLootCondition.builder(0.40f)) // Drops 40% of the time
+                        .conditionally(RandomChanceLootCondition.builder(0.35f)) // Drops 35% of the time
                         .with(ItemEntry.builder(ModBlocks.TOTEM_OF_ORDER))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
                 tableBuilder.pool(poolBuilder.build());
             }if (TAIGA_VILLAGE_CHEST_ID.equals(id)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(RandomChanceLootCondition.builder(0.40f)) // Drops 40% of the time
+                        .conditionally(RandomChanceLootCondition.builder(0.35f)) // Drops 35% of the time
                         .with(ItemEntry.builder(ModBlocks.TOTEM_OF_ORDER))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
                 tableBuilder.pool(poolBuilder.build());
@@ -262,14 +262,14 @@ public class ModLootTableModifies {
             }if (TOOLSMITH_VILLAGE_CHEST_ID.equals(id)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(RandomChanceLootCondition.builder(0.25f)) // Drops 25% of the time
+                        .conditionally(RandomChanceLootCondition.builder(0.20f)) // Drops 20% of the time
                         .with(ItemEntry.builder(ModBlocks.TOTEM_OF_ORDER))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
                 tableBuilder.pool(poolBuilder.build());
             }if (WEAPONSMITH_VILLAGE_CHEST_ID.equals(id)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(RandomChanceLootCondition.builder(0.25f)) // Drops 25% of the time
+                        .conditionally(RandomChanceLootCondition.builder(0.20f)) // Drops 20% of the time
                         .with(ItemEntry.builder(ModBlocks.TOTEM_OF_ORDER))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
                 tableBuilder.pool(poolBuilder.build());

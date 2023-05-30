@@ -19,7 +19,7 @@ public class ModBlocks {
     new Block(FabricBlockSettings.of(Material.STONE).strength(4f).requiresTool()), ModItemGroup.ARTIFACTS);
 
     public static final Block CHACHAPOYAN_IDOL = registerBlock("chachapoyan_idol",
-    new ChachapoyanIdol(FabricBlockSettings.of(Material.METAL).strength(4f).
+    new ChachapoyanIdol(FabricBlockSettings.of(Material.METAL).luminance(8).strength(4f).
             requiresTool().nonOpaque()), ModItemGroup.ARTIFACTS);
 
     public static final Block GILDED_PLATE = registerBlock("gilded_plate",
