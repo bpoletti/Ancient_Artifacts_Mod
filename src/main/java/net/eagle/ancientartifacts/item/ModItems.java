@@ -1,8 +1,7 @@
 package net.eagle.ancientartifacts.item;
 
 import net.eagle.ancientartifacts.AncientArtifacts;
-import net.eagle.ancientartifacts.item.custom.DragonFossil;
-import net.eagle.ancientartifacts.item.custom.EndStaff;
+import net.eagle.ancientartifacts.item.custom.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.Item;
@@ -14,7 +13,7 @@ import net.minecraft.util.Identifier;
 public class ModItems {
     
     public static final Item WARDEN_HEART = registerItem("warden_heart",
-        new Item(new FabricItemSettings()));
+        new WardensHeart(new FabricItemSettings()));
     
     public static final Item ENDER_ROD = registerItem("ender_rod",
         new Item(new FabricItemSettings()));
@@ -44,19 +43,19 @@ public class ModItems {
         new Item(new FabricItemSettings()));
         
     public static final Item EVOKER_KEY = registerItem("evoker_key",
-        new Item(new FabricItemSettings().maxCount(1)));
+        new EvokerKey(new FabricItemSettings().maxCount(1)));
         
     public static final Item ELDER_GUARDIAN_SCALES = registerItem("elder_guardian_scales",
-        new Item(new FabricItemSettings()));
+        new ElderGuardianScales(new FabricItemSettings()));
         
     public static final Item END_STAFF = registerItem("end_staff",
         new EndStaff(new FabricItemSettings()));
 
     public static final Item ANKH_PENDANT = registerItem("ankh_pendant",
-        new Item(new FabricItemSettings().maxCount(1)));
+        new AnkhPendant(new FabricItemSettings().maxCount(1)));
 
     public static final Item ORB_INFINIUM = registerItem("orb_infinium",
-        new Item(new FabricItemSettings().maxCount(1)));
+        new OrbOfInfinium(new FabricItemSettings().maxCount(1)));
 
     public static final Item DRAGON_FOSSIL = registerItem("dragon_fossil",
         new DragonFossil(new FabricItemSettings().maxCount(1)));

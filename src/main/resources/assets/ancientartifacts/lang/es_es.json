@@ -1,0 +1,50 @@
+{
+    "item.ancientartifacts.warden_heart": "Corazón de Guardián",
+    "item.ancientartifacts.ender_rod": "Vara de Ender",
+    "item.ancientartifacts.mycelium_dust": "Polvo de Micelio",
+    "item.ancientartifacts.black_ice": "Hielo Negro",
+    "item.ancientartifacts.red_ice": "Hielo Rojo",
+    "item.ancientartifacts.nether_grass": "Hierba del Nether",
+    "item.ancientartifacts.ochre_firefly_bud": "Capullo de Luciérnaga Ocre",
+    "item.ancientartifacts.verdant_firefly_bud": "Capullo de Luciérnaga Verdeante",
+    "item.ancientartifacts.pearlescent_firefly_bud": "Capullo de Luciérnaga Nacarada",
+    "item.ancientartifacts.firefly_orb": "Orbe de Luciérnaga",
+    "item.ancientartifacts.evoker_key": "Llave del Evocador",
+    "item.ancientartifacts.elder_guardian_scales": "Escamas del Guardián Anciano",
+    "item.ancientartifacts.end_staff": "Bastón del Fin",
+    "item.ancientartifacts.ankh_pendant": "Colgante de Ankh",
+    "item.ancientartifacts.orb_infinium": "Orbe de Infinium",
+    "item.ancientartifacts.dragon_fossil": "Fósil de Dragón",
+
+
+    "block.ancientartifacts.nender_brick": "Ladrillo Nender",
+    "block.ancientartifacts.chachapoyan_idol": "Ídolo Chachapoyano",
+    "block.ancientartifacts.gilded_plate": "Placa Dorada",
+    "block.ancientartifacts.dragon_pedestal": "Pedestal de Dragón",
+    "block.ancientartifacts.ether_lever": "Palanca Éter",
+    "block.ancientartifacts.totem_of_order": "Tótem del Orden",
+    "block.ancientartifacts.totem_of_chaos": "Tótem del Caos",
+
+
+    "item.minecraft.potion.effect.elixir_base_i": "Base de Elixir I",
+    "item.minecraft.splash_potion.effect.elixir_base_i": "Base de Elixir I (Arrojadiza)",
+    "item.minecraft.lingering_potion.effect.elixir_base_i": "Base de Elixir I (Persistente)",
+    "item.minecraft.potion.effect.elixir_base_ii": "Base de Elixir II",
+    "item.minecraft.splash_potion.effect.elixir_base_ii": "Base de Elixir II (Arrojadiza)",
+    "item.minecraft.lingering_potion.effect.elixir_base_ii": "Base de Elixir II (Persistente)",
+    "item.minecraft.potion.effect.elixir_base_iii": "Base de Elixir III",
+    "item.minecraft.splash_potion.effect.elixir_base_iii": "Base de Elixir III (Arrojadiza)",
+    "item.minecraft.lingering_potion.effect.elixir_base_iii": "Base de Elixir III (Persistente)",
+    "item.minecraft.potion.effect.elixir_base_iv": "Base de Elixir IV",
+    "item.minecraft.splash_potion.effect.elixir_base_iv": "Base de Elixir IV (Arrojadiza)",
+    "item.minecraft.lingering_potion.effect.elixir_base_iv": "Base de Elixir IV (Persistente)",
+    "item.minecraft.potion.effect.elixir_base_v": "Base de Elixir V",
+    "item.minecraft.splash_potion.effect.elixir_base_v": "Base de Elixir V (Arrojadiza)",
+    "item.minecraft.lingering_potion.effect.elixir_base_v": "Base de Elixir V (Persistente)",
+    "item.minecraft.potion.effect.elixir_of_drake": "Elixir de Drake",
+    "item.minecraft.splash_potion.effect.elixir_of_drake": "Elixir de Drake (Arrojadiza)",
+    "item.minecraft.lingering_potion.effect.elixir_of_drake": "Elixir de Drake (Persistente)",
+
+    "itemGroup.ancientartifacts.dragon_pedestal": "Artefactos Antiguos"
+
+}

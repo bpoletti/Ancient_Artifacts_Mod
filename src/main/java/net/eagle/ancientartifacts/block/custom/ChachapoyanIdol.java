@@ -9,6 +9,7 @@ import net.minecraft.block.pattern.BlockPatternBuilder;
 import net.minecraft.block.pattern.CachedBlockPosition;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
@@ -30,6 +31,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.function.MaterialPredicate;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
@@ -68,6 +70,24 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
     @Override
     public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
         world.playSound(null, pos, SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.BLOCKS,0.2f, 0.4f);
+        world.playSound(null, pos, SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.BLOCKS,0.4f, 0.4f);
+        world.setBlockState(pos, state);
+        // Check for nearby Creeper entities and trigger their explosion
+        if (!world.isClient) {
+            int radius = 16;
+            boolean creeperExploded = false;
+            for (CreeperEntity entity : world.getEntitiesByClass(CreeperEntity.class, new Box(pos).expand(radius), entity -> entity instanceof CreeperEntity)) {
+                CreeperEntity creeper = entity;
+                creeper.ignite(); // Ignite the Creeper
+                creeper.setFuseSpeed(5); // Set the fuse time to 3 (immediate explosion)
+                creeperExploded = true;
+            }
+            // Destroy the Chachapoyan Idol if a Creeper has exploded
+            if (creeperExploded) {
+                world.playSound(null, pos, SoundEvents.ITEM_TRIDENT_THUNDER, SoundCategory.NEUTRAL, 1.0f, 0.3f);
+                world.breakBlock(pos, false);
+            }
+        }
         super.onPlaced(world, pos, state, placer, itemStack);
     }
 
@@ -90,7 +110,7 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
                 ItemStack orb = new ItemStack(ModItems.ORB_INFINIUM);
                 BlockPos dropPos = pos.up();
                 world.spawnEntity(new ItemEntity(world, dropPos.getX(), dropPos.getY(), dropPos.getZ(), orb));
-                world.playSound(null, pos, SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.NEUTRAL,0.5f, 1.0f);
+                world.playSound(null, pos, SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.NEUTRAL,0.7f, 1.0f);
                 return ActionResult.CONSUME;
             }
         } else if (heldItem.getItem() == ModItems.ELDER_GUARDIAN_SCALES) {
@@ -100,7 +120,7 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
                 if (!player.isCreative()) {
                     heldItem.decrement(1);
                 }
-                world.playSound(null, pos, SoundEvents.BLOCK_FLOWERING_AZALEA_PLACE, SoundCategory.NEUTRAL,0.5f, 0.2f);
+                world.playSound(null, pos, SoundEvents.BLOCK_FLOWERING_AZALEA_PLACE, SoundCategory.NEUTRAL,0.7f, 0.2f);
                 return ActionResult.CONSUME;
             }
         } else if (heldItem.getItem() == ModItems.ANKH_PENDANT) {
@@ -110,13 +130,13 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
                 if (!player.isCreative()) {
                     heldItem.decrement(1);
                 }
-                world.playSound(null, pos, SoundEvents.BLOCK_AMETHYST_BLOCK_PLACE, SoundCategory.NEUTRAL,0.7f, 0.3f);
+                world.playSound(null, pos, SoundEvents.BLOCK_AMETHYST_BLOCK_PLACE, SoundCategory.NEUTRAL,0.8f, 0.3f);
                 return ActionResult.CONSUME;
             }
         } else if (heldItem.getItem() == ModItems.EVOKER_KEY) {
             if (!state.get(ChachapoyanIdol.KEY)) {
                 world.setBlockState(pos, state.with(ChachapoyanIdol.KEY, true));
-                world.playSound(null, pos, SoundEvents.BLOCK_IRON_DOOR_OPEN, SoundCategory.NEUTRAL,0.5f, 0.45f);
+                world.playSound(null, pos, SoundEvents.BLOCK_IRON_DOOR_OPEN, SoundCategory.NEUTRAL,0.7f, 0.45f);
                 return ActionResult.CONSUME;
             }
         }

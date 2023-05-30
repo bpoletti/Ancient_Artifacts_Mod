@@ -4,9 +4,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 
-public class DragonFossil extends Item {
-    public DragonFossil(Settings settings) {
-        super(settings);
+public class ElderGuardianScales extends Item {
+
+    public ElderGuardianScales(Settings settings) { super(settings); }
+
+    @Override
+    public boolean hasGlint(ItemStack stack) {
+        return true;
     }
 
     @Override

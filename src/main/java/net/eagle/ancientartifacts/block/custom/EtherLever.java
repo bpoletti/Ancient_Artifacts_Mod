@@ -2,9 +2,7 @@ package net.eagle.ancientartifacts.block.custom;
 
 import net.minecraft.block.*;
 import net.minecraft.block.enums.WallMountLocation;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.particle.DustParticleEffect;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -21,7 +19,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.event.GameEvent;
-import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
 
 import java.util.Objects;
 
@@ -38,6 +36,8 @@ public class EtherLever extends WallMountedBlock {
     protected static final VoxelShape FLOOR_X_AXIS_SHAPE;
     protected static final VoxelShape CEILING_Z_AXIS_SHAPE;
     protected static final VoxelShape CEILING_X_AXIS_SHAPE;
+
+    public static final Vector3f BLUE = new Vector3f((float)65 / 255, (float)102 / 255, (float)245 / 255);
 
     static {
         NORTH_WALL_SHAPE = Block.createCuboidShape(6.0, 5.0, 4.0, 10.0, 11.0, 16.0);
@@ -122,7 +122,7 @@ public class EtherLever extends WallMountedBlock {
         double d = (double)pos.getX() + 0.5 + 0.1 * (double)direction.getOffsetX() + 0.2 * (double)direction2.getOffsetX();
         double e = (double)pos.getY() + 0.5 + 0.1 * (double)direction.getOffsetY() + 0.2 * (double)direction2.getOffsetY();
         double f = (double)pos.getZ() + 0.5 + 0.1 * (double)direction.getOffsetZ() + 0.2 * (double)direction2.getOffsetZ();
-        world.addParticle(new DustParticleEffect(DustParticleEffect.RED, alpha), d, e, f, 0.0, 0.0, 0.0);
+        world.addParticle(new DustParticleEffect(BLUE, alpha), d, e, f, 0.0, 0.0, 0.0);
     }
 
     private void updateNeighbors(BlockState state, World world, BlockPos pos) {

@@ -10,7 +10,6 @@ import net.minecraft.util.Identifier;
 
 public class ModBlockEntities {
     public static BlockEntityType<DragonPedestalEntity> DRAGON_PEDESTAL_ENTITY;
-//    public static BlockEntityType<ChachapoyanIdolEntity> CHACHAPOYAN_IDOL_ENTITY;
 
     public static void registerBlockEntities(){
         DRAGON_PEDESTAL_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE,
