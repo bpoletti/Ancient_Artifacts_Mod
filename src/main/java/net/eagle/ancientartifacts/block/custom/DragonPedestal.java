@@ -142,7 +142,7 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
 
         if (blockPos.getY() < world.getTopY() - 1 && world.getBlockState(blockPos.up()).canReplace(ctx)) {
             return this.getDefaultState()
-                    .with(FACING, ctx.getPlayerFacing().getOpposite())
+                    .with(FACING, ctx.getPlayerLookDirection().getOpposite())
                     .with(HALF, DoubleBlockHalf.LOWER);
         } else {
             return null;
