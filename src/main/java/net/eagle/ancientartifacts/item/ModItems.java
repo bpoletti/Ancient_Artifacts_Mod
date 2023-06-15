@@ -65,33 +65,8 @@ public class ModItems {
         return Registry.register(Registries.ITEM, new Identifier(AncientArtifacts.MOD_ID, name), item);
     }
 
-    public static void addItemsToItmeGroups() {
-        addToItemGroup(ModItemGroup.ARTIFACTS, WARDEN_HEART);
-        addToItemGroup(ModItemGroup.ARTIFACTS, ENDER_ROD);
-        addToItemGroup(ModItemGroup.ARTIFACTS, MYCELIUM_DUST);
-        addToItemGroup(ModItemGroup.ARTIFACTS, BLACK_ICE);
-        addToItemGroup(ModItemGroup.ARTIFACTS, RED_ICE);
-        addToItemGroup(ModItemGroup.ARTIFACTS, NETHER_GRASS);
-        addToItemGroup(ModItemGroup.ARTIFACTS, OCHRE_FIREFLY_BUD);
-        addToItemGroup(ModItemGroup.ARTIFACTS, PEARLESCENT_FIREFLY_BUD);
-        addToItemGroup(ModItemGroup.ARTIFACTS, VERDANT_FIREFLY_BUD);
-        addToItemGroup(ModItemGroup.ARTIFACTS, FIREFLY_ORB);
-        addToItemGroup(ModItemGroup.ARTIFACTS, EVOKER_KEY);
-        addToItemGroup(ModItemGroup.ARTIFACTS, ELDER_GUARDIAN_SCALES);
-        addToItemGroup(ModItemGroup.ARTIFACTS, END_STAFF);
-        addToItemGroup(ModItemGroup.ARTIFACTS, ANKH_PENDANT);
-        addToItemGroup(ModItemGroup.ARTIFACTS, ORB_INFINIUM);
-        addToItemGroup(ModItemGroup.ARTIFACTS, DRAGON_FOSSIL);
-    }
-
-    public static void addToItemGroup(ItemGroup group, Item item) {
-        ItemGroupEvents.modifyEntriesEvent(group).register(entries ->
-                entries.add(item));
-    }
-
     public static void registerModItems() {
         AncientArtifacts.LOGGER.debug("Registering Mod Items for " + AncientArtifacts.MOD_ID);
-        addItemsToItmeGroups();
     }
 
 }
