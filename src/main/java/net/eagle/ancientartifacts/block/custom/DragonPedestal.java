@@ -29,7 +29,6 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.function.MaterialPredicate;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -155,7 +154,7 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
                     .aisle(" LD","P~N")
                     .where('N', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.NENDER_BRICK)))
                     .where('P', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.DRAGON_PEDESTAL)))
-                    .where('~', CachedBlockPosition.matchesBlockState(MaterialPredicate.create(Material.AIR)))
+                    .where('~', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(Blocks.AIR)))
                     .where('L', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.ETHER_LEVER)))
                     .where('D', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(Blocks.DIRT)))
                     .build();
