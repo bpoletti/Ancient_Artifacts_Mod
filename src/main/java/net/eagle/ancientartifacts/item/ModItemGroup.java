@@ -48,9 +48,7 @@ public class ModItemGroup {
                         entries.add(ModBlocks.GILDED_PLATE);
 
                         entries.add(ModBlocks.ETHER_LEVER);
-
-
-
+                        entries.add(ModBlocks.COPPER_WIRE);
 
 
                     }).build());

@@ -1,5 +1,6 @@
 package net.eagle.ancientartifacts.block.custom;
 
+import net.eagle.ancientartifacts.AncientArtifacts;
 import net.eagle.ancientartifacts.block.ModBlocks;
 import net.eagle.ancientartifacts.item.ModItems;
 import net.eagle.ancientartifacts.potion.ModPotions;
@@ -168,7 +169,7 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
     @Nullable
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return this.getDefaultState().with(FACING, ctx.getPlayerLookDirection().getOpposite());
+        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
     }
 
     @Override
@@ -190,7 +191,7 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
                     .where('C', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.TOTEM_OF_CHAOS)))
                     .where('N', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.NENDER_BRICK)))
                     .where('D', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(Blocks.DIRT)))
-                    .where('~', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(Blocks.AIR)))
+                    .where('~', pos -> pos.getBlockState().isAir())
                     .build();
         }
         return this.elderianMonumentPatter;

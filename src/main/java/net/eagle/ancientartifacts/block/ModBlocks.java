@@ -33,6 +33,8 @@ public class ModBlocks {
             new TotemOrder(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(4f).requiresTool()));
     public static final Block TOTEM_OF_CHAOS = registerBlock("totem_of_chaos",
             new TotemChaos(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(4f).requiresTool()));
+    public static final Block COPPER_WIRE = registerBlock("copper_wire",
+            new CopperWire(FabricBlockSettings.copyOf(Blocks.COPPER_BLOCK).strength(4f).requiresTool()));
 
 
     private static Block registerBlock(String name, Block block) {
