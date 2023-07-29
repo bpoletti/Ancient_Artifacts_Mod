@@ -1,0 +1,41 @@
+{
+  "parent": "ancientartifacts:magic_staff",
+  "display": {
+    "icon": {
+      "item": "ancientartifacts:orb_infinium"
+    },
+    "title":  "§5The Beginning of the End?",
+    "description": "The Elderian Monument was activated and the End Gate has opened",
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "pedestal_final": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "item": {
+          "items": [
+            "ancientartifacts:end_staff"
+          ]
+        },
+        "location": {
+          "block": {
+            "blocks": [
+              "ancientartifacts:dragon_pedestal"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "pedestal_final"
+    ]
+  ],
+  "rewards": {
+    "experience": 500
+  }
+}

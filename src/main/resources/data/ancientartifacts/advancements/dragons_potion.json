@@ -1,0 +1,33 @@
+{
+  "parent": "ancientartifacts:ball_of_stars",
+  "display": {
+    "icon": {
+      "item": "minecraft:potion",
+      "nbt": "{Potion:\"ancientartifacts:elixir_of_drake\"}"
+    },
+    "title": "Taste Like Crap!",
+    "description": "Brewed the Elixir of Drake",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "drake_potion": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions":{
+        "items": [
+          {
+            "item": "minecraft:potion",
+            "nbt": "{Potion:\"ancientartifacts:elixir_of_drake\"}"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "drake_potion"
+    ]
+  ]
+}
