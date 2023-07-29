@@ -120,11 +120,12 @@ public class CopperWire extends Block implements Waterloggable{
         if(strongestPower == 0){
             state = state.with(POWER, strongestPower);
         } else{
+            world.syncWorldEvent(WorldEvents.ELECTRICITY_SPARKS, pos, state.get(FACING).getAxis().ordinal());
             state = state.with(POWER, strongestPower - 1);
         }
         if(state.get(POWER) > 0){
             state = state.with(IS_POWERED, true);
-            world.syncWorldEvent(WorldEvents.ELECTRICITY_SPARKS, pos, state.get(FACING).getAxis().ordinal());
+
         } else {
             state = state.with(IS_POWERED, false);
         }
@@ -210,7 +211,6 @@ public class CopperWire extends Block implements Waterloggable{
                 state = state.with(POWER, netPower).with(IS_ROOT, false);
                 if(state.get(POWER) > 0){
                     state = state.with(IS_POWERED, true);
-                    world.syncWorldEvent(WorldEvents.ELECTRICITY_SPARKS, pos, state.get(FACING).getAxis().ordinal());
                 } else {
                     state = state.with(IS_POWERED, false);
                 }
@@ -237,7 +237,6 @@ public class CopperWire extends Block implements Waterloggable{
         }
         if(state.get(POWER) > 0){
             state = state.with(IS_POWERED, true);
-            world.syncWorldEvent(WorldEvents.ELECTRICITY_SPARKS, pos, state.get(FACING).getAxis().ordinal());
         } else {
             state = state.with(IS_POWERED, false);
         }
