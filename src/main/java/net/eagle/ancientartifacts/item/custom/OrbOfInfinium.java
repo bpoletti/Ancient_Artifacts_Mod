@@ -18,6 +18,6 @@ public class OrbOfInfinium extends Item {
 
     @Override
     public Text getName(ItemStack stack) {
-        return Text.of("§e" + super.getName(stack).getString());
+        return Text.of("§5" + super.getName(stack).getString());
     }
 }

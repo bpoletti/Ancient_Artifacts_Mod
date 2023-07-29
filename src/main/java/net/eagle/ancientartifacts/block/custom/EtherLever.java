@@ -2,39 +2,30 @@ package net.eagle.ancientartifacts.block.custom;
 
 import net.minecraft.block.*;
 import net.minecraft.block.enums.WallMountLocation;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.particle.DustParticleEffect;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.text.TextColor;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3f;
 import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.*;
 import net.minecraft.world.event.GameEvent;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
+import static net.minecraft.block.RedstoneWireBlock.POWER;
+
 
 @SuppressWarnings("deprecation")
-public class EtherLever extends WallMountedBlock {
+public class EtherLever extends LeverBlock {
 
     public static final BooleanProperty POWERED = Properties.POWERED;
     protected static final VoxelShape NORTH_WALL_SHAPE;
@@ -45,6 +36,7 @@ public class EtherLever extends WallMountedBlock {
     protected static final VoxelShape FLOOR_X_AXIS_SHAPE;
     protected static final VoxelShape CEILING_Z_AXIS_SHAPE;
     protected static final VoxelShape CEILING_X_AXIS_SHAPE;
+
 
     public static final Vec3f BLUE = new Vec3f((float)65 / 255, (float)102 / 255, (float)245 / 255);
 
@@ -108,11 +100,97 @@ public class EtherLever extends WallMountedBlock {
             }
             return ActionResult.SUCCESS;
         }
+
+        // Toggle the lever power state
         BlockState blockState = this.togglePower(state, world, pos);
+
+        // Power the Copper Wire connected to this Ether Lever
         float f = blockState.get(POWERED) ? 0.6f : 0.5f;
         world.playSound(null, pos, SoundEvents.BLOCK_LEVER_CLICK, SoundCategory.BLOCKS, 0.3f, f);
         world.emitGameEvent(player, blockState.get(POWERED) ? GameEvent.BLOCK_ACTIVATE : GameEvent.BLOCK_DEACTIVATE, pos);
         return ActionResult.CONSUME;
+    }
+    private void setRootRod(World world, BlockPos pos) {
+        for (Direction direction : Direction.values()) {
+            BlockPos copperPos = pos.offset(direction);
+            BlockState copperState = world.getBlockState(copperPos);
+            if(copperState.getBlock() == Blocks.COPPER_BLOCK || copperState.getBlock() == Blocks.WAXED_COPPER_BLOCK){
+                BlockPos[] adjacentPositions = {
+                        copperPos.north(),
+                        copperPos.south(),
+                        copperPos.east(),
+                        copperPos.west(),
+                        copperPos.up(),
+                        copperPos.down()
+                };
+                for(BlockPos rodPos : adjacentPositions) {
+                    BlockState rodState = world.getBlockState(rodPos);
+                    if(rodState.getBlock() instanceof CopperWire){
+                        world.setBlockState(rodPos, rodState.with(CopperWire.IS_ROOT, true).with(CopperWire.POWER, world.getReceivedRedstonePower(pos)).with(CopperWire.IS_POWERED ,world.getBlockState(pos).get(POWERED)));
+                    }
+                }
+            }
+        }
+    }
+    private void setNonRootRod(World world, BlockPos pos) {
+        for (Direction direction : Direction.values()) {
+            BlockPos copperPos = pos.offset(direction);
+            BlockState copperState = world.getBlockState(copperPos);
+            if(copperState.getBlock() == Blocks.COPPER_BLOCK || copperState.getBlock() == Blocks.WAXED_COPPER_BLOCK){
+                BlockPos[] adjacentPositions = {
+                        copperPos.north(),
+                        copperPos.south(),
+                        copperPos.east(),
+                        copperPos.west(),
+                        copperPos.up(),
+                        copperPos.down()
+                };
+                for(BlockPos rodPos : adjacentPositions) {
+                    BlockState rodState = world.getBlockState(rodPos);
+                    if(rodState.getBlock() instanceof CopperWire){
+                        world.setBlockState(rodPos, rodState.with(CopperWire.IS_ROOT, false).with(CopperWire.POWER, 0).with(CopperWire.IS_POWERED, false));
+                    }
+                }
+            }
+        }
+    }
+
+    private void setRootRodOff(World world, BlockPos pos) {
+        for (Direction direction : Direction.values()) {
+            BlockPos copperPos = pos.offset(direction);
+            BlockState copperState = world.getBlockState(copperPos);
+            if(copperState.getBlock() == Blocks.COPPER_BLOCK || copperState.getBlock() == Blocks.WAXED_COPPER_BLOCK){
+                BlockPos[] adjacentPositions = {
+                copperPos.north(),
+                copperPos.south(),
+                copperPos.east(),
+                copperPos.west(),
+                copperPos.up(),
+                copperPos.down()
+                };
+                for(BlockPos rodPos : adjacentPositions) {
+                    BlockState rodState = world.getBlockState(rodPos);
+                    if(rodState.getBlock() instanceof CopperWire){
+                        world.setBlockState(rodPos, rodState.with(CopperWire.POWER, 0).with(CopperWire.IS_POWERED, false));
+                    }
+                }
+            }
+        }
+    }
+    @Override
+    public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
+        super.onBlockAdded(state, world, pos, oldState, notify);
+        setRootRod(world, pos);
+    }
+
+    @Override
+    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+            super.onBreak(world, pos, state, player);
+        setNonRootRod(world, pos);
+    }
+    @Override
+    public int getWeakRedstonePower(BlockState state, BlockView world, BlockPos pos, Direction direction) {
+        return super.getWeakRedstonePower(state, world, pos, direction);
     }
 
     @Override
@@ -140,8 +218,12 @@ public class EtherLever extends WallMountedBlock {
         world.updateNeighborsAlways(pos.offset(LeverBlock.getDirection(state).getOpposite()), this);
     }
 
+    @Override
     public BlockState togglePower(BlockState state, World world, BlockPos pos) {
         state = state.cycle(POWERED);
+        if(!state.get(POWERED)){
+            setRootRodOff(world, pos);
+        }
         world.setBlockState(pos, state, Block.NOTIFY_ALL);
         this.updateNeighbors(state, world, pos);
         return state;

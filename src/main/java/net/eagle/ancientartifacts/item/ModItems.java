@@ -3,6 +3,8 @@ package net.eagle.ancientartifacts.item;
 import net.eagle.ancientartifacts.AncientArtifacts;
 import net.eagle.ancientartifacts.item.custom.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.block.Block;
+import net.minecraft.block.RedstoneWireBlock;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -57,7 +59,6 @@ public class ModItems {
     public static final Item DRAGON_FOSSIL = registerItem("dragon_fossil",
         new DragonFossil(new FabricItemSettings().group(ModItemGroup.ARTIFACTS).maxCount(1)));
 
-        
 
 
     private static Item registerItem(String name, Item item) {

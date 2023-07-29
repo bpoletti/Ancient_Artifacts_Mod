@@ -6,6 +6,7 @@
   "mixins": [
     "BetterIglooMixin",
     "BrewingRecipeRegistryMixin",
+    "CopperToRedstoneWire",
     "EyeEnderItemMixin",
     "ShovelItemMixin"
   ],

@@ -1,0 +1,33 @@
+{
+  "parent": "ancientartifacts:golden_idol_head",
+  "display": {
+    "icon": {
+      "item": "ancientartifacts:evoker_key"
+    },
+    "title": "The Key to Everything!",
+    "description": "Found the Evoker's Key",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "key_nabbed": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions":{
+        "items": [
+          {
+            "items": [
+              "ancientartifacts:evoker_key"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "key_nabbed"
+    ]
+  ]
+}
