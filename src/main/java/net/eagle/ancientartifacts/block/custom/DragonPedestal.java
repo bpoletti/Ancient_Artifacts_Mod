@@ -4,6 +4,7 @@ import net.eagle.ancientartifacts.block.ModBlocks;
 import net.eagle.ancientartifacts.block.entity.DragonPedestalEntity;
 import net.eagle.ancientartifacts.block.entity.ModBlockEntities;
 import net.eagle.ancientartifacts.item.ModItems;
+import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -19,6 +20,7 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.predicate.block.BlockStatePredicate;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
@@ -198,9 +200,12 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
             if(heldItem.getItem() == ModItems.END_STAFF){
                 if(!state.get(DragonPedestal.END_READY)
                         && state.get(DragonPedestal.ORB_INFINIUM)) {
-                    world.setBlockState(pos, state.with(END_READY, true));
+                    world.setBlockState(pos, state.with(END_READY, true)
+                            .with(HALF, DoubleBlockHalf.UPPER));
+                    world.playSound(null, pos, SoundEvents.ENTITY_ENDER_DRAGON_GROWL, SoundCategory.HOSTILE, 0.2f, 0.9f);
+                    world.playSound(null, pos, SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.NEUTRAL, 0.2f, 1.0f);
                     if (!player.isCreative()) {
-                        player.sendMessage(Text.literal("End Gateway Activation is Complete!"));
+                        player.sendMessage(Text.literal("End Gateway is now Unlocked!"));
                     }
                 }
             return ActionResult.PASS;
@@ -210,7 +215,7 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
                         && state.get(DragonPedestal.HEART_SEA)) {
                     world.setBlockState(pos, state.with(ORB_INFINIUM, true)
                             .with(HALF, DoubleBlockHalf.UPPER));
-                    world.playSound(null, pos, SoundEvents.BLOCK_BEACON_ACTIVATE, SoundCategory.AMBIENT, 0.6f, 0.6f);
+                    world.playSound(null, pos, SoundEvents.BLOCK_BEACON_ACTIVATE, SoundCategory.AMBIENT, 1.0f, 0.6f);
                     if (!player.isCreative()) {
                         heldItem.decrement(1);
                     }
@@ -222,7 +227,7 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
                         && state.get(DragonPedestal.FOSSIL_HEAD)) {
                     world.setBlockState(pos, state.with(HEART_SEA, true)
                             .with(HALF, DoubleBlockHalf.UPPER));
-                    world.playSound(null, pos, SoundEvents.BLOCK_CONDUIT_ACTIVATE, SoundCategory.BLOCKS, 0.5f, 0.4f);
+                    world.playSound(null, pos, SoundEvents.BLOCK_CONDUIT_ACTIVATE, SoundCategory.BLOCKS, 1.0f, 0.4f);
                     if (!player.isCreative()) {
                         heldItem.decrement(1);
                     }
@@ -235,7 +240,7 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
                         && correctPattern != null) {
                     world.setBlockState(pos.up(), state.with(FOSSIL_HEAD, true)
                             .with(HALF, DoubleBlockHalf.UPPER));
-                    world.playSound(null, pos, SoundEvents.BLOCK_BONE_BLOCK_PLACE, SoundCategory.BLOCKS, 0.5f, 0.3f);
+                    world.playSound(null, pos, SoundEvents.BLOCK_BONE_BLOCK_PLACE, SoundCategory.BLOCKS, 0.8f, 0.3f);
                     if (!player.isCreative()) {
                         heldItem.decrement(1);
                     }

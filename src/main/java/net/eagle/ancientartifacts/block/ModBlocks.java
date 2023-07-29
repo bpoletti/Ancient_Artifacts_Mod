@@ -37,6 +37,8 @@ public class ModBlocks {
     public static final Block TOTEM_OF_CHAOS = registerBlock("totem_of_chaos",
             new TotemChaos(FabricBlockSettings.of(Material.METAL).strength(4f).requiresTool()), ModItemGroup.ARTIFACTS);
 
+    public static final Block COPPER_WIRE = registerBlock("copper_wire",
+            new CopperWire(FabricBlockSettings.of(Material.METAL).strength(4f).requiresTool()), ModItemGroup.ARTIFACTS);
 
     private static Block registerBlock(String name, Block block, ItemGroup tab) {
         registerBlockItem(name, block, tab);
