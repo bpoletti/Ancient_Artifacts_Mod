@@ -109,7 +109,7 @@ public class ModLootTableModifies {
             if (ABANDON_MINESHAFT_CHEST_ID.equals(id)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(RandomChanceLootCondition.builder(0.60f)) // Drops 60% of the time
+                        .conditionally(RandomChanceLootCondition.builder(0.40f)) // Drops 40% of the time
                         .with(ItemEntry.builder(ModItems.DRAGON_FOSSIL))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
                 tableBuilder.pool(poolBuilder.build());
@@ -117,7 +117,7 @@ public class ModLootTableModifies {
             if (BASTION_HOGLIN_STABLE_CHEST_ID.equals(id)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(RandomChanceLootCondition.builder(0.60f)) // Drops 60% of the time
+                        .conditionally(RandomChanceLootCondition.builder(0.40f)) // Drops 40% of the time
                         .with(ItemEntry.builder(ModBlocks.GILDED_PLATE))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
                 tableBuilder.pool(poolBuilder.build());
@@ -125,7 +125,7 @@ public class ModLootTableModifies {
             if (BASTION_OTHER_CHEST_ID.equals(id)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(RandomChanceLootCondition.builder(0.50f)) // Drops 50% of the time
+                        .conditionally(RandomChanceLootCondition.builder(0.40f)) // Drops 40% of the time
                         .with(ItemEntry.builder(ModBlocks.GILDED_PLATE))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
                 tableBuilder.pool(poolBuilder.build());
@@ -165,7 +165,7 @@ public class ModLootTableModifies {
             if (PILLAGER_OUTPOST_CHEST_ID.equals(id)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(RandomChanceLootCondition.builder(0.75f)) // Drops 75% of the time
+                        .conditionally(RandomChanceLootCondition.builder(0.65f)) // Drops 65% of the time
                         .with(ItemEntry.builder(ModBlocks.TOTEM_OF_CHAOS))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
                 tableBuilder.pool(poolBuilder.build());
@@ -173,7 +173,7 @@ public class ModLootTableModifies {
             if (RUINED_PORTAL_CHEST_ID.equals(id)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(RandomChanceLootCondition.builder(0.55f)) // Drops 55% of the time
+                        .conditionally(RandomChanceLootCondition.builder(0.40f)) // Drops 40% of the time
                         .with(ItemEntry.builder(ModItems.NETHER_GRASS))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
                 tableBuilder.pool(poolBuilder.build());

@@ -17,15 +17,18 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.*;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.event.GameEvent;
 import org.joml.Vector3f;
 
 import java.util.Objects;
 
+import static net.minecraft.block.RedstoneWireBlock.POWER;
+
 
 @SuppressWarnings("deprecation")
-public class EtherLever extends WallMountedBlock {
+public class EtherLever extends LeverBlock {
 
     public static final BooleanProperty POWERED = Properties.POWERED;
     protected static final VoxelShape NORTH_WALL_SHAPE;
@@ -49,7 +52,7 @@ public class EtherLever extends WallMountedBlock {
         CEILING_Z_AXIS_SHAPE = Block.createCuboidShape(6.0, 4.0, 5.0, 10.0, 16.0, 11.0);
         CEILING_X_AXIS_SHAPE = Block.createCuboidShape(5.0, 4.0, 6.0, 11.0, 16.0, 10.0);
     }
-    
+
     public EtherLever(Settings settings) {
         super(settings);
         this.setDefaultState(getStateManager().getDefaultState()
@@ -104,7 +107,88 @@ public class EtherLever extends WallMountedBlock {
         world.emitGameEvent(player, blockState.get(POWERED) ? GameEvent.BLOCK_ACTIVATE : GameEvent.BLOCK_DEACTIVATE, pos);
         return ActionResult.CONSUME;
     }
+    private void setRootRod(World world, BlockPos pos) {
+        for (Direction direction : Direction.values()) {
+            BlockPos copperPos = pos.offset(direction);
+            BlockState copperState = world.getBlockState(copperPos);
+            if(copperState.getBlock() == Blocks.COPPER_BLOCK || copperState.getBlock() == Blocks.WAXED_COPPER_BLOCK){
+                BlockPos[] adjacentPositions = {
+                        copperPos.north(),
+                        copperPos.south(),
+                        copperPos.east(),
+                        copperPos.west(),
+                        copperPos.up(),
+                        copperPos.down()
+                };
+                for(BlockPos rodPos : adjacentPositions) {
+                    BlockState rodState = world.getBlockState(rodPos);
+                    if(rodState.getBlock() instanceof CopperWire){
+                        world.setBlockState(rodPos, rodState.with(CopperWire.IS_ROOT, true).with(CopperWire.POWER, world.getReceivedRedstonePower(pos)).with(CopperWire.IS_POWERED ,world.getBlockState(pos).get(POWERED)));
+                    }
+                }
+            }
+        }
+    }
+    private void setNonRootRod(World world, BlockPos pos) {
+        for (Direction direction : Direction.values()) {
+            BlockPos copperPos = pos.offset(direction);
+            BlockState copperState = world.getBlockState(copperPos);
+            if(copperState.getBlock() == Blocks.COPPER_BLOCK || copperState.getBlock() == Blocks.WAXED_COPPER_BLOCK){
+                BlockPos[] adjacentPositions = {
+                        copperPos.north(),
+                        copperPos.south(),
+                        copperPos.east(),
+                        copperPos.west(),
+                        copperPos.up(),
+                        copperPos.down()
+                };
+                for(BlockPos rodPos : adjacentPositions) {
+                    BlockState rodState = world.getBlockState(rodPos);
+                    if(rodState.getBlock() instanceof CopperWire){
+                        world.setBlockState(rodPos, rodState.with(CopperWire.IS_ROOT, false).with(CopperWire.POWER, 0).with(CopperWire.IS_POWERED, false));
+                    }
+                }
+            }
+        }
+    }
 
+    private void setRootRodOff(World world, BlockPos pos) {
+        for (Direction direction : Direction.values()) {
+            BlockPos copperPos = pos.offset(direction);
+            BlockState copperState = world.getBlockState(copperPos);
+            if(copperState.getBlock() == Blocks.COPPER_BLOCK || copperState.getBlock() == Blocks.WAXED_COPPER_BLOCK){
+                BlockPos[] adjacentPositions = {
+                        copperPos.north(),
+                        copperPos.south(),
+                        copperPos.east(),
+                        copperPos.west(),
+                        copperPos.up(),
+                        copperPos.down()
+                };
+                for(BlockPos rodPos : adjacentPositions) {
+                    BlockState rodState = world.getBlockState(rodPos);
+                    if(rodState.getBlock() instanceof CopperWire){
+                        world.setBlockState(rodPos, rodState.with(CopperWire.POWER, 0).with(CopperWire.IS_POWERED, false));
+                    }
+                }
+            }
+        }
+    }
+    @Override
+    public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
+        super.onBlockAdded(state, world, pos, oldState, notify);
+        setRootRod(world, pos);
+    }
+
+    @Override
+    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+        super.onBreak(world, pos, state, player);
+        setNonRootRod(world, pos);
+    }
+    @Override
+    public int getWeakRedstonePower(BlockState state, BlockView world, BlockPos pos, Direction direction) {
+        return super.getWeakRedstonePower(state, world, pos, direction);
+    }
     @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (moved || state.isOf(newState.getBlock())) {
@@ -132,6 +216,9 @@ public class EtherLever extends WallMountedBlock {
 
     public BlockState togglePower(BlockState state, World world, BlockPos pos) {
         state = state.cycle(POWERED);
+        if(!state.get(POWERED)){
+            setRootRodOff(world, pos);
+        }
         world.setBlockState(pos, state, Block.NOTIFY_ALL);
         this.updateNeighbors(state, world, pos);
         return state;

@@ -1,0 +1,3084 @@
+{
+  "variants": {
+    "facing=down,north=false,south=false,east=false,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire"
+    },
+    "facing=down,north=false,south=false,east=false,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire"
+    },
+    "facing=down,north=false,south=false,east=false,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire"
+    },
+    "facing=down,north=false,south=false,east=false,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire"
+    },
+    "facing=down,north=false,south=false,east=false,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w"
+    },
+    "facing=down,north=false,south=false,east=false,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w"
+    },
+    "facing=down,north=false,south=false,east=false,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w"
+    },
+    "facing=down,north=false,south=false,east=false,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w"
+    },
+    "facing=down,north=true,south=false,east=false,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "y": 90
+    },
+    "facing=down,north=true,south=false,east=false,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "y": 90
+    },
+    "facing=down,north=true,south=false,east=false,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "y": 90
+    },
+    "facing=down,north=true,south=false,east=false,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "y": 90
+    },
+    "facing=down,north=false,south=false,east=true,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "y": 180
+    },
+    "facing=down,north=false,south=false,east=true,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "y": 180
+    },
+    "facing=down,north=false,south=false,east=true,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "y": 180
+    },
+    "facing=down,north=false,south=false,east=true,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "y": 180
+    },
+    "facing=down,north=false,south=true,east=false,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "y": 270
+    },
+    "facing=down,north=false,south=true,east=false,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "y": 270
+    },
+    "facing=down,north=false,south=true,east=false,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "y": 270
+    },
+    "facing=down,north=false,south=true,east=false,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "y": 270
+    },
+    "facing=down,north=true,south=false,east=false,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw"
+    },
+    "facing=down,north=true,south=false,east=false,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw"
+    },
+    "facing=down,north=true,south=false,east=false,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw"
+    },
+    "facing=down,north=true,south=false,east=false,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw"
+    },
+    "facing=down,north=true,south=false,east=true,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "y": 90
+    },
+    "facing=down,north=true,south=false,east=true,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "y": 90
+    },
+    "facing=down,north=true,south=false,east=true,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "y": 90
+    },
+    "facing=down,north=true,south=false,east=true,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "y": 90
+    },
+    "facing=down,north=false,south=true,east=true,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "y": 180
+    },
+    "facing=down,north=false,south=true,east=true,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "y": 180
+    },
+    "facing=down,north=false,south=true,east=true,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "y": 180
+    },
+    "facing=down,north=false,south=true,east=true,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "y": 180
+    },
+    "facing=down,north=false,south=true,east=false,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "y": 270
+    },
+    "facing=down,north=false,south=true,east=false,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "y": 270
+    },
+    "facing=down,north=false,south=true,east=false,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "y": 270
+    },
+    "facing=down,north=false,south=true,east=false,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "y": 270
+    },
+    "facing=down,north=false,south=false,east=true,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew"
+    },
+    "facing=down,north=false,south=false,east=true,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew"
+    },
+    "facing=down,north=false,south=false,east=true,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew"
+    },
+    "facing=down,north=false,south=false,east=true,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew"
+    },
+    "facing=down,north=true,south=true,east=false,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew",
+      "y": 90
+    },
+    "facing=down,north=true,south=true,east=false,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew",
+      "y": 90
+    },
+    "facing=down,north=true,south=true,east=false,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew",
+      "y": 90
+    },
+    "facing=down,north=true,south=true,east=false,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew",
+      "y": 90
+    },
+    "facing=down,north=true,south=false,east=true,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new"
+    },
+    "facing=down,north=true,south=false,east=true,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new"
+    },
+    "facing=down,north=true,south=false,east=true,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new"
+    },
+    "facing=down,north=true,south=false,east=true,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new"
+    },
+    "facing=down,north=true,south=true,east=true,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 90
+    },
+    "facing=down,north=true,south=true,east=true,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 90
+    },
+    "facing=down,north=true,south=true,east=true,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 90
+    },
+    "facing=down,north=true,south=true,east=true,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 90
+    },
+    "facing=down,north=false,south=true,east=true,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 180
+    },
+    "facing=down,north=false,south=true,east=true,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 180
+    },
+    "facing=down,north=false,south=true,east=true,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 180
+    },
+    "facing=down,north=false,south=true,east=true,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 180
+    },
+    "facing=down,north=true,south=true,east=false,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 270
+    },
+    "facing=down,north=true,south=true,east=false,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 270
+    },
+    "facing=down,north=true,south=true,east=false,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 270
+    },
+    "facing=down,north=true,south=true,east=false,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 270
+    },
+    "facing=down,north=true,south=true,east=true,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con4ud"
+    },
+    "facing=down,north=true,south=true,east=true,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con4ud"
+    },
+    "facing=down,north=true,south=true,east=true,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con4ud"
+    },
+    "facing=down,north=true,south=true,east=true,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con4ud"
+    },
+    "facing=up,north=false,south=false,east=false,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire"
+    },
+    "facing=up,north=false,south=false,east=false,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire"
+    },
+    "facing=up,north=false,south=false,east=false,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire"
+    },
+    "facing=up,north=false,south=false,east=false,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire"
+    },
+    "facing=up,north=false,south=false,east=false,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w"
+    },
+    "facing=up,north=false,south=false,east=false,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w"
+    },
+    "facing=up,north=false,south=false,east=false,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w"
+    },
+    "facing=up,north=false,south=false,east=false,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w"
+    },
+    "facing=up,north=true,south=false,east=false,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "y": 90
+    },
+    "facing=up,north=true,south=false,east=false,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "y": 90
+    },
+    "facing=up,north=true,south=false,east=false,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "y": 90
+    },
+    "facing=up,north=true,south=false,east=false,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "y": 90
+    },
+    "facing=up,north=false,south=false,east=true,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "y": 180
+    },
+    "facing=up,north=false,south=false,east=true,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "y": 180
+    },
+    "facing=up,north=false,south=false,east=true,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "y": 180
+    },
+    "facing=up,north=false,south=false,east=true,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "y": 180
+    },
+    "facing=up,north=false,south=true,east=false,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "y": 270
+    },
+    "facing=up,north=false,south=true,east=false,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "y": 270
+    },
+    "facing=up,north=false,south=true,east=false,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "y": 270
+    },
+    "facing=up,north=false,south=true,east=false,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "y": 270
+    },
+    "facing=up,north=true,south=false,east=false,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw"
+    },
+    "facing=up,north=true,south=false,east=false,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw"
+    },
+    "facing=up,north=true,south=false,east=false,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw"
+    },
+    "facing=up,north=true,south=false,east=false,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw"
+    },
+    "facing=up,north=true,south=false,east=true,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "y": 90
+    },
+    "facing=up,north=true,south=false,east=true,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "y": 90
+    },
+    "facing=up,north=true,south=false,east=true,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "y": 90
+    },
+    "facing=up,north=true,south=false,east=true,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "y": 90
+    },
+    "facing=up,north=false,south=true,east=true,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "y": 180
+    },
+    "facing=up,north=false,south=true,east=true,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "y": 180
+    },
+    "facing=up,north=false,south=true,east=true,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "y": 180
+    },
+    "facing=up,north=false,south=true,east=true,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "y": 180
+    },
+    "facing=up,north=false,south=true,east=false,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "y": 270
+    },
+    "facing=up,north=false,south=true,east=false,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "y": 270
+    },
+    "facing=up,north=false,south=true,east=false,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "y": 270
+    },
+    "facing=up,north=false,south=true,east=false,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "y": 270
+    },
+    "facing=up,north=false,south=false,east=true,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew"
+    },
+    "facing=up,north=false,south=false,east=true,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew"
+    },
+    "facing=up,north=false,south=false,east=true,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew"
+    },
+    "facing=up,north=false,south=false,east=true,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew"
+    },
+    "facing=up,north=true,south=true,east=false,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew",
+      "y": 90
+    },
+    "facing=up,north=true,south=true,east=false,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew",
+      "y": 90
+    },
+    "facing=up,north=true,south=true,east=false,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew",
+      "y": 90
+    },
+    "facing=up,north=true,south=true,east=false,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew",
+      "y": 90
+    },
+    "facing=up,north=true,south=false,east=true,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new"
+    },
+    "facing=up,north=true,south=false,east=true,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new"
+    },
+    "facing=up,north=true,south=false,east=true,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new"
+    },
+    "facing=up,north=true,south=false,east=true,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new"
+    },
+    "facing=up,north=true,south=true,east=true,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 90
+    },
+    "facing=up,north=true,south=true,east=true,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 90
+    },
+    "facing=up,north=true,south=true,east=true,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 90
+    },
+    "facing=up,north=true,south=true,east=true,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 90
+    },
+    "facing=up,north=false,south=true,east=true,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 180
+    },
+    "facing=up,north=false,south=true,east=true,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 180
+    },
+    "facing=up,north=false,south=true,east=true,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 180
+    },
+    "facing=up,north=false,south=true,east=true,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 180
+    },
+    "facing=up,north=true,south=true,east=false,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 270
+    },
+    "facing=up,north=true,south=true,east=false,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 270
+    },
+    "facing=up,north=true,south=true,east=false,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 270
+    },
+    "facing=up,north=true,south=true,east=false,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 270
+    },
+    "facing=up,north=true,south=true,east=true,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con4ud"
+    },
+    "facing=up,north=true,south=true,east=true,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con4ud"
+    },
+    "facing=up,north=true,south=true,east=true,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con4ud"
+    },
+    "facing=up,north=true,south=true,east=true,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con4ud"
+    },
+    "facing=east,north=false,south=false,east=false,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire",
+      "x": 270,
+      "y": 90
+    },
+    "facing=east,north=false,south=false,east=false,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1u",
+      "x": 180,
+      "y": 270
+    },
+    "facing=east,north=false,south=false,east=false,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1u",
+      "y": 270
+    },
+    "facing=east,north=false,south=false,east=false,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ud",
+      "y": 270
+    },
+    "facing=east,north=false,south=false,east=false,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire",
+      "x": 270,
+      "y": 90
+    },
+    "facing=east,north=false,south=false,east=false,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1u",
+      "x": 180,
+      "y": 270
+    },
+    "facing=east,north=false,south=false,east=false,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1u",
+      "y": 270
+    },
+    "facing=east,north=false,south=false,east=false,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ud",
+      "y": 270
+    },
+    "facing=east,north=true,south=false,east=false,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,north=true,south=false,east=false,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,north=true,south=false,east=false,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 270,
+      "y": 90
+    },
+    "facing=east,north=true,south=false,east=false,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw"
+    },
+    "facing=east,north=false,south=false,east=true,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire",
+      "x": 270,
+      "y": 90
+    },
+    "facing=east,north=false,south=false,east=true,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "y": 180
+    },
+    "facing=east,north=false,south=false,east=true,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "y": 180
+    },
+    "facing=east,north=false,south=false,east=true,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "y": 180
+    },
+    "facing=east,north=false,south=true,east=false,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "x": 90,
+      "y": 270
+    },
+    "facing=east,north=false,south=true,east=false,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 90,
+      "y": 270
+    },
+    "facing=east,north=false,south=true,east=false,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 270,
+      "y": 270
+    },
+    "facing=east,north=false,south=true,east=false,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "y": 270
+    },
+    "facing=east,north=true,south=false,east=false,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,north=true,south=false,east=false,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,north=true,south=false,east=false,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 270,
+      "y": 90
+    },
+    "facing=east,north=true,south=false,east=false,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new"
+    },
+    "facing=east,north=true,south=false,east=true,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,north=true,south=false,east=true,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,north=true,south=false,east=true,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 270,
+      "y": 90
+    },
+    "facing=east,north=true,south=false,east=true,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new"
+    },
+    "facing=east,north=false,south=true,east=true,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "x": 90,
+      "y": 270
+    },
+    "facing=east,north=false,south=true,east=true,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 90,
+      "y": 270
+    },
+    "facing=east,north=false,south=true,east=true,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 270,
+      "y": 270
+    },
+    "facing=east,north=false,south=true,east=true,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 180
+    },
+    "facing=east,north=false,south=true,east=false,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "x": 90,
+      "y": 270
+    },
+    "facing=east,north=false,south=true,east=false,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 90,
+      "y": 270
+    },
+    "facing=east,north=false,south=true,east=false,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 270,
+      "y": 270
+    },
+    "facing=east,north=false,south=true,east=false,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 180
+    },
+    "facing=east,north=false,south=false,east=true,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire",
+      "x": 270,
+      "y": 90
+    },
+    "facing=east,north=false,south=false,east=true,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1u",
+      "x": 180,
+      "y": 270
+    },
+    "facing=east,north=false,south=false,east=true,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1u",
+      "y": 270
+    },
+    "facing=east,north=false,south=false,east=true,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew"
+    },
+    "facing=east,north=true,south=true,east=false,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew",
+      "x": 90
+    },
+    "facing=east,north=true,south=true,east=false,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "x": 90
+    },
+    "facing=east,north=true,south=true,east=false,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "x": 270
+    },
+    "facing=east,north=true,south=true,east=false,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con4ud"
+    },
+    "facing=east,north=true,south=false,east=true,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,north=true,south=false,east=true,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,north=true,south=false,east=true,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 270,
+      "y": 90
+    },
+    "facing=east,north=true,south=false,east=true,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new"
+    },
+    "facing=east,north=true,south=true,east=true,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew",
+      "x": 90
+    },
+    "facing=east,north=true,south=true,east=true,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "x": 90
+    },
+    "facing=east,north=true,south=true,east=true,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "x": 270
+    },
+    "facing=east,north=true,south=true,east=true,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con4ud"
+    },
+    "facing=east,north=false,south=true,east=true,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "x": 90,
+      "y": 270
+    },
+    "facing=east,north=false,south=true,east=true,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 90,
+      "y": 270
+    },
+    "facing=east,north=false,south=true,east=true,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 270,
+      "y": 270
+    },
+    "facing=east,north=false,south=true,east=true,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 180
+    },
+    "facing=east,north=true,south=true,east=false,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew",
+      "x": 90
+    },
+    "facing=east,north=true,south=true,east=false,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "x": 90,
+      "y": 270
+    },
+    "facing=east,north=true,south=true,east=false,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "x": 270,
+      "y": 270
+    },
+    "facing=east,north=true,south=true,east=false,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con4ud"
+    },
+    "facing=east,north=true,south=true,east=true,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew",
+      "x": 90
+    },
+    "facing=east,north=true,south=true,east=true,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "x": 90
+    },
+    "facing=east,north=true,south=true,east=true,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "x": 270
+    },
+    "facing=east,north=true,south=true,east=true,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con4ud"
+    },
+    "facing=west,north=false,south=false,east=false,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire",
+      "x": 270,
+      "y": 90
+    },
+    "facing=west,north=false,south=false,east=false,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1u",
+      "x": 180,
+      "y": 270
+    },
+    "facing=west,north=false,south=false,east=false,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1u",
+      "y": 270
+    },
+    "facing=west,north=false,south=false,east=false,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ud",
+      "y": 270
+    },
+    "facing=west,north=false,south=false,east=false,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire",
+      "x": 270,
+      "y": 90
+    },
+    "facing=west,north=false,south=false,east=false,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1u",
+      "x": 180,
+      "y": 270
+    },
+    "facing=west,north=false,south=false,east=false,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1u",
+      "y": 270
+    },
+    "facing=west,north=false,south=false,east=false,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ud",
+      "y": 270
+    },
+    "facing=west,north=true,south=false,east=false,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "x": 90,
+      "y": 90
+    },
+    "facing=west,north=true,south=false,east=false,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 90,
+      "y": 90
+    },
+    "facing=west,north=true,south=false,east=false,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 270,
+      "y": 90
+    },
+    "facing=west,north=true,south=false,east=false,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw"
+    },
+    "facing=west,north=false,south=false,east=true,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire",
+      "x": 270,
+      "y": 90
+    },
+    "facing=west,north=false,south=false,east=true,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "y": 180
+    },
+    "facing=west,north=false,south=false,east=true,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "y": 180
+    },
+    "facing=west,north=false,south=false,east=true,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "y": 180
+    },
+    "facing=west,north=false,south=true,east=false,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,north=false,south=true,east=false,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,north=false,south=true,east=false,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 270,
+      "y": 270
+    },
+    "facing=west,north=false,south=true,east=false,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "y": 270
+    },
+    "facing=west,north=true,south=false,east=false,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "x": 90,
+      "y": 90
+    },
+    "facing=west,north=true,south=false,east=false,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 90,
+      "y": 90
+    },
+    "facing=west,north=true,south=false,east=false,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 270,
+      "y": 90
+    },
+    "facing=west,north=true,south=false,east=false,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new"
+    },
+    "facing=west,north=true,south=false,east=true,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "x": 90,
+      "y": 90
+    },
+    "facing=west,north=true,south=false,east=true,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 90,
+      "y": 90
+    },
+    "facing=west,north=true,south=false,east=true,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 270,
+      "y": 90
+    },
+    "facing=west,north=true,south=false,east=true,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new"
+    },
+    "facing=west,north=false,south=true,east=true,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,north=false,south=true,east=true,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,north=false,south=true,east=true,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 270,
+      "y": 270
+    },
+    "facing=west,north=false,south=true,east=true,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 180
+    },
+    "facing=west,north=false,south=true,east=false,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,north=false,south=true,east=false,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,north=false,south=true,east=false,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 270,
+      "y": 270
+    },
+    "facing=west,north=false,south=true,east=false,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 180
+    },
+    "facing=west,north=false,south=false,east=true,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire",
+      "x": 270,
+      "y": 90
+    },
+    "facing=west,north=false,south=false,east=true,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1u",
+      "x": 180,
+      "y": 270
+    },
+    "facing=west,north=false,south=false,east=true,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1u",
+      "y": 270
+    },
+    "facing=west,north=false,south=false,east=true,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew"
+    },
+    "facing=west,north=true,south=true,east=false,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew",
+      "x": 90
+    },
+    "facing=west,north=true,south=true,east=false,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "x": 90
+    },
+    "facing=west,north=true,south=true,east=false,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "x": 270
+    },
+    "facing=west,north=true,south=true,east=false,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con4ud"
+    },
+    "facing=west,north=true,south=false,east=true,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "x": 90,
+      "y": 90
+    },
+    "facing=west,north=true,south=false,east=true,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 90,
+      "y": 90
+    },
+    "facing=west,north=true,south=false,east=true,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 270,
+      "y": 90
+    },
+    "facing=west,north=true,south=false,east=true,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new"
+    },
+    "facing=west,north=true,south=true,east=true,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew",
+      "x": 90
+    },
+    "facing=west,north=true,south=true,east=true,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "x": 90
+    },
+    "facing=west,north=true,south=true,east=true,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "x": 270
+    },
+    "facing=west,north=true,south=true,east=true,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con4ud"
+    },
+    "facing=west,north=false,south=true,east=true,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,north=false,south=true,east=true,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,north=false,south=true,east=true,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 270,
+      "y": 270
+    },
+    "facing=west,north=false,south=true,east=true,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 180
+    },
+    "facing=west,north=true,south=true,east=false,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew",
+      "x": 90
+    },
+    "facing=west,north=true,south=true,east=false,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,north=true,south=true,east=false,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "x": 270,
+      "y": 270
+    },
+    "facing=west,north=true,south=true,east=false,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con4ud"
+    },
+    "facing=west,north=true,south=true,east=true,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew",
+      "x": 90
+    },
+    "facing=west,north=true,south=true,east=true,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "x": 90
+    },
+    "facing=west,north=true,south=true,east=true,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "x": 270
+    },
+    "facing=west,north=true,south=true,east=true,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con4ud"
+    },
+    "facing=north,north=false,south=false,east=false,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire",
+      "x": 90
+    },
+    "facing=north,north=false,south=false,east=false,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1u",
+      "x": 180
+    },
+    "facing=north,north=false,south=false,east=false,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1u"
+    },
+    "facing=north,north=false,south=false,east=false,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ud"
+    },
+    "facing=north,north=false,south=false,east=false,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "x": 90
+    },
+    "facing=north,north=false,south=false,east=false,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 90
+    },
+    "facing=north,north=false,south=false,east=false,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 270
+    },
+    "facing=north,north=false,south=false,east=false,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "x": 180,
+      "y": 90
+    },
+    "facing=north,north=true,south=false,east=false,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire",
+      "x": 90
+    },
+    "facing=north,north=true,south=false,east=false,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1u",
+      "x": 180
+    },
+    "facing=north,north=true,south=false,east=false,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1u"
+    },
+    "facing=north,north=true,south=false,east=false,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ud",
+      "x": 90
+    },
+    "facing=north,north=false,south=false,east=true,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "x": 90,
+      "y": 180
+    },
+    "facing=north,north=false,south=false,east=true,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 90
+    },
+    "facing=north,north=false,south=false,east=true,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 90
+    },
+    "facing=north,north=false,south=false,east=true,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 90
+    },
+    "facing=north,north=false,south=true,east=false,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire",
+      "x": 90
+    },
+    "facing=north,north=false,south=true,east=false,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1u",
+      "x": 180
+    },
+    "facing=north,north=false,south=true,east=false,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1u"
+    },
+    "facing=north,north=false,south=true,east=false,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew",
+      "y": 90
+    },
+    "facing=north,north=true,south=false,east=false,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "x": 90
+    },
+    "facing=north,north=true,south=false,east=false,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 90
+    },
+    "facing=north,north=true,south=false,east=false,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 270
+    },
+    "facing=north,north=true,south=false,east=false,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 270
+    },
+    "facing=north,north=true,south=false,east=true,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "x": 90,
+      "y": 180
+    },
+    "facing=north,north=true,south=false,east=true,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 90,
+      "y": 180
+    },
+    "facing=north,north=true,south=false,east=true,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 270,
+      "y": 180
+    },
+    "facing=north,north=true,south=false,east=true,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "y": 90
+    },
+    "facing=north,north=false,south=true,east=true,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "x": 90,
+      "y": 180
+    },
+    "facing=north,north=false,south=true,east=true,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 90,
+      "y": 180
+    },
+    "facing=north,north=false,south=true,east=true,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 270,
+      "y": 180
+    },
+    "facing=north,north=false,south=true,east=true,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 90
+    },
+    "facing=north,north=false,south=true,east=false,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "x": 90
+    },
+    "facing=north,north=false,south=true,east=false,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 90
+    },
+    "facing=north,north=false,south=true,east=false,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 270
+    },
+    "facing=north,north=false,south=true,east=false,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 270
+    },
+    "facing=north,north=false,south=false,east=true,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew",
+      "x": 90
+    },
+    "facing=north,north=false,south=false,east=true,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "x": 90
+    },
+    "facing=north,north=false,south=false,east=true,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "x": 270
+    },
+    "facing=north,north=false,south=false,east=true,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con4ud"
+    },
+    "facing=north,north=true,south=true,east=false,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire",
+      "x": 90
+    },
+    "facing=north,north=true,south=true,east=false,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1u",
+      "x": 180
+    },
+    "facing=north,north=true,south=true,east=false,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1u"
+    },
+    "facing=north,north=true,south=true,east=false,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew",
+      "y": 90
+    },
+    "facing=north,north=true,south=false,east=true,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew",
+      "x": 90
+    },
+    "facing=north,north=true,south=false,east=true,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "x": 90
+    },
+    "facing=north,north=true,south=false,east=true,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "x": 270
+    },
+    "facing=north,north=true,south=false,east=true,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con4ud"
+    },
+    "facing=north,north=true,south=true,east=true,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "x": 90,
+      "y": 180
+    },
+    "facing=north,north=true,south=true,east=true,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 90,
+      "y": 180
+    },
+    "facing=north,north=true,south=true,east=true,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 270,
+      "y": 180
+    },
+    "facing=north,north=true,south=true,east=true,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 90
+    },
+    "facing=north,north=false,south=true,east=true,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew",
+      "x": 90
+    },
+    "facing=north,north=false,south=true,east=true,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "x": 90
+    },
+    "facing=north,north=false,south=true,east=true,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "x": 270
+    },
+    "facing=north,north=false,south=true,east=true,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con4ud"
+    },
+    "facing=north,north=true,south=true,east=false,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "x": 90
+    },
+    "facing=north,north=true,south=true,east=false,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 90
+    },
+    "facing=north,north=true,south=true,east=false,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 270
+    },
+    "facing=north,north=true,south=true,east=false,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 270
+    },
+    "facing=north,north=true,south=true,east=true,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew",
+      "x": 90
+    },
+    "facing=north,north=true,south=true,east=true,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "x": 90
+    },
+    "facing=north,north=true,south=true,east=true,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "x": 270
+    },
+    "facing=north,north=true,south=true,east=true,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con4ud"
+    },
+    "facing=south,north=false,south=false,east=false,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire",
+      "x": 90
+    },
+    "facing=south,north=false,south=false,east=false,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1u",
+      "x": 180
+    },
+    "facing=south,north=false,south=false,east=false,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1u"
+    },
+    "facing=south,north=false,south=false,east=false,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ud"
+    },
+    "facing=south,north=false,south=false,east=false,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "x": 90
+    },
+    "facing=south,north=false,south=false,east=false,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 90
+    },
+    "facing=south,north=false,south=false,east=false,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 270
+    },
+    "facing=south,north=false,south=false,east=false,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "x": 180,
+      "y": 90
+    },
+    "facing=south,north=true,south=false,east=false,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire",
+      "x": 90
+    },
+    "facing=south,north=true,south=false,east=false,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1u",
+      "x": 180
+    },
+    "facing=south,north=true,south=false,east=false,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1u"
+    },
+    "facing=south,north=true,south=false,east=false,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ud",
+      "x": 90
+    },
+    "facing=south,north=false,south=false,east=true,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,north=false,south=false,east=true,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 90
+    },
+    "facing=south,north=false,south=false,east=true,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 90
+    },
+    "facing=south,north=false,south=false,east=true,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 90
+    },
+    "facing=south,north=false,south=true,east=false,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire",
+      "x": 90
+    },
+    "facing=south,north=false,south=true,east=false,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1u",
+      "x": 180
+    },
+    "facing=south,north=false,south=true,east=false,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1u"
+    },
+    "facing=south,north=false,south=true,east=false,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew",
+      "y": 90
+    },
+    "facing=south,north=true,south=false,east=false,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "x": 90
+    },
+    "facing=south,north=true,south=false,east=false,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 90
+    },
+    "facing=south,north=true,south=false,east=false,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 270
+    },
+    "facing=south,north=true,south=false,east=false,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 270
+    },
+    "facing=south,north=true,south=false,east=true,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,north=true,south=false,east=true,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,north=true,south=false,east=true,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 270,
+      "y": 180
+    },
+    "facing=south,north=true,south=false,east=true,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "y": 90
+    },
+    "facing=south,north=false,south=true,east=true,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,north=false,south=true,east=true,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,north=false,south=true,east=true,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 270,
+      "y": 180
+    },
+    "facing=south,north=false,south=true,east=true,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 90
+    },
+    "facing=south,north=false,south=true,east=false,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "x": 90
+    },
+    "facing=south,north=false,south=true,east=false,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 90
+    },
+    "facing=south,north=false,south=true,east=false,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 270
+    },
+    "facing=south,north=false,south=true,east=false,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 270
+    },
+    "facing=south,north=false,south=false,east=true,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew",
+      "x": 90
+    },
+    "facing=south,north=false,south=false,east=true,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "x": 90
+    },
+    "facing=south,north=false,south=false,east=true,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "x": 270
+    },
+    "facing=south,north=false,south=false,east=true,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con4ud"
+    },
+    "facing=south,north=true,south=true,east=false,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire",
+      "x": 90
+    },
+    "facing=south,north=true,south=true,east=false,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1u",
+      "x": 180
+    },
+    "facing=south,north=true,south=true,east=false,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1u"
+    },
+    "facing=south,north=true,south=true,east=false,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew",
+      "y": 90
+    },
+    "facing=south,north=true,south=false,east=true,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew",
+      "x": 90
+    },
+    "facing=south,north=true,south=false,east=true,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "x": 90
+    },
+    "facing=south,north=true,south=false,east=true,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "x": 270
+    },
+    "facing=south,north=true,south=false,east=true,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con4ud"
+    },
+    "facing=south,north=true,south=true,east=true,west=false,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,north=true,south=true,east=true,west=false,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,north=true,south=true,east=true,west=false,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 270,
+      "y": 180
+    },
+    "facing=south,north=true,south=true,east=true,west=false,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 90
+    },
+    "facing=south,north=false,south=true,east=true,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew",
+      "x": 90
+    },
+    "facing=south,north=false,south=true,east=true,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "x": 90
+    },
+    "facing=south,north=false,south=true,east=true,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "x": 270
+    },
+    "facing=south,north=false,south=true,east=true,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con4ud"
+    },
+    "facing=south,north=true,south=true,east=false,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con1w",
+      "x": 90
+    },
+    "facing=south,north=true,south=true,east=false,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 90
+    },
+    "facing=south,north=true,south=true,east=false,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2nw",
+      "x": 270
+    },
+    "facing=south,north=true,south=true,east=false,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "y": 270
+    },
+    "facing=south,north=true,south=true,east=true,west=true,up=false,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con2ew",
+      "x": 90
+    },
+    "facing=south,north=true,south=true,east=true,west=true,up=false,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "x": 90
+    },
+    "facing=south,north=true,south=true,east=true,west=true,up=true,down=false,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con3new",
+      "x": 270
+    },
+    "facing=south,north=true,south=true,east=true,west=true,up=true,down=true,is_powered=false": {
+      "model": "ancientartifacts:block/copper_wire_con4ud"
+    },
+    "facing=down,north=false,south=false,east=false,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_on"
+    },
+    "facing=down,north=false,south=false,east=false,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_on"
+    },
+    "facing=down,north=false,south=false,east=false,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_on"
+    },
+    "facing=down,north=false,south=false,east=false,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_on"
+    },
+    "facing=down,north=false,south=false,east=false,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on"
+    },
+    "facing=down,north=false,south=false,east=false,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on"
+    },
+    "facing=down,north=false,south=false,east=false,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on"
+    },
+    "facing=down,north=false,south=false,east=false,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on"
+    },
+    "facing=down,north=true,south=false,east=false,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "y": 90
+    },
+    "facing=down,north=true,south=false,east=false,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "y": 90
+    },
+    "facing=down,north=true,south=false,east=false,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "y": 90
+    },
+    "facing=down,north=true,south=false,east=false,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "y": 90
+    },
+    "facing=down,north=false,south=false,east=true,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "y": 180
+    },
+    "facing=down,north=false,south=false,east=true,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "y": 180
+    },
+    "facing=down,north=false,south=false,east=true,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "y": 180
+    },
+    "facing=down,north=false,south=false,east=true,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "y": 180
+    },
+    "facing=down,north=false,south=true,east=false,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "y": 270
+    },
+    "facing=down,north=false,south=true,east=false,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "y": 270
+    },
+    "facing=down,north=false,south=true,east=false,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "y": 270
+    },
+    "facing=down,north=false,south=true,east=false,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "y": 270
+    },
+    "facing=down,north=true,south=false,east=false,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on"
+    },
+    "facing=down,north=true,south=false,east=false,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on"
+    },
+    "facing=down,north=true,south=false,east=false,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on"
+    },
+    "facing=down,north=true,south=false,east=false,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on"
+    },
+    "facing=down,north=true,south=false,east=true,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "y": 90
+    },
+    "facing=down,north=true,south=false,east=true,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "y": 90
+    },
+    "facing=down,north=true,south=false,east=true,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "y": 90
+    },
+    "facing=down,north=true,south=false,east=true,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "y": 90
+    },
+    "facing=down,north=false,south=true,east=true,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "y": 180
+    },
+    "facing=down,north=false,south=true,east=true,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "y": 180
+    },
+    "facing=down,north=false,south=true,east=true,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "y": 180
+    },
+    "facing=down,north=false,south=true,east=true,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "y": 180
+    },
+    "facing=down,north=false,south=true,east=false,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "y": 270
+    },
+    "facing=down,north=false,south=true,east=false,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "y": 270
+    },
+    "facing=down,north=false,south=true,east=false,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "y": 270
+    },
+    "facing=down,north=false,south=true,east=false,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "y": 270
+    },
+    "facing=down,north=false,south=false,east=true,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on"
+    },
+    "facing=down,north=false,south=false,east=true,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on"
+    },
+    "facing=down,north=false,south=false,east=true,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on"
+    },
+    "facing=down,north=false,south=false,east=true,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on"
+    },
+    "facing=down,north=true,south=true,east=false,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on",
+      "y": 90
+    },
+    "facing=down,north=true,south=true,east=false,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on",
+      "y": 90
+    },
+    "facing=down,north=true,south=true,east=false,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on",
+      "y": 90
+    },
+    "facing=down,north=true,south=true,east=false,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on",
+      "y": 90
+    },
+    "facing=down,north=true,south=false,east=true,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on"
+    },
+    "facing=down,north=true,south=false,east=true,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on"
+    },
+    "facing=down,north=true,south=false,east=true,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on"
+    },
+    "facing=down,north=true,south=false,east=true,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on"
+    },
+    "facing=down,north=true,south=true,east=true,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 90
+    },
+    "facing=down,north=true,south=true,east=true,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 90
+    },
+    "facing=down,north=true,south=true,east=true,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 90
+    },
+    "facing=down,north=true,south=true,east=true,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 90
+    },
+    "facing=down,north=false,south=true,east=true,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 180
+    },
+    "facing=down,north=false,south=true,east=true,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 180
+    },
+    "facing=down,north=false,south=true,east=true,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 180
+    },
+    "facing=down,north=false,south=true,east=true,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 180
+    },
+    "facing=down,north=true,south=true,east=false,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 270
+    },
+    "facing=down,north=true,south=true,east=false,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 270
+    },
+    "facing=down,north=true,south=true,east=false,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 270
+    },
+    "facing=down,north=true,south=true,east=false,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 270
+    },
+    "facing=down,north=true,south=true,east=true,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con4ud_on"
+    },
+    "facing=down,north=true,south=true,east=true,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con4ud_on"
+    },
+    "facing=down,north=true,south=true,east=true,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con4ud_on"
+    },
+    "facing=down,north=true,south=true,east=true,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con4ud_on"
+    },
+    "facing=up,north=false,south=false,east=false,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_on"
+    },
+    "facing=up,north=false,south=false,east=false,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_on"
+    },
+    "facing=up,north=false,south=false,east=false,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_on"
+    },
+    "facing=up,north=false,south=false,east=false,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_on"
+    },
+    "facing=up,north=false,south=false,east=false,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on"
+    },
+    "facing=up,north=false,south=false,east=false,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on"
+    },
+    "facing=up,north=false,south=false,east=false,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on"
+    },
+    "facing=up,north=false,south=false,east=false,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on"
+    },
+    "facing=up,north=true,south=false,east=false,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "y": 90
+    },
+    "facing=up,north=true,south=false,east=false,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "y": 90
+    },
+    "facing=up,north=true,south=false,east=false,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "y": 90
+    },
+    "facing=up,north=true,south=false,east=false,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "y": 90
+    },
+    "facing=up,north=false,south=false,east=true,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "y": 180
+    },
+    "facing=up,north=false,south=false,east=true,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "y": 180
+    },
+    "facing=up,north=false,south=false,east=true,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "y": 180
+    },
+    "facing=up,north=false,south=false,east=true,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "y": 180
+    },
+    "facing=up,north=false,south=true,east=false,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "y": 270
+    },
+    "facing=up,north=false,south=true,east=false,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "y": 270
+    },
+    "facing=up,north=false,south=true,east=false,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "y": 270
+    },
+    "facing=up,north=false,south=true,east=false,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "y": 270
+    },
+    "facing=up,north=true,south=false,east=false,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on"
+    },
+    "facing=up,north=true,south=false,east=false,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on"
+    },
+    "facing=up,north=true,south=false,east=false,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on"
+    },
+    "facing=up,north=true,south=false,east=false,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on"
+    },
+    "facing=up,north=true,south=false,east=true,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "y": 90
+    },
+    "facing=up,north=true,south=false,east=true,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "y": 90
+    },
+    "facing=up,north=true,south=false,east=true,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "y": 90
+    },
+    "facing=up,north=true,south=false,east=true,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "y": 90
+    },
+    "facing=up,north=false,south=true,east=true,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "y": 180
+    },
+    "facing=up,north=false,south=true,east=true,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "y": 180
+    },
+    "facing=up,north=false,south=true,east=true,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "y": 180
+    },
+    "facing=up,north=false,south=true,east=true,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "y": 180
+    },
+    "facing=up,north=false,south=true,east=false,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "y": 270
+    },
+    "facing=up,north=false,south=true,east=false,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "y": 270
+    },
+    "facing=up,north=false,south=true,east=false,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "y": 270
+    },
+    "facing=up,north=false,south=true,east=false,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "y": 270
+    },
+    "facing=up,north=false,south=false,east=true,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on"
+    },
+    "facing=up,north=false,south=false,east=true,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on"
+    },
+    "facing=up,north=false,south=false,east=true,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on"
+    },
+    "facing=up,north=false,south=false,east=true,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on"
+    },
+    "facing=up,north=true,south=true,east=false,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on",
+      "y": 90
+    },
+    "facing=up,north=true,south=true,east=false,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on",
+      "y": 90
+    },
+    "facing=up,north=true,south=true,east=false,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on",
+      "y": 90
+    },
+    "facing=up,north=true,south=true,east=false,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on",
+      "y": 90
+    },
+    "facing=up,north=true,south=false,east=true,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on"
+    },
+    "facing=up,north=true,south=false,east=true,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on"
+    },
+    "facing=up,north=true,south=false,east=true,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on"
+    },
+    "facing=up,north=true,south=false,east=true,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on"
+    },
+    "facing=up,north=true,south=true,east=true,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 90
+    },
+    "facing=up,north=true,south=true,east=true,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 90
+    },
+    "facing=up,north=true,south=true,east=true,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 90
+    },
+    "facing=up,north=true,south=true,east=true,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 90
+    },
+    "facing=up,north=false,south=true,east=true,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 180
+    },
+    "facing=up,north=false,south=true,east=true,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 180
+    },
+    "facing=up,north=false,south=true,east=true,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 180
+    },
+    "facing=up,north=false,south=true,east=true,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 180
+    },
+    "facing=up,north=true,south=true,east=false,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 270
+    },
+    "facing=up,north=true,south=true,east=false,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 270
+    },
+    "facing=up,north=true,south=true,east=false,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 270
+    },
+    "facing=up,north=true,south=true,east=false,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 270
+    },
+    "facing=up,north=true,south=true,east=true,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con4ud_on"
+    },
+    "facing=up,north=true,south=true,east=true,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con4ud_on"
+    },
+    "facing=up,north=true,south=true,east=true,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con4ud_on"
+    },
+    "facing=up,north=true,south=true,east=true,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con4ud_on"
+    },
+    "facing=east,north=false,south=false,east=false,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_on",
+      "x": 270,
+      "y": 90
+    },
+    "facing=east,north=false,south=false,east=false,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1u_on",
+      "x": 180,
+      "y": 270
+    },
+    "facing=east,north=false,south=false,east=false,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1u_on",
+      "y": 270
+    },
+    "facing=east,north=false,south=false,east=false,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ud_on",
+      "y": 270
+    },
+    "facing=east,north=false,south=false,east=false,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_on",
+      "x": 270,
+      "y": 90
+    },
+    "facing=east,north=false,south=false,east=false,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1u_on",
+      "x": 180,
+      "y": 270
+    },
+    "facing=east,north=false,south=false,east=false,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1u_on",
+      "y": 270
+    },
+    "facing=east,north=false,south=false,east=false,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ud_on",
+      "y": 270
+    },
+    "facing=east,north=true,south=false,east=false,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,north=true,south=false,east=false,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,north=true,south=false,east=false,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 270,
+      "y": 90
+    },
+    "facing=east,north=true,south=false,east=false,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on"
+    },
+    "facing=east,north=false,south=false,east=true,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_on",
+      "x": 270,
+      "y": 90
+    },
+    "facing=east,north=false,south=false,east=true,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "y": 180
+    },
+    "facing=east,north=false,south=false,east=true,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "y": 180
+    },
+    "facing=east,north=false,south=false,east=true,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "y": 180
+    },
+    "facing=east,north=false,south=true,east=false,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "x": 90,
+      "y": 270
+    },
+    "facing=east,north=false,south=true,east=false,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 90,
+      "y": 270
+    },
+    "facing=east,north=false,south=true,east=false,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 270,
+      "y": 270
+    },
+    "facing=east,north=false,south=true,east=false,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "y": 270
+    },
+    "facing=east,north=true,south=false,east=false,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,north=true,south=false,east=false,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,north=true,south=false,east=false,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 270,
+      "y": 90
+    },
+    "facing=east,north=true,south=false,east=false,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on"
+    },
+    "facing=east,north=true,south=false,east=true,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,north=true,south=false,east=true,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,north=true,south=false,east=true,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 270,
+      "y": 90
+    },
+    "facing=east,north=true,south=false,east=true,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on"
+    },
+    "facing=east,north=false,south=true,east=true,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "x": 90,
+      "y": 270
+    },
+    "facing=east,north=false,south=true,east=true,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 90,
+      "y": 270
+    },
+    "facing=east,north=false,south=true,east=true,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 270,
+      "y": 270
+    },
+    "facing=east,north=false,south=true,east=true,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 180
+    },
+    "facing=east,north=false,south=true,east=false,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "x": 90,
+      "y": 270
+    },
+    "facing=east,north=false,south=true,east=false,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 90,
+      "y": 270
+    },
+    "facing=east,north=false,south=true,east=false,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 270,
+      "y": 270
+    },
+    "facing=east,north=false,south=true,east=false,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 180
+    },
+    "facing=east,north=false,south=false,east=true,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_on",
+      "x": 270,
+      "y": 90
+    },
+    "facing=east,north=false,south=false,east=true,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1u_on",
+      "x": 180,
+      "y": 270
+    },
+    "facing=east,north=false,south=false,east=true,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1u_on",
+      "y": 270
+    },
+    "facing=east,north=false,south=false,east=true,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on"
+    },
+    "facing=east,north=true,south=true,east=false,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on",
+      "x": 90
+    },
+    "facing=east,north=true,south=true,east=false,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "x": 90
+    },
+    "facing=east,north=true,south=true,east=false,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "x": 270
+    },
+    "facing=east,north=true,south=true,east=false,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con4ud_on"
+    },
+    "facing=east,north=true,south=false,east=true,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,north=true,south=false,east=true,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,north=true,south=false,east=true,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 270,
+      "y": 90
+    },
+    "facing=east,north=true,south=false,east=true,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on"
+    },
+    "facing=east,north=true,south=true,east=true,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on",
+      "x": 90
+    },
+    "facing=east,north=true,south=true,east=true,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "x": 90
+    },
+    "facing=east,north=true,south=true,east=true,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "x": 270
+    },
+    "facing=east,north=true,south=true,east=true,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con4ud_on"
+    },
+    "facing=east,north=false,south=true,east=true,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "x": 90,
+      "y": 270
+    },
+    "facing=east,north=false,south=true,east=true,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 90,
+      "y": 270
+    },
+    "facing=east,north=false,south=true,east=true,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 270,
+      "y": 270
+    },
+    "facing=east,north=false,south=true,east=true,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 180
+    },
+    "facing=east,north=true,south=true,east=false,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on",
+      "x": 90
+    },
+    "facing=east,north=true,south=true,east=false,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "x": 90,
+      "y": 270
+    },
+    "facing=east,north=true,south=true,east=false,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "x": 270,
+      "y": 270
+    },
+    "facing=east,north=true,south=true,east=false,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con4ud_on"
+    },
+    "facing=east,north=true,south=true,east=true,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on",
+      "x": 90
+    },
+    "facing=east,north=true,south=true,east=true,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "x": 90
+    },
+    "facing=east,north=true,south=true,east=true,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "x": 270
+    },
+    "facing=east,north=true,south=true,east=true,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con4ud_on"
+    },
+    "facing=west,north=false,south=false,east=false,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_on",
+      "x": 270,
+      "y": 90
+    },
+    "facing=west,north=false,south=false,east=false,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1u_on",
+      "x": 180,
+      "y": 270
+    },
+    "facing=west,north=false,south=false,east=false,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1u_on",
+      "y": 270
+    },
+    "facing=west,north=false,south=false,east=false,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ud_on",
+      "y": 270
+    },
+    "facing=west,north=false,south=false,east=false,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_on",
+      "x": 270,
+      "y": 90
+    },
+    "facing=west,north=false,south=false,east=false,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1u_on",
+      "x": 180,
+      "y": 270
+    },
+    "facing=west,north=false,south=false,east=false,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1u_on",
+      "y": 270
+    },
+    "facing=west,north=false,south=false,east=false,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ud_on",
+      "y": 270
+    },
+    "facing=west,north=true,south=false,east=false,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "x": 90,
+      "y": 90
+    },
+    "facing=west,north=true,south=false,east=false,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 90,
+      "y": 90
+    },
+    "facing=west,north=true,south=false,east=false,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 270,
+      "y": 90
+    },
+    "facing=west,north=true,south=false,east=false,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on"
+    },
+    "facing=west,north=false,south=false,east=true,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_on",
+      "x": 270,
+      "y": 90
+    },
+    "facing=west,north=false,south=false,east=true,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "y": 180
+    },
+    "facing=west,north=false,south=false,east=true,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "y": 180
+    },
+    "facing=west,north=false,south=false,east=true,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "y": 180
+    },
+    "facing=west,north=false,south=true,east=false,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,north=false,south=true,east=false,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,north=false,south=true,east=false,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 270,
+      "y": 270
+    },
+    "facing=west,north=false,south=true,east=false,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "y": 270
+    },
+    "facing=west,north=true,south=false,east=false,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "x": 90,
+      "y": 90
+    },
+    "facing=west,north=true,south=false,east=false,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 90,
+      "y": 90
+    },
+    "facing=west,north=true,south=false,east=false,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 270,
+      "y": 90
+    },
+    "facing=west,north=true,south=false,east=false,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on"
+    },
+    "facing=west,north=true,south=false,east=true,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "x": 90,
+      "y": 90
+    },
+    "facing=west,north=true,south=false,east=true,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 90,
+      "y": 90
+    },
+    "facing=west,north=true,south=false,east=true,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 270,
+      "y": 90
+    },
+    "facing=west,north=true,south=false,east=true,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on"
+    },
+    "facing=west,north=false,south=true,east=true,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,north=false,south=true,east=true,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,north=false,south=true,east=true,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 270,
+      "y": 270
+    },
+    "facing=west,north=false,south=true,east=true,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 180
+    },
+    "facing=west,north=false,south=true,east=false,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,north=false,south=true,east=false,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,north=false,south=true,east=false,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 270,
+      "y": 270
+    },
+    "facing=west,north=false,south=true,east=false,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 180
+    },
+    "facing=west,north=false,south=false,east=true,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_on",
+      "x": 270,
+      "y": 90
+    },
+    "facing=west,north=false,south=false,east=true,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1u_on",
+      "x": 180,
+      "y": 270
+    },
+    "facing=west,north=false,south=false,east=true,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1u_on",
+      "y": 270
+    },
+    "facing=west,north=false,south=false,east=true,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on"
+    },
+    "facing=west,north=true,south=true,east=false,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on",
+      "x": 90
+    },
+    "facing=west,north=true,south=true,east=false,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "x": 90
+    },
+    "facing=west,north=true,south=true,east=false,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "x": 270
+    },
+    "facing=west,north=true,south=true,east=false,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con4ud_on"
+    },
+    "facing=west,north=true,south=false,east=true,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "x": 90,
+      "y": 90
+    },
+    "facing=west,north=true,south=false,east=true,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 90,
+      "y": 90
+    },
+    "facing=west,north=true,south=false,east=true,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 270,
+      "y": 90
+    },
+    "facing=west,north=true,south=false,east=true,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on"
+    },
+    "facing=west,north=true,south=true,east=true,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on",
+      "x": 90
+    },
+    "facing=west,north=true,south=true,east=true,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "x": 90
+    },
+    "facing=west,north=true,south=true,east=true,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "x": 270
+    },
+    "facing=west,north=true,south=true,east=true,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con4ud_on"
+    },
+    "facing=west,north=false,south=true,east=true,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,north=false,south=true,east=true,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,north=false,south=true,east=true,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 270,
+      "y": 270
+    },
+    "facing=west,north=false,south=true,east=true,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 180
+    },
+    "facing=west,north=true,south=true,east=false,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on",
+      "x": 90
+    },
+    "facing=west,north=true,south=true,east=false,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,north=true,south=true,east=false,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "x": 270,
+      "y": 270
+    },
+    "facing=west,north=true,south=true,east=false,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con4ud_on"
+    },
+    "facing=west,north=true,south=true,east=true,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on",
+      "x": 90
+    },
+    "facing=west,north=true,south=true,east=true,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "x": 90
+    },
+    "facing=west,north=true,south=true,east=true,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "x": 270
+    },
+    "facing=west,north=true,south=true,east=true,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con4ud_on"
+    },
+    "facing=north,north=false,south=false,east=false,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_on",
+      "x": 90
+    },
+    "facing=north,north=false,south=false,east=false,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1u_on",
+      "x": 180
+    },
+    "facing=north,north=false,south=false,east=false,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1u_on"
+    },
+    "facing=north,north=false,south=false,east=false,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ud_on"
+    },
+    "facing=north,north=false,south=false,east=false,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "x": 90
+    },
+    "facing=north,north=false,south=false,east=false,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 90
+    },
+    "facing=north,north=false,south=false,east=false,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 270
+    },
+    "facing=north,north=false,south=false,east=false,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "x": 180,
+      "y": 90
+    },
+    "facing=north,north=true,south=false,east=false,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_on",
+      "x": 90
+    },
+    "facing=north,north=true,south=false,east=false,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1u_on",
+      "x": 180
+    },
+    "facing=north,north=true,south=false,east=false,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1u_on"
+    },
+    "facing=north,north=true,south=false,east=false,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ud_on",
+      "x": 90
+    },
+    "facing=north,north=false,south=false,east=true,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "x": 90,
+      "y": 180
+    },
+    "facing=north,north=false,south=false,east=true,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 90
+    },
+    "facing=north,north=false,south=false,east=true,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 90
+    },
+    "facing=north,north=false,south=false,east=true,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 90
+    },
+    "facing=north,north=false,south=true,east=false,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_on",
+      "x": 90
+    },
+    "facing=north,north=false,south=true,east=false,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1u_on",
+      "x": 180
+    },
+    "facing=north,north=false,south=true,east=false,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1u_on"
+    },
+    "facing=north,north=false,south=true,east=false,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on",
+      "y": 90
+    },
+    "facing=north,north=true,south=false,east=false,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "x": 90
+    },
+    "facing=north,north=true,south=false,east=false,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 90
+    },
+    "facing=north,north=true,south=false,east=false,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 270
+    },
+    "facing=north,north=true,south=false,east=false,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 270
+    },
+    "facing=north,north=true,south=false,east=true,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "x": 90,
+      "y": 180
+    },
+    "facing=north,north=true,south=false,east=true,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 90,
+      "y": 180
+    },
+    "facing=north,north=true,south=false,east=true,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 270,
+      "y": 180
+    },
+    "facing=north,north=true,south=false,east=true,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "y": 90
+    },
+    "facing=north,north=false,south=true,east=true,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "x": 90,
+      "y": 180
+    },
+    "facing=north,north=false,south=true,east=true,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 90,
+      "y": 180
+    },
+    "facing=north,north=false,south=true,east=true,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 270,
+      "y": 180
+    },
+    "facing=north,north=false,south=true,east=true,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 90
+    },
+    "facing=north,north=false,south=true,east=false,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "x": 90
+    },
+    "facing=north,north=false,south=true,east=false,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 90
+    },
+    "facing=north,north=false,south=true,east=false,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 270
+    },
+    "facing=north,north=false,south=true,east=false,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 270
+    },
+    "facing=north,north=false,south=false,east=true,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on",
+      "x": 90
+    },
+    "facing=north,north=false,south=false,east=true,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "x": 90
+    },
+    "facing=north,north=false,south=false,east=true,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "x": 270
+    },
+    "facing=north,north=false,south=false,east=true,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con4ud_on"
+    },
+    "facing=north,north=true,south=true,east=false,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_on",
+      "x": 90
+    },
+    "facing=north,north=true,south=true,east=false,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1u_on",
+      "x": 180
+    },
+    "facing=north,north=true,south=true,east=false,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1u_on"
+    },
+    "facing=north,north=true,south=true,east=false,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on",
+      "y": 90
+    },
+    "facing=north,north=true,south=false,east=true,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on",
+      "x": 90
+    },
+    "facing=north,north=true,south=false,east=true,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "x": 90
+    },
+    "facing=north,north=true,south=false,east=true,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "x": 270
+    },
+    "facing=north,north=true,south=false,east=true,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con4ud_on"
+    },
+    "facing=north,north=true,south=true,east=true,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "x": 90,
+      "y": 180
+    },
+    "facing=north,north=true,south=true,east=true,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 90,
+      "y": 180
+    },
+    "facing=north,north=true,south=true,east=true,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 270,
+      "y": 180
+    },
+    "facing=north,north=true,south=true,east=true,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 90
+    },
+    "facing=north,north=false,south=true,east=true,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on",
+      "x": 90
+    },
+    "facing=north,north=false,south=true,east=true,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "x": 90
+    },
+    "facing=north,north=false,south=true,east=true,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "x": 270
+    },
+    "facing=north,north=false,south=true,east=true,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con4ud_on"
+    },
+    "facing=north,north=true,south=true,east=false,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "x": 90
+    },
+    "facing=north,north=true,south=true,east=false,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 90
+    },
+    "facing=north,north=true,south=true,east=false,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 270
+    },
+    "facing=north,north=true,south=true,east=false,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 270
+    },
+    "facing=north,north=true,south=true,east=true,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on",
+      "x": 90
+    },
+    "facing=north,north=true,south=true,east=true,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "x": 90
+    },
+    "facing=north,north=true,south=true,east=true,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "x": 270
+    },
+    "facing=north,north=true,south=true,east=true,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con4ud_on"
+    },
+    "facing=south,north=false,south=false,east=false,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_on",
+      "x": 90
+    },
+    "facing=south,north=false,south=false,east=false,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1u_on",
+      "x": 180
+    },
+    "facing=south,north=false,south=false,east=false,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1u_on"
+    },
+    "facing=south,north=false,south=false,east=false,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ud_on"
+    },
+    "facing=south,north=false,south=false,east=false,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "x": 90
+    },
+    "facing=south,north=false,south=false,east=false,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 90
+    },
+    "facing=south,north=false,south=false,east=false,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 270
+    },
+    "facing=south,north=false,south=false,east=false,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "x": 180,
+      "y": 90
+    },
+    "facing=south,north=true,south=false,east=false,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_on",
+      "x": 90
+    },
+    "facing=south,north=true,south=false,east=false,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1u_on",
+      "x": 180
+    },
+    "facing=south,north=true,south=false,east=false,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1u_on"
+    },
+    "facing=south,north=true,south=false,east=false,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ud_on",
+      "x": 90
+    },
+    "facing=south,north=false,south=false,east=true,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,north=false,south=false,east=true,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 90
+    },
+    "facing=south,north=false,south=false,east=true,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 90
+    },
+    "facing=south,north=false,south=false,east=true,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 90
+    },
+    "facing=south,north=false,south=true,east=false,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_on",
+      "x": 90
+    },
+    "facing=south,north=false,south=true,east=false,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1u_on",
+      "x": 180
+    },
+    "facing=south,north=false,south=true,east=false,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1u_on"
+    },
+    "facing=south,north=false,south=true,east=false,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on",
+      "y": 90
+    },
+    "facing=south,north=true,south=false,east=false,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "x": 90
+    },
+    "facing=south,north=true,south=false,east=false,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 90
+    },
+    "facing=south,north=true,south=false,east=false,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 270
+    },
+    "facing=south,north=true,south=false,east=false,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 270
+    },
+    "facing=south,north=true,south=false,east=true,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,north=true,south=false,east=true,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,north=true,south=false,east=true,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 270,
+      "y": 180
+    },
+    "facing=south,north=true,south=false,east=true,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "y": 90
+    },
+    "facing=south,north=false,south=true,east=true,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,north=false,south=true,east=true,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,north=false,south=true,east=true,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 270,
+      "y": 180
+    },
+    "facing=south,north=false,south=true,east=true,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 90
+    },
+    "facing=south,north=false,south=true,east=false,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "x": 90
+    },
+    "facing=south,north=false,south=true,east=false,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 90
+    },
+    "facing=south,north=false,south=true,east=false,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 270
+    },
+    "facing=south,north=false,south=true,east=false,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 270
+    },
+    "facing=south,north=false,south=false,east=true,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on",
+      "x": 90
+    },
+    "facing=south,north=false,south=false,east=true,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "x": 90
+    },
+    "facing=south,north=false,south=false,east=true,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "x": 270
+    },
+    "facing=south,north=false,south=false,east=true,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con4ud_on"
+    },
+    "facing=south,north=true,south=true,east=false,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_on",
+      "x": 90
+    },
+    "facing=south,north=true,south=true,east=false,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1u_on",
+      "x": 180
+    },
+    "facing=south,north=true,south=true,east=false,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1u_on"
+    },
+    "facing=south,north=true,south=true,east=false,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on",
+      "y": 90
+    },
+    "facing=south,north=true,south=false,east=true,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on",
+      "x": 90
+    },
+    "facing=south,north=true,south=false,east=true,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "x": 90
+    },
+    "facing=south,north=true,south=false,east=true,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "x": 270
+    },
+    "facing=south,north=true,south=false,east=true,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con4ud_on"
+    },
+    "facing=south,north=true,south=true,east=true,west=false,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,north=true,south=true,east=true,west=false,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,north=true,south=true,east=true,west=false,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 270,
+      "y": 180
+    },
+    "facing=south,north=true,south=true,east=true,west=false,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 90
+    },
+    "facing=south,north=false,south=true,east=true,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on",
+      "x": 90
+    },
+    "facing=south,north=false,south=true,east=true,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "x": 90
+    },
+    "facing=south,north=false,south=true,east=true,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "x": 270
+    },
+    "facing=south,north=false,south=true,east=true,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con4ud_on"
+    },
+    "facing=south,north=true,south=true,east=false,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con1w_on",
+      "x": 90
+    },
+    "facing=south,north=true,south=true,east=false,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 90
+    },
+    "facing=south,north=true,south=true,east=false,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2nw_on",
+      "x": 270
+    },
+    "facing=south,north=true,south=true,east=false,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "y": 270
+    },
+    "facing=south,north=true,south=true,east=true,west=true,up=false,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con2ew_on",
+      "x": 90
+    },
+    "facing=south,north=true,south=true,east=true,west=true,up=false,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "x": 90
+    },
+    "facing=south,north=true,south=true,east=true,west=true,up=true,down=false,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con3new_on",
+      "x": 270
+    },
+    "facing=south,north=true,south=true,east=true,west=true,up=true,down=true,is_powered=true": {
+      "model": "ancientartifacts:block/copper_wire_con4ud_on"
+    }
+  }
+}
