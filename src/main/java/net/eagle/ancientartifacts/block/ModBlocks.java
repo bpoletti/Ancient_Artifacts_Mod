@@ -15,26 +15,26 @@ import net.minecraft.util.Identifier;
 public class ModBlocks {
     
     public static final Block NENDER_BRICK = registerBlock("nender_brick", 
-    new Block(FabricBlockSettings.copyOf(Blocks.NETHER_BRICKS).strength(4f).requiresTool()));
+    new Block(FabricBlockSettings.copyOf(Blocks.NETHER_BRICKS).strength(2f).requiresTool()));
 
     public static final Block CHACHAPOYAN_IDOL = registerBlock("chachapoyan_idol",
-    new ChachapoyanIdol(FabricBlockSettings.copyOf(Blocks.GOLD_BLOCK).luminance(8).strength(4f).
+    new ChachapoyanIdol(FabricBlockSettings.copyOf(Blocks.GOLD_BLOCK).luminance(8).strength(3f).
             requiresTool().nonOpaque()));
 
     public static final Block GILDED_PLATE = registerBlock("gilded_plate",
-            new GildedPlate(FabricBlockSettings.copyOf(Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE).strength(4f).requiresTool()));
+            new GildedPlate(FabricBlockSettings.copyOf(Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE).strength(1f).requiresTool()));
 
     public static final Block DRAGON_PEDESTAL = registerBlock("dragon_pedestal",
-            new DragonPedestal(FabricBlockSettings.copyOf(Blocks.PURPUR_BLOCK).strength(4f).requiresTool()));
+            new DragonPedestal(FabricBlockSettings.copyOf(Blocks.PURPUR_BLOCK).strength(2f).requiresTool()));
 
     public static final Block ETHER_LEVER = registerBlock("ether_lever",
-            new EtherLever(FabricBlockSettings.copyOf(Blocks.LEVER).strength(4f).requiresTool()));
+            new EtherLever(FabricBlockSettings.copyOf(Blocks.LEVER).strength(1f).requiresTool()));
     public static final Block TOTEM_OF_ORDER = registerBlock("totem_of_order",
-            new TotemOrder(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(4f).requiresTool()));
+            new TotemOrder(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(1f).requiresTool()));
     public static final Block TOTEM_OF_CHAOS = registerBlock("totem_of_chaos",
-            new TotemChaos(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(4f).requiresTool()));
+            new TotemChaos(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(1f).requiresTool()));
     public static final Block COPPER_WIRE = registerBlock("copper_wire",
-            new CopperWire(FabricBlockSettings.copyOf(Blocks.COPPER_BLOCK).strength(4f).requiresTool()));
+            new CopperWire(FabricBlockSettings.copyOf(Blocks.COPPER_BLOCK).strength(1f).requiresTool()));
 
 
     private static Block registerBlock(String name, Block block) {
