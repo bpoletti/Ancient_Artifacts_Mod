@@ -4,7 +4,6 @@ import net.eagle.ancientartifacts.block.ModBlocks;
 import net.eagle.ancientartifacts.block.entity.DragonPedestalEntity;
 import net.eagle.ancientartifacts.block.entity.ModBlockEntities;
 import net.eagle.ancientartifacts.item.ModItems;
-import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -19,7 +18,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.predicate.block.BlockStatePredicate;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -300,6 +298,8 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, ModBlockEntities.DRAGON_PEDESTAL_ENTITY, DragonPedestalEntity::tick);
+        return type == ModBlockEntities.DRAGON_PEDESTAL_ENTITY ?
+                (worldIn, pos, stateIn, blockEntity) -> DragonPedestalEntity.tick(worldIn, pos, stateIn, (DragonPedestalEntity) blockEntity) :
+                null;
     }
 }

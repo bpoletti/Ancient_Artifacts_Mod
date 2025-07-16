@@ -1,7 +1,7 @@
 package net.eagle.ancientartifacts.block.custom;
 
 import net.minecraft.block.*;
-import net.minecraft.block.enums.WallMountLocation;
+import net.minecraft.block.enums.BlockFace;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.DustParticleEffect;
 import net.minecraft.sound.SoundCategory;
@@ -17,14 +17,12 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.minecraft.world.*;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.event.GameEvent;
 import org.joml.Vector3f;
 
 import java.util.Objects;
 
-import static net.minecraft.block.RedstoneWireBlock.POWER;
 
 
 @SuppressWarnings("deprecation")
@@ -57,7 +55,7 @@ public class EtherLever extends LeverBlock {
         super(settings);
         this.setDefaultState(getStateManager().getDefaultState()
                 .with(FACING, Direction.NORTH)
-                .with(FACE, WallMountLocation.WALL)
+                .with(FACE, BlockFace.WALL)
                 .with(POWERED, false));
     }
 
