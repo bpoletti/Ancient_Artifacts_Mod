@@ -132,7 +132,7 @@ public class CopperWire extends Block implements Waterloggable{
         return state;
     }
     @Override
-    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         super.onBreak(world, pos, state, player);
 
         // Update the neighboring CopperWire blocks when a block is broken
@@ -150,6 +150,7 @@ public class CopperWire extends Block implements Waterloggable{
                 this.updateNeighbors(world, pos);
             }
         }
+        return state;
     }
     @Override
     public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {

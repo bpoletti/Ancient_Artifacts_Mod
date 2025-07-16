@@ -1,6 +1,6 @@
 package net.eagle.ancientartifacts.block.custom;
 
-import net.eagle.ancientartifacts.AncientArtifacts;
+import com.mojang.serialization.MapCodec;
 import net.eagle.ancientartifacts.block.ModBlocks;
 import net.eagle.ancientartifacts.item.ModItems;
 import net.eagle.ancientartifacts.potion.ModPotions;
@@ -60,6 +60,11 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
                 .with(PENDANT, false)
                 .with(SCALES, false)
                 .with(ELDERIAN_MONUMENT, false));
+    }
+
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return null;
     }
 
     @Override
@@ -151,7 +156,7 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
     }
 
     @Override
-    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         super.onBreak(world, pos, state, player);
         if(!player.isCreative()){
             if(state.get(ChachapoyanIdol.PENDANT)){
@@ -164,6 +169,7 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
                 }
             }
         }
+        return state;
     }
 
     @Nullable

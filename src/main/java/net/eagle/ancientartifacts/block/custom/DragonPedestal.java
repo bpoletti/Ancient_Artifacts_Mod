@@ -1,5 +1,6 @@
 package net.eagle.ancientartifacts.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.eagle.ancientartifacts.block.ModBlocks;
 import net.eagle.ancientartifacts.block.entity.DragonPedestalEntity;
 import net.eagle.ancientartifacts.block.entity.ModBlockEntities;
@@ -89,6 +90,11 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
                 .with(HEART_SEA, false)
                 .with(ORB_INFINIUM, false)
                 .with(END_READY, false));
+    }
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return null;
     }
 
     @Override
@@ -255,7 +261,7 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
     }
 
     @Override
-    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         BlockPos topPos;
         BlockPos botPos;
         if (state.get(HALF) == DoubleBlockHalf.UPPER) {
@@ -293,6 +299,7 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
             }
         }
 
+        return state;
     }
 
     @Nullable
