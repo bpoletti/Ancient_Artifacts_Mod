@@ -90,7 +90,8 @@ public class EtherLever extends LeverBlock {
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos,
+                                 PlayerEntity player, BlockHitResult hit) {
         if (world.isClient) {
             BlockState blockState = state.cycle(POWERED);
 
@@ -105,6 +106,7 @@ public class EtherLever extends LeverBlock {
         world.emitGameEvent(player, blockState.get(POWERED) ? GameEvent.BLOCK_ACTIVATE : GameEvent.BLOCK_DEACTIVATE, pos);
         return ActionResult.CONSUME;
     }
+
     private void setRootRod(World world, BlockPos pos) {
         for (Direction direction : Direction.values()) {
             BlockPos copperPos = pos.offset(direction);

@@ -17,7 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.PotionItem;
 import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionUtil;
+import net.minecraft.registry.Registries;
 import net.minecraft.predicate.block.BlockStatePredicate;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -25,10 +25,7 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.text.Text;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.Hand;
+import net.minecraft.util.*;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
@@ -72,87 +69,161 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
         return SHAPE;
     }
 
+
+
+
     @Override
     public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
-        world.playSound(null, pos, SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.BLOCKS,0.2f, 0.4f);
-        world.playSound(null, pos, SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.BLOCKS,0.4f, 0.4f);
+        world.playSound(
+                null,
+                pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
+                SoundEvents.BLOCK_ANVIL_PLACE,
+                SoundCategory.BLOCKS, 0.2f, 0.4f
+        );
+        world.playSound(
+                null,
+                pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
+                SoundEvents.BLOCK_ANVIL_PLACE,
+                SoundCategory.BLOCKS, 0.4f, 0.4f
+        );
+
         world.setBlockState(pos, state);
-        // Check for nearby Creeper entities and trigger their explosion
+
         if (!world.isClient) {
             int radius = 16;
             boolean creeperExploded = false;
-            for (CreeperEntity entity : world.getEntitiesByClass(CreeperEntity.class, new Box(pos).expand(radius), entity -> entity instanceof CreeperEntity)) {
+            for (CreeperEntity entity : world.getEntitiesByClass(CreeperEntity.class, new Box(pos).expand(radius), e -> e instanceof CreeperEntity)) {
                 CreeperEntity creeper = entity;
-                creeper.ignite(); // Ignite the Creeper
-                creeper.setFuseSpeed(5); // Set the fuse time to 3 (immediate explosion)
+                creeper.ignite();
+                creeper.setFuseSpeed(5);
                 creeperExploded = true;
             }
-            // Destroy the Chachapoyan Idol if a Creeper has exploded
             if (creeperExploded) {
-                world.playSound(null, pos, SoundEvents.ITEM_TRIDENT_THUNDER, SoundCategory.NEUTRAL, 1.0f, 0.3f);
+                world.playSound(
+                        null,
+                        pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
+                        SoundEvents.ITEM_TRIDENT_THUNDER,
+                        SoundCategory.NEUTRAL, 1.0f, 0.3f
+                );
                 world.breakBlock(pos, false);
             }
         }
         super.onPlaced(world, pos, state, placer, itemStack);
     }
 
+
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        ItemStack heldItem = player.getStackInHand(hand);
-        Potion elixir = PotionUtil.getPotion(heldItem);
-        BlockPattern.Result result;
-        result = this.getMonumentPattern().searchAround(world,pos);
-    if(result != null){
-        if (heldItem.getItem() instanceof PotionItem
-                && elixir == ModPotions.ELIXIR_OF_DRAKE) {
-            if(!state.get(ChachapoyanIdol.ELDERIAN_MONUMENT)
-                    && state.get(ChachapoyanIdol.SCALES)){
-                world.setBlockState(pos, state.with(ChachapoyanIdol.ELDERIAN_MONUMENT, true));
-                if(!player.isCreative()){
-                    heldItem.decrement(1);
-                    player.giveItemStack(new ItemStack(Items.GLASS_BOTTLE));
-                }
-                ItemStack orb = new ItemStack(ModItems.ORB_INFINIUM);
-                BlockPos dropPos = pos.up();
-                world.spawnEntity(new ItemEntity(world, dropPos.getX(), dropPos.getY(), dropPos.getZ(), orb));
-                world.playSound(null, pos, SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.NEUTRAL,0.7f, 1.0f);
-                return ActionResult.CONSUME;
+    protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world,
+                                             BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        // Gate on the full monument pattern like before
+        BlockPattern.Result result = this.getMonumentPattern().searchAround(world, pos);
+        if (result == null) {
+            if (!world.isClient) {
+                player.sendMessage(Text.literal("Full Monument needs to be built first"));
             }
-        } else if (heldItem.getItem() == ModItems.ELDER_GUARDIAN_SCALES) {
-            if (!state.get(ChachapoyanIdol.SCALES)
-                    && state.get(ChachapoyanIdol.PENDANT)) {
-                world.setBlockState(pos, state.with(ChachapoyanIdol.SCALES, true));
-                if (!player.isCreative()) {
-                    heldItem.decrement(1);
-                }
-                world.playSound(null, pos, SoundEvents.BLOCK_FLOWERING_AZALEA_PLACE, SoundCategory.NEUTRAL,0.7f, 0.2f);
-                return ActionResult.CONSUME;
-            }
-        } else if (heldItem.getItem() == ModItems.ANKH_PENDANT) {
-            if (!state.get(ChachapoyanIdol.PENDANT)
-                    && state.get(ChachapoyanIdol.KEY)) {
-                world.setBlockState(pos, state.with(ChachapoyanIdol.PENDANT, true));
-                if (!player.isCreative()) {
-                    heldItem.decrement(1);
-                }
-                world.playSound(null, pos, SoundEvents.BLOCK_AMETHYST_BLOCK_PLACE, SoundCategory.NEUTRAL,0.8f, 0.3f);
-                return ActionResult.CONSUME;
-            }
-        } else if (heldItem.getItem() == ModItems.EVOKER_KEY) {
-            if (!state.get(ChachapoyanIdol.KEY)) {
-                world.setBlockState(pos, state.with(ChachapoyanIdol.KEY, true));
-                world.playSound(null, pos, SoundEvents.BLOCK_IRON_DOOR_OPEN, SoundCategory.NEUTRAL,0.7f, 0.45f);
-                return ActionResult.CONSUME;
-            }
-        }
-    }
-        if (!world.isClient) {
-            player.sendMessage(Text.literal("Full Monument needs to be built first"));
+            return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
 
-        return ActionResult.PASS;
+        // We'll switch on the item id; potions get a special case
+        final String id = net.minecraft.registry.Registries.ITEM.getId(stack.getItem()).toString();
 
+        switch (id) {
+            // --- Special case: potion bottle w/ ELIXIR_OF_DRAKE ---
+            case "minecraft:potion" -> {
+                // In 1.21, potions are a data component on the item stack
+                var contents = stack.get(net.minecraft.component.DataComponentTypes.POTION_CONTENTS);
+                net.minecraft.registry.entry.RegistryEntry<net.minecraft.potion.Potion> potionEntry =
+                        contents != null ? contents.potion().orElse(null) : null;
 
+                if (potionEntry != null
+                        && potionEntry.equals(net.minecraft.registry.Registries.POTION.getEntry(ModPotions.ELIXIR_OF_DRAKE))) {
+
+                    if (!state.get(ChachapoyanIdol.ELDERIAN_MONUMENT)
+                            && state.get(ChachapoyanIdol.SCALES)) {
+
+                        world.setBlockState(pos, state.with(ChachapoyanIdol.ELDERIAN_MONUMENT, true));
+
+                        if (!player.isCreative()) {
+                            stack.decrement(1);
+                            player.giveItemStack(new ItemStack(Items.GLASS_BOTTLE));
+                        }
+
+                        // Drop ORB_INFINIUM one block above
+                        BlockPos dropPos = pos.up();
+                        world.spawnEntity(new ItemEntity(world,
+                                dropPos.getX(), dropPos.getY(), dropPos.getZ(),
+                                new ItemStack(ModItems.ORB_INFINIUM)));
+
+                        // play sound (coords overload in 1.21)
+                        world.playSound(
+                                null,
+                                pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
+                                SoundEvents.ENTITY_PLAYER_LEVELUP,
+                                SoundCategory.NEUTRAL, 0.7f, 1.0f
+                        );
+                        return ItemActionResult.CONSUME;
+                    }
+                }
+                // Not our specific potion → let default logic continue
+                return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            }
+
+            // --- ELDER_GUARDIAN_SCALES ---
+            case "ancientartifacts:elder_guardian_scales" -> {
+                if (!state.get(ChachapoyanIdol.SCALES)
+                        && state.get(ChachapoyanIdol.PENDANT)) {
+                    world.setBlockState(pos, state.with(ChachapoyanIdol.SCALES, true));
+                    if (!player.isCreative()) stack.decrement(1);
+
+                    world.playSound(
+                            null,
+                            pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
+                            SoundEvents.BLOCK_FLOWERING_AZALEA_PLACE,
+                            SoundCategory.NEUTRAL, 0.7f, 0.2f
+                    );
+                    return ItemActionResult.CONSUME;
+                }
+                return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            }
+
+            // --- ANKH_PENDANT ---
+            case "ancientartifacts:ankh_pendant" -> {
+                if (!state.get(ChachapoyanIdol.PENDANT)
+                        && state.get(ChachapoyanIdol.KEY)) {
+                    world.setBlockState(pos, state.with(ChachapoyanIdol.PENDANT, true));
+                    if (!player.isCreative()) stack.decrement(1);
+
+                    world.playSound(
+                            null,
+                            pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
+                            SoundEvents.BLOCK_AMETHYST_BLOCK_PLACE,
+                            SoundCategory.NEUTRAL, 0.8f, 0.3f
+                    );
+                    return ItemActionResult.CONSUME;
+                }
+                return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            }
+
+            // --- EVOKER_KEY ---
+            case "ancientartifacts:evoker_key" -> {
+                if (!state.get(ChachapoyanIdol.KEY)) {
+                    world.setBlockState(pos, state.with(ChachapoyanIdol.KEY, true));
+                    world.playSound(
+                            null,
+                            pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
+                            SoundEvents.BLOCK_IRON_DOOR_OPEN,
+                            SoundCategory.NEUTRAL, 0.7f, 0.45f
+                    );
+                    return ItemActionResult.CONSUME;
+                }
+                return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            }
+
+            // --- Not handled here ---
+            default -> {
+                return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            }
+        }
     }
 
     @Override

@@ -13,7 +13,7 @@ public class ModBlockEntities {
 
     public static void registerBlockEntities(){
         DRAGON_PEDESTAL_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE,
-                new Identifier(AncientArtifacts.MOD_ID, "dragon_pedestal"),
+                Identifier.of(AncientArtifacts.MOD_ID, "dragon_pedestal"),
                 FabricBlockEntityTypeBuilder.create(DragonPedestalEntity::new,
                         ModBlocks.DRAGON_PEDESTAL).build(null));
 

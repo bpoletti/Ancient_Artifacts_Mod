@@ -12,16 +12,16 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-
-
 @Mixin(IglooGenerator.class)
 public class BetterIglooMixin {
-    private static final Identifier TOP_TEMPLATE = new Identifier("igloo/top");
-    private static final Identifier MIDDLE_TEMPLATE = new Identifier("igloo/middle");
-    private static final Identifier BOTTOM_TEMPLATE = new Identifier("igloo/bottom");
+    // Explicitly use the minecraft namespace in 1.21+
+    private static final Identifier TOP_TEMPLATE    = Identifier.of("minecraft", "igloo/top");
+    private static final Identifier MIDDLE_TEMPLATE = Identifier.of("minecraft", "igloo/middle");
+    private static final Identifier BOTTOM_TEMPLATE = Identifier.of("minecraft", "igloo/bottom");
 
-    @Inject(at = @At("HEAD"), method = "addPieces", cancellable = true)
-    private static void addPieces(StructureTemplateManager manager, BlockPos pos, BlockRotation rotation, StructurePiecesHolder holder, Random random, CallbackInfo ci) {
+    @Inject(method = "addPieces", at = @At("HEAD"), cancellable = true)
+    private static void addPieces(StructureTemplateManager manager, BlockPos pos, BlockRotation rotation,
+                                  StructurePiecesHolder holder, Random random, CallbackInfo ci) {
         if (random.nextDouble() < 0.9) {
             int i = random.nextInt(8) + 4;
             holder.addPiece(new IglooGenerator.Piece(manager, BOTTOM_TEMPLATE, pos, rotation, i * 3));
@@ -30,5 +30,8 @@ public class BetterIglooMixin {
             }
         }
         holder.addPiece(new IglooGenerator.Piece(manager, TOP_TEMPLATE, pos, rotation, 0));
+
+        // If you intend to fully replace vanilla behavior, cancel so the original addPieces doesn't also run.
+        ci.cancel();
     }
 }

@@ -26,9 +26,9 @@
 		"ancientartifacts.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.14.13",
-		"minecraft": ">=1.19.3",
-		"java": ">=17",
+		"fabricloader": ">=0.17.3",
+		"minecraft": ">=1.21.1",
+		"java": ">=21",
 		"fabric-api": "*"
 	},
 	"suggests": {
