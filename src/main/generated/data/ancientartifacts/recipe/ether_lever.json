@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "B": {
+      "item": "minecraft:blaze_rod"
+    },
+    "E": {
+      "item": "minecraft:echo_shard"
+    },
+    "W": {
+      "item": "minecraft:wither_skeleton_skull"
+    }
+  },
+  "pattern": [
+    " W ",
+    " B ",
+    " E "
+  ],
+  "result": {
+    "count": 1,
+    "id": "ancientartifacts:ether_lever"
+  }
+}

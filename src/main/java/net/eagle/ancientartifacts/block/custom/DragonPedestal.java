@@ -1,10 +1,10 @@
 package net.eagle.ancientartifacts.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.eagle.ancientartifacts.block.ModBlocks;
 import net.eagle.ancientartifacts.block.entity.DragonPedestalEntity;
 import net.eagle.ancientartifacts.block.entity.ModBlockEntities;
 import net.eagle.ancientartifacts.item.ModItems;
-import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -19,7 +19,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.predicate.block.BlockStatePredicate;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -31,6 +30,7 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -91,6 +91,11 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
                 .with(HEART_SEA, false)
                 .with(ORB_INFINIUM, false)
                 .with(END_READY, false));
+    }
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return null;
     }
 
     @Override
@@ -192,63 +197,65 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        ItemStack heldItem = player.getStackInHand(hand);
-        BlockPattern.Result correctPattern;
-        correctPattern = this.getRitualPattern().searchAround(world,pos);
-            if(heldItem.getItem() == ModItems.END_STAFF){
-                if(!state.get(DragonPedestal.END_READY)
-                        && state.get(DragonPedestal.ORB_INFINIUM)) {
-                    world.setBlockState(pos, state.with(END_READY, true)
-                            .with(HALF, DoubleBlockHalf.UPPER));
+    protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world,
+                                             BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        // if you also want empty-hand behavior, override onUseWithoutItem as well
+        final var correctPattern = this.getRitualPattern().searchAround(world, pos);
+
+        // Switch on the full registry id, e.g. "ancientartifacts:orb_infinium", "minecraft:heart_of_the_sea"
+        final String id = net.minecraft.registry.Registries.ITEM.getId(stack.getItem()).toString();
+
+        switch (id) {
+            case "ancientartifacts:end_staff" -> {
+                if (!state.get(DragonPedestal.END_READY) && state.get(DragonPedestal.ORB_INFINIUM)) {
+                    world.setBlockState(pos, state.with(END_READY, true).with(HALF, DoubleBlockHalf.UPPER));
                     world.playSound(null, pos, SoundEvents.ENTITY_ENDER_DRAGON_GROWL, SoundCategory.HOSTILE, 0.2f, 0.9f);
-                    world.playSound(null, pos, SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.NEUTRAL, 0.2f, 1.0f);
+                    world.playSound(null, pos, SoundEvents.ENTITY_PLAYER_LEVELUP,   SoundCategory.NEUTRAL, 0.2f, 1.0f);
                     if (!player.isCreative()) {
                         player.sendMessage(Text.literal("End Gateway is now Unlocked!"));
                     }
                 }
-            return ActionResult.PASS;
+                // Do not consume the staff; let default block action run if needed
+                return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
             }
-           else if(heldItem.getItem() == ModItems.ORB_INFINIUM) {
-                if(!state.get(DragonPedestal.ORB_INFINIUM)
-                        && state.get(DragonPedestal.HEART_SEA)) {
-                    world.setBlockState(pos, state.with(ORB_INFINIUM, true)
-                            .with(HALF, DoubleBlockHalf.UPPER));
+
+            case "ancientartifacts:orb_infinium" -> {
+                if (!state.get(DragonPedestal.ORB_INFINIUM) && state.get(DragonPedestal.HEART_SEA)) {
+                    world.setBlockState(pos, state.with(ORB_INFINIUM, true).with(HALF, DoubleBlockHalf.UPPER));
                     world.playSound(null, pos, SoundEvents.BLOCK_BEACON_ACTIVATE, SoundCategory.AMBIENT, 1.0f, 0.6f);
-                    if (!player.isCreative()) {
-                        heldItem.decrement(1);
-                    }
+                    if (!player.isCreative()) stack.decrement(1);
                 }
-                return ActionResult.CONSUME;
+                return ItemActionResult.CONSUME;
             }
-            else if (heldItem.getItem() == Items.HEART_OF_THE_SEA) {
-                if (!state.get(DragonPedestal.HEART_SEA)
-                        && state.get(DragonPedestal.FOSSIL_HEAD)) {
-                    world.setBlockState(pos, state.with(HEART_SEA, true)
-                            .with(HALF, DoubleBlockHalf.UPPER));
+
+            case "minecraft:heart_of_the_sea" -> {
+                if (!state.get(DragonPedestal.HEART_SEA) && state.get(DragonPedestal.FOSSIL_HEAD)) {
+                    world.setBlockState(pos, state.with(HEART_SEA, true).with(HALF, DoubleBlockHalf.UPPER));
                     world.playSound(null, pos, SoundEvents.BLOCK_CONDUIT_ACTIVATE, SoundCategory.BLOCKS, 1.0f, 0.4f);
-                    if (!player.isCreative()) {
-                        heldItem.decrement(1);
-                    }
+                    if (!player.isCreative()) stack.decrement(1);
                 }
-                return ActionResult.CONSUME;
-            } else if (heldItem.getItem() == ModItems.DRAGON_FOSSIL) {
+                return ItemActionResult.CONSUME;
+            }
+
+            case "ancientartifacts:dragon_fossil" -> {
                 if (!state.get(DragonPedestal.FOSSIL_HEAD)
                         && state.get(DragonPedestal.GILDED)
                         && !state.get(DragonPedestal.HEART_SEA)
                         && correctPattern != null) {
-                    world.setBlockState(pos.up(), state.with(FOSSIL_HEAD, true)
-                            .with(HALF, DoubleBlockHalf.UPPER));
+                    world.setBlockState(pos.up(), state.with(FOSSIL_HEAD, true).with(HALF, DoubleBlockHalf.UPPER));
                     world.playSound(null, pos, SoundEvents.BLOCK_BONE_BLOCK_PLACE, SoundCategory.BLOCKS, 0.8f, 0.3f);
-                    if (!player.isCreative()) {
-                        heldItem.decrement(1);
-                    }
+                    if (!player.isCreative()) stack.decrement(1);
                 }
-                return ActionResult.CONSUME;
+                return ItemActionResult.CONSUME;
             }
 
-        return ActionResult.PASS;
+            default -> {
+
+                return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            }
+        }
     }
+
 
     @Nullable
     @Override
@@ -257,7 +264,7 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
     }
 
     @Override
-    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         BlockPos topPos;
         BlockPos botPos;
         if (state.get(HALF) == DoubleBlockHalf.UPPER) {
@@ -295,11 +302,14 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
             }
         }
 
+        return state;
     }
 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, ModBlockEntities.DRAGON_PEDESTAL_ENTITY, DragonPedestalEntity::tick);
+        return type == ModBlockEntities.DRAGON_PEDESTAL_ENTITY ?
+                (worldIn, pos, stateIn, blockEntity) -> DragonPedestalEntity.tick(worldIn, pos, stateIn, (DragonPedestalEntity) blockEntity) :
+                null;
     }
 }

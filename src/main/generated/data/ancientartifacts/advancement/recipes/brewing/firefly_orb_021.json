@@ -1,0 +1,65 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_glass": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:glass"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_ochre_firefly_bud": {
+      "conditions": {
+        "items": [
+          {
+            "items": "ancientartifacts:ochre_firefly_bud"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_pearlescent_firefly_bud": {
+      "conditions": {
+        "items": [
+          {
+            "items": "ancientartifacts:pearlescent_firefly_bud"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "ancientartifacts:firefly_orb_021"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_verdant_firefly_bud": {
+      "conditions": {
+        "items": [
+          {
+            "items": "ancientartifacts:verdant_firefly_bud"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_glass",
+      "has_ochre_firefly_bud",
+      "has_verdant_firefly_bud",
+      "has_pearlescent_firefly_bud"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "ancientartifacts:firefly_orb_021"
+    ]
+  }
+}

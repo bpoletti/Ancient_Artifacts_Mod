@@ -11,12 +11,15 @@
 		"homepage": "https://modrinth.com/mod/ancient_artifacts",
 		"sources": "https://github.com/bpoletti/Ancient_Artifacts_Mod"
 	},
-	"license": "MIT License",
+	"license": "MIT",
 	"icon": "assets/ancientartifacts/ancientartifactsicon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
 			"net.eagle.ancientartifacts.AncientArtifacts"
+		],
+		"fabric-datagen": [
+			"net.eagle.ancientartifacts.AncientArtifactsDataGenerator"
 		],
 		"client": [
 			"net.eagle.ancientartifacts.AncientArtifactsClient"
@@ -26,9 +29,9 @@
 		"ancientartifacts.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.14.13",
-		"minecraft": ">=1.19.3",
-		"java": ">=17",
+		"fabricloader": ">=0.17.3",
+		"minecraft": ">=1.21.1",
+		"java": ">=21",
 		"fabric-api": "*"
 	},
 	"suggests": {

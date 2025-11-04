@@ -1,7 +1,7 @@
 package net.eagle.ancientartifacts.block.custom;
 
 import net.minecraft.block.*;
-import net.minecraft.block.enums.WallMountLocation;
+import net.minecraft.block.enums.BlockFace;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.DustParticleEffect;
 import net.minecraft.sound.SoundCategory;
@@ -17,14 +17,12 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.minecraft.world.*;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.event.GameEvent;
 import org.joml.Vector3f;
 
 import java.util.Objects;
 
-import static net.minecraft.block.RedstoneWireBlock.POWER;
 
 
 @SuppressWarnings("deprecation")
@@ -57,7 +55,7 @@ public class EtherLever extends LeverBlock {
         super(settings);
         this.setDefaultState(getStateManager().getDefaultState()
                 .with(FACING, Direction.NORTH)
-                .with(FACE, WallMountLocation.WALL)
+                .with(FACE, BlockFace.WALL)
                 .with(POWERED, false));
     }
 
@@ -92,7 +90,8 @@ public class EtherLever extends LeverBlock {
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos,
+                                 PlayerEntity player, BlockHitResult hit) {
         if (world.isClient) {
             BlockState blockState = state.cycle(POWERED);
 
@@ -107,6 +106,7 @@ public class EtherLever extends LeverBlock {
         world.emitGameEvent(player, blockState.get(POWERED) ? GameEvent.BLOCK_ACTIVATE : GameEvent.BLOCK_DEACTIVATE, pos);
         return ActionResult.CONSUME;
     }
+
     private void setRootRod(World world, BlockPos pos) {
         for (Direction direction : Direction.values()) {
             BlockPos copperPos = pos.offset(direction);
@@ -181,9 +181,10 @@ public class EtherLever extends LeverBlock {
     }
 
     @Override
-    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         super.onBreak(world, pos, state, player);
         setNonRootRod(world, pos);
+        return state;
     }
     @Override
     public int getWeakRedstonePower(BlockState state, BlockView world, BlockPos pos, Direction direction) {

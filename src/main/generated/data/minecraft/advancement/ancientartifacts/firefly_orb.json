@@ -1,0 +1,29 @@
+{
+  "parent": "minecraft:ancientartifacts/evoker_key",
+  "criteria": {
+    "star_orb": {
+      "conditions": {
+        "items": [
+          {
+            "items": "ancientartifacts:firefly_orb"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": "Crafted the Firefly Orb",
+    "icon": {
+      "count": 1,
+      "id": "ancientartifacts:firefly_orb"
+    },
+    "title": "Ball of Stars"
+  },
+  "requirements": [
+    [
+      "star_orb"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

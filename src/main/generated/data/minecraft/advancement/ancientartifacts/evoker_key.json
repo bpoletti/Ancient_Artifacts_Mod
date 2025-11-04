@@ -1,0 +1,29 @@
+{
+  "parent": "minecraft:ancientartifacts/root",
+  "criteria": {
+    "key_nabbed": {
+      "conditions": {
+        "items": [
+          {
+            "items": "ancientartifacts:evoker_key"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": "Found the Evoker's Key",
+    "icon": {
+      "count": 1,
+      "id": "ancientartifacts:evoker_key"
+    },
+    "title": "The Key to Everything!"
+  },
+  "requirements": [
+    [
+      "key_nabbed"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

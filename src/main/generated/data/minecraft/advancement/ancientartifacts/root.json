@@ -1,0 +1,29 @@
+{
+  "criteria": {
+    "golden_head": {
+      "conditions": {
+        "items": [
+          {
+            "items": "ancientartifacts:chachapoyan_idol"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "background": "ancientartifacts:textures/block/nender_brick.png",
+    "description": "Found the Chachapoyan Idol",
+    "icon": {
+      "count": 1,
+      "id": "ancientartifacts:chachapoyan_idol"
+    },
+    "title": "Not Today Dr. Jones!"
+  },
+  "requirements": [
+    [
+      "golden_head"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
