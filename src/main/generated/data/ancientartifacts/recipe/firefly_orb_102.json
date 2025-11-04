@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "firefly_orb",
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "O": {
+      "item": "ancientartifacts:verdant_firefly_bud"
+    },
+    "P": {
+      "item": "ancientartifacts:pearlescent_firefly_bud"
+    },
+    "V": {
+      "item": "ancientartifacts:ochre_firefly_bud"
+    }
+  },
+  "pattern": [
+    "GGG",
+    "OVP",
+    "GGG"
+  ],
+  "result": {
+    "count": 1,
+    "id": "ancientartifacts:firefly_orb"
+  }
+}

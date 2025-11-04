@@ -76,6 +76,7 @@ public class ModItemGroup {
                             entries.add(Items.ENDER_EYE);
                             entries.add(Items.HEART_OF_THE_SEA);
                             entries.add(Items.DIRT);
+                            entries.add(Items.NETHER_STAR);
                             entries.add(potionStack(Potions.AWKWARD));
                         })
                         .build()

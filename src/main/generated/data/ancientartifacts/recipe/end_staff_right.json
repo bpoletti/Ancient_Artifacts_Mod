@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "end_staff",
+  "key": {
+    "E": {
+      "item": "ancientartifacts:ender_rod"
+    },
+    "I": {
+      "item": "minecraft:ender_eye"
+    },
+    "S": {
+      "item": "minecraft:nether_star"
+    }
+  },
+  "pattern": [
+    "  I",
+    " S ",
+    "E  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "ancientartifacts:end_staff"
+  }
+}

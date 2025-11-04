@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "ancientartifacts:verdant_firefly_bud_from_smelting_verdant_froglight"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_verdant_froglight": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:verdant_froglight"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_verdant_froglight"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "ancientartifacts:verdant_firefly_bud_from_smelting_verdant_froglight"
+    ]
+  }
+}

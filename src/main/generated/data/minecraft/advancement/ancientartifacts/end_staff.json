@@ -1,0 +1,29 @@
+{
+  "parent": "minecraft:ancientartifacts/elixir_of_drake",
+  "criteria": {
+    "end_staff": {
+      "conditions": {
+        "items": [
+          {
+            "items": "ancientartifacts:end_staff"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": "Crafted the End Staff",
+    "icon": {
+      "count": 1,
+      "id": "ancientartifacts:end_staff"
+    },
+    "title": "Wingardium Leviosa"
+  },
+  "requirements": [
+    [
+      "end_staff"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

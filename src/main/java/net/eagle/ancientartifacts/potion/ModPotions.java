@@ -18,7 +18,6 @@ public class ModPotions {
     public static Potion ELIXIR_OF_DRAKE;
 
     private static Potion registerPotion(String name) {
-        // Tip: Identifier.of(...) is the newer helper in 1.21.x
         Identifier id = Identifier.of(AncientArtifacts.MOD_ID, name);
 
         if ("elixir_of_drake".equals(name)) {
@@ -42,6 +41,5 @@ public class ModPotions {
         ELIXIR_BASE_IV  = registerPotion("elixir_base_iv");
         ELIXIR_BASE_V   = registerPotion("elixir_base_v");
         ELIXIR_OF_DRAKE = registerPotion("elixir_of_drake");
-        // Brewing recipes are no longer registered here.
     }
 }

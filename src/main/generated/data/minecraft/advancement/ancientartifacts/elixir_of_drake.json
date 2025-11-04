@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:ancientartifacts/firefly_orb",
+  "criteria": {
+    "drake_potion": {
+      "conditions": {
+        "items": [
+          {
+            "components": {
+              "minecraft:potion_contents": {
+                "potion": "ancientartifacts:elixir_of_drake"
+              }
+            },
+            "items": "minecraft:potion"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": "Brewed the Elixir of Drake",
+    "icon": {
+      "count": 1,
+      "id": "minecraft:potion"
+    },
+    "title": "Taste Like Crap!"
+  },
+  "requirements": [
+    [
+      "drake_potion"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

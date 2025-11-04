@@ -9,7 +9,6 @@ import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.state.property.Properties;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
@@ -20,7 +19,7 @@ import net.minecraft.world.BlockView;
 import org.jetbrains.annotations.Nullable;
 
 public class TotemOrder extends HorizontalFacingBlock {
-
+    public static final MapCodec<TotemOrder> CODEC = createCodec(TotemOrder::new);
     public static final DirectionProperty FACING;
     public TotemOrder(Settings settings) {
         super(settings);
@@ -30,7 +29,7 @@ public class TotemOrder extends HorizontalFacingBlock {
 
     @Override
     protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
-        return null;
+        return CODEC;
     }
 
     private static final VoxelShape SHAPE;

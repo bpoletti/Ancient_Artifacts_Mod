@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 160,
+  "experience": 0.1,
+  "group": "firefly_buds",
+  "ingredient": {
+    "item": "minecraft:pearlescent_froglight"
+  },
+  "result": {
+    "id": "ancientartifacts:pearlescent_firefly_bud"
+  }
+}

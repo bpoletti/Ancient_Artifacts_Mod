@@ -1,0 +1,44 @@
+{
+  "parent": "minecraft:ancientartifacts/end_staff",
+  "criteria": {
+    "pedestal_final": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "ancientartifacts:dragon_pedestal"
+              }
+            }
+          },
+          {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "items": "ancientartifacts:end_staff"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:item_used_on_block"
+    }
+  },
+  "display": {
+    "description": "The Elderian Monument was activated and the End Gate has opened",
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "ancientartifacts:orb_infinium"
+    },
+    "title": "§5The Beginning of the End?"
+  },
+  "requirements": [
+    [
+      "pedestal_final"
+    ]
+  ],
+  "rewards": {
+    "experience": 500
+  },
+  "sends_telemetry_event": true
+}
