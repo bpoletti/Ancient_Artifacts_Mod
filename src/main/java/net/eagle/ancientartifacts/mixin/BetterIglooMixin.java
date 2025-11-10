@@ -14,7 +14,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(IglooGenerator.class)
 public class BetterIglooMixin {
-    // Explicitly use the minecraft namespace in 1.21+
     private static final Identifier TOP_TEMPLATE    = Identifier.of("minecraft", "igloo/top");
     private static final Identifier MIDDLE_TEMPLATE = Identifier.of("minecraft", "igloo/middle");
     private static final Identifier BOTTOM_TEMPLATE = Identifier.of("minecraft", "igloo/bottom");
@@ -31,7 +30,6 @@ public class BetterIglooMixin {
         }
         holder.addPiece(new IglooGenerator.Piece(manager, TOP_TEMPLATE, pos, rotation, 0));
 
-        // If you intend to fully replace vanilla behavior, cancel so the original addPieces doesn't also run.
         ci.cancel();
     }
 }

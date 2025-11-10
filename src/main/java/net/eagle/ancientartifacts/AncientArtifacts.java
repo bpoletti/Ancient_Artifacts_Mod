@@ -30,7 +30,7 @@ public class AncientArtifacts implements ModInitializer {
 
 		ModLootTableModifies.modifyLootTables();  // keep this after ModItems
 
-		FabricBrewingRecipeRegistryBuilder.BUILD.register(builder -> {
+	 	FabricBrewingRecipeRegistryBuilder.BUILD.register(builder -> {
 			builder.registerPotionRecipe(
 					Potions.AWKWARD,                          // input
 					ModItems.NETHER_GRASS,                    // ingredient

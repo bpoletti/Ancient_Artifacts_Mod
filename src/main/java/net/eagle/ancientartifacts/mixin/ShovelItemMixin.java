@@ -81,7 +81,5 @@ public abstract class ShovelItemMixin {
                 cir.cancel();
             }
         }
-
-
 }
 
