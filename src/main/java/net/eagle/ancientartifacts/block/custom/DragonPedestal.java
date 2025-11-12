@@ -57,8 +57,6 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
     protected static final VoxelShape SHAPE_LOWER;
     protected static final VoxelShape SHAPE_LOWER_G;
 
-    @Nullable
-    private BlockPattern ritualPattern;
     static {
         //TOP
         VoxelShape su1 = Block.createCuboidShape(5.5, 0, 5.5, 10.5, 1, 10.5);
@@ -92,20 +90,19 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
                 .with(END_READY, false));
     }
 
-    @Override
-    protected MapCodec<? extends BlockWithEntity> getCodec() {
-        return null;
-    }
+    public static final MapCodec<DragonPedestal> CODEC = createCodec(DragonPedestal::new);
 
     @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return state.get(HALF) == DoubleBlockHalf.LOWER
-                ? (state.get(GILDED)
-                ? state.get(FOSSIL_HEAD)
-                ? SHAPE_UPPER_F
-                : SHAPE_LOWER_G
-                : SHAPE_LOWER)
-                : SHAPE_UPPER;
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return CODEC;
+    }
+
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext ctx) {
+        if (state.get(HALF) == DoubleBlockHalf.UPPER) {
+            return state.get(FOSSIL_HEAD) ? SHAPE_UPPER_F : SHAPE_UPPER;
+        } else {
+            return state.get(GILDED) ? SHAPE_LOWER_G : SHAPE_LOWER;
+        }
     }
 
     @Override
@@ -119,11 +116,13 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
         super.onBlockAdded(state, world, pos, oldState, notify);
         if (!world.isClient) {
             Block down = world.getBlockState(pos.down()).getBlock();
-            if (down == ModBlocks.GILDED_PLATE && !state.get(DragonPedestal.GILDED)) {
-                world.removeBlock(pos, false);
-                world.setBlockState(pos.down(), state.with(HALF, DoubleBlockHalf.LOWER)
-                        .with(GILDED, true), 3);
-                world.setBlockState(pos, state.with(HALF, DoubleBlockHalf.UPPER));
+            if (down == ModBlocks.GILDED_PLATE && !state.get(GILDED)) {
+                BlockState lower = state.with(HALF, DoubleBlockHalf.LOWER).with(GILDED, true);
+                BlockState upper = lower.with(HALF, DoubleBlockHalf.UPPER);
+
+                world.removeBlock(pos, false); // removing current (lower) placeholder
+                world.setBlockState(pos.down(), lower, Block.NOTIFY_ALL);
+                world.setBlockState(pos, upper, Block.NOTIFY_ALL);
             }
         }
 
@@ -131,12 +130,14 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
 
     @Override
     public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
-
         if (state.get(HALF) == DoubleBlockHalf.UPPER) {
             super.onPlaced(world, pos, state, placer, itemStack);
             return;
         }
-        world.setBlockState(pos.up(), state.with(HALF, DoubleBlockHalf.UPPER));
+        // Mirror all props into the top half at place time
+        BlockState top = state.with(HALF, DoubleBlockHalf.UPPER);
+        world.setBlockState(pos.up(), top, Block.NOTIFY_ALL);
+        super.onPlaced(world, pos, state, placer, itemStack);
     }
 
     @Nullable
@@ -152,20 +153,6 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
         } else {
             return null;
         }
-    }
-
-    public BlockPattern getRitualPattern() {
-        if(this.ritualPattern == null){
-            this.ritualPattern = BlockPatternBuilder.start()
-                    .aisle(" LD","P~N")
-                    .where('N', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.NENDER_BRICK)))
-                    .where('P', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.DRAGON_PEDESTAL)))
-                    .where('~', pos -> pos.getBlockState().isAir())
-                    .where('L', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.ETHER_LEVER)))
-                    .where('D', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(Blocks.DIRT)))
-                    .build();
-        }
-        return this.ritualPattern;
     }
 
     @Override
@@ -198,8 +185,6 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
     @Override
     protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world,
                                              BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        // if you also want empty-hand behavior, override onUseWithoutItem as well
-        final var correctPattern = this.getRitualPattern().searchAround(world, pos);
 
         // Switch on the full registry id, e.g. "ancientartifacts:orb_infinium", "minecraft:heart_of_the_sea"
         final String id = net.minecraft.registry.Registries.ITEM.getId(stack.getItem()).toString();
@@ -237,23 +222,72 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
             }
 
             case "ancientartifacts:dragon_fossil" -> {
-                if (!state.get(DragonPedestal.FOSSIL_HEAD)
-                        && state.get(DragonPedestal.GILDED)
-                        && !state.get(DragonPedestal.HEART_SEA)
-                        && correctPattern != null) {
-                    world.setBlockState(pos.up(), state.with(FOSSIL_HEAD, true).with(HALF, DoubleBlockHalf.UPPER));
-                    world.playSound(null, pos, SoundEvents.BLOCK_BONE_BLOCK_PLACE, SoundCategory.BLOCKS, 0.8f, 0.3f);
-                    if (!player.isCreative()) stack.decrement(1);
-                }
-                return ItemActionResult.CONSUME;
-            }
+                BlockPos basePos = state.get(HALF) == DoubleBlockHalf.UPPER ? pos.down() : pos;
 
+                if (!state.get(FOSSIL_HEAD)            // current clicked half says no head
+                        && world.getBlockState(basePos).get(GILDED)  // the actual base is gilded
+                        && !world.getBlockState(basePos).get(HEART_SEA)
+                        && hasNearbyRitual(world, basePos)) {
+
+                    BlockState base = world.getBlockState(basePos)
+                            .with(HALF, DoubleBlockHalf.LOWER);
+
+                    BlockPos topPos = basePos.up();
+                    BlockState top = world.getBlockState(topPos);
+
+                    // Ensure upper half exists and mirrors base props
+                    if (!top.isOf(ModBlocks.DRAGON_PEDESTAL) || top.get(HALF) != DoubleBlockHalf.UPPER) {
+                        world.setBlockState(topPos, base.with(HALF, DoubleBlockHalf.UPPER), Block.NOTIFY_ALL);
+                    }
+
+                    // Now toggle the visible flag on the UPPER half
+                    BlockState newTop = world.getBlockState(topPos)
+                            .with(FOSSIL_HEAD, true); // add other props if your model cares
+
+                    world.setBlockState(topPos, newTop, Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD);
+                    world.updateListeners(topPos, top, newTop, Block.NOTIFY_ALL);
+
+                    world.playSound(null, basePos, SoundEvents.BLOCK_BONE_BLOCK_PLACE, SoundCategory.BLOCKS, 0.8f, 0.3f);
+                    if (!player.isCreative()) stack.decrement(1);
+                    return ItemActionResult.CONSUME;
+                }
+                return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            }
             default -> {
 
                 return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
             }
         }
     }
+
+    private static boolean hasNearbyRitual(World world, BlockPos basePos) {
+        final int r = 2;
+        // scan one block below to one block above, and 2 blocks out in X/Z
+        BlockPos min = basePos.add(-r, -1, -r);
+        BlockPos max = basePos.add( r,  1,  r);
+
+        boolean hasDirt  = false;
+        boolean hasBrick = false;
+        boolean hasLever = false;
+
+        for (BlockPos p : BlockPos.iterate(min, max)) {
+            BlockState s = world.getBlockState(p);
+
+            if (!hasDirt && (s.isOf(Blocks.DIRT) /* or a tag: || s.isIn(BlockTags.DIRT) */)) {
+                hasDirt = true;
+            }
+            if (!hasBrick && s.isOf(ModBlocks.NENDER_BRICK)) {
+                hasBrick = true;
+            }
+            if (!hasLever && s.isOf(ModBlocks.ETHER_LEVER)) {
+                hasLever = true;
+            }
+
+            if (hasDirt && hasBrick && hasLever) return true;
+        }
+        return false;
+    }
+
 
 
     @Nullable

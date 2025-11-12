@@ -40,8 +40,8 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
     public static final DirectionProperty FACING;
 
     private static final VoxelShape SHAPE;
-    @Nullable
-    private BlockPattern elderianMonumentPatter;
+    private BlockPattern elderianMonumentPatternOC; // O ^ C
+    private BlockPattern elderianMonumentPatternCO; // C ^ O
 
     public static final BooleanProperty KEY = BooleanProperty.of("key");
     public static final BooleanProperty PENDANT = BooleanProperty.of("pendant");
@@ -112,7 +112,7 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
     protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world,
                                              BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         // Gate on the full monument pattern like before
-        BlockPattern.Result result = this.getMonumentPattern().searchAround(world, pos);
+        BlockPattern.Result result = findMonument(world, pos);
         if (result == null) {
             if (!world.isClient) {
                 player.sendMessage(Text.literal("Full Monument needs to be built first"));
@@ -255,19 +255,48 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
         return state.rotate(mirror.getRotation(state.get(FACING)));
     }
 
-    public BlockPattern getMonumentPattern() {
-        if(this.elderianMonumentPatter == null){
-            this.elderianMonumentPatter = BlockPatternBuilder.start()
-                    .aisle("OIC", "NDN", "~N~")
+    private BlockPattern getMonumentPatternOC() {
+        if (this.elderianMonumentPatternOC == null) {
+            this.elderianMonumentPatternOC = BlockPatternBuilder.start()
+                    // y = 0 (top layer): O ^ C  (idol at center ^)
+                    .aisle("O^C",
+                            "NDN",
+                            "~N~")
                     .where('O', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.TOTEM_OF_ORDER)))
-                    .where('I', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.CHACHAPOYAN_IDOL)))
                     .where('C', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.TOTEM_OF_CHAOS)))
+                    .where('^', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.CHACHAPOYAN_IDOL)))
                     .where('N', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.NENDER_BRICK)))
                     .where('D', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(Blocks.DIRT)))
                     .where('~', pos -> pos.getBlockState().isAir())
                     .build();
         }
-        return this.elderianMonumentPatter;
+        return this.elderianMonumentPatternOC;
+    }
+
+    private BlockPattern getMonumentPatternCO() {
+        if (this.elderianMonumentPatternCO == null) {
+            this.elderianMonumentPatternCO = BlockPatternBuilder.start()
+                    .aisle("C^O",
+                            "NDN",
+                            "~N~")
+                    .where('O', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.TOTEM_OF_ORDER)))
+                    .where('C', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.TOTEM_OF_CHAOS)))
+                    .where('^', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.CHACHAPOYAN_IDOL)))
+                    .where('N', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.NENDER_BRICK)))
+                    .where('D', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(Blocks.DIRT)))
+                    .where('~', pos -> pos.getBlockState().isAir())
+                    .build();
+        }
+        return this.elderianMonumentPatternCO;
+    }
+
+    @Nullable
+    private BlockPattern.Result findMonument(World world, BlockPos pos) {
+        BlockPattern.Result res = this.getMonumentPatternOC().searchAround(world, pos);
+        if (res == null) {
+            res = this.getMonumentPatternCO().searchAround(world, pos);
+        }
+        return res;
     }
 
     @Override

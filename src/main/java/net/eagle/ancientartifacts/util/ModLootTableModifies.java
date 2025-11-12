@@ -154,7 +154,7 @@ public final class ModLootTableModifies {
                 case "minecraft:chests/village/village_armorer" -> {
                     LootPool.Builder pool = LootPool.builder()
                             .rolls(ConstantLootNumberProvider.create(1))
-                            .conditionally(RandomChanceLootCondition.builder(0.30f))
+                            .conditionally(RandomChanceLootCondition.builder(0.80f))
                             .with(ItemEntry.builder(ModBlocks.TOTEM_OF_ORDER))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)));
                     tableBuilder.pool(pool);
@@ -166,7 +166,7 @@ public final class ModLootTableModifies {
                      "minecraft:chests/village/village_taiga_house" -> {
                     LootPool.Builder pool = LootPool.builder()
                             .rolls(ConstantLootNumberProvider.create(1))
-                            .conditionally(RandomChanceLootCondition.builder(0.35f))
+                            .conditionally(RandomChanceLootCondition.builder(0.75f))
                             .with(ItemEntry.builder(ModBlocks.TOTEM_OF_ORDER))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)));
                     tableBuilder.pool(pool);
@@ -174,7 +174,7 @@ public final class ModLootTableModifies {
                 case "minecraft:chests/village/village_mason" -> {
                     LootPool.Builder pool = LootPool.builder()
                             .rolls(ConstantLootNumberProvider.create(1))
-                            .conditionally(RandomChanceLootCondition.builder(0.30f))
+                            .conditionally(RandomChanceLootCondition.builder(0.60f))
                             .with(ItemEntry.builder(ModBlocks.TOTEM_OF_ORDER))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)));
                     tableBuilder.pool(pool);
@@ -182,7 +182,7 @@ public final class ModLootTableModifies {
                 case "minecraft:chests/village/village_temple" -> {
                     LootPool.Builder pool = LootPool.builder()
                             .rolls(ConstantLootNumberProvider.create(1))
-                            .conditionally(RandomChanceLootCondition.builder(0.50f))
+                            .conditionally(RandomChanceLootCondition.builder(1.00f))
                             .with(ItemEntry.builder(ModBlocks.TOTEM_OF_ORDER))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)));
                     tableBuilder.pool(pool);
@@ -191,7 +191,7 @@ public final class ModLootTableModifies {
                      "minecraft:chests/village/village_weaponsmith" -> {
                     LootPool.Builder pool = LootPool.builder()
                             .rolls(ConstantLootNumberProvider.create(1))
-                            .conditionally(RandomChanceLootCondition.builder(0.20f))
+                            .conditionally(RandomChanceLootCondition.builder(0.50f))
                             .with(ItemEntry.builder(ModBlocks.TOTEM_OF_ORDER))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)));
                     tableBuilder.pool(pool);
