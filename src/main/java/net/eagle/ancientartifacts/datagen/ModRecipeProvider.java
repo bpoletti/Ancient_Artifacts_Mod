@@ -84,6 +84,16 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
         offerFireflyOrbPermutations(exporter); // for firefly orbs
 
+        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, ModBlocks.NENDER_BRICK , 1)
+                .pattern("NW ")
+                .pattern("WN ")
+                .pattern("   ")
+                .input('W', Items.WARPED_FUNGUS)
+                .input('N', Items.NETHER_BRICK)
+                .criterion(hasItem(Items.WARPED_FUNGUS), conditionsFromItem(Items.WARPED_FUNGUS))
+                .criterion(hasItem(Items.WARPED_FUNGUS), conditionsFromItem(Items.WARPED_FUNGUS))
+                .offerTo(exporter, Identifier.of(AncientArtifacts.MOD_ID, "nender_bricks_craftable"));
+
     }
 
     private void smelt(RecipeExporter exporter, ItemConvertible input, ItemConvertible output) {

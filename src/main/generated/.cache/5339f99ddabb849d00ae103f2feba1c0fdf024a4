@@ -1,5 +1,6 @@
-// 1.21.1	2025-11-12T16:30:31.7536882	Ancient Artifacts Mod/Recipes
+// 1.21.1	2025-12-23T14:05:02.8429655	Ancient Artifacts Mod/Recipes
 60ed2cdd97580d7cf96189f193d2f4408d855cdb data\ancientartifacts\advancement\recipes\combat\end_staff_right.json
+f31f4717557474b0c7a965d2129efee7a65fac88 data\ancientartifacts\advancement\recipes\decorations\nender_bricks_craftable.json
 c8818387c6a3dcc12cb73962f3a7accf57610f08 data\ancientartifacts\advancement\recipes\combat\end_staff_left.json
 3b1a3a064b712473be3beb2de7e3acd53bdc26ab data\ancientartifacts\recipe\firefly_orb_102.json
 f216cecc08e95bc01a6f78cb49f5b6c47545b158 data\ancientartifacts\advancement\recipes\redstone\ether_lever.json
@@ -20,6 +21,7 @@ caeae08e251fb7850a5b020e9799d6a84d3dfc39 data\ancientartifacts\advancement\recip
 535998cea6986a3de6727d3edbd391e35c030a6c data\ancientartifacts\recipe\copper_wire_from_copper_and_lightning_rod.json
 983a7f6a94c8b9886e1ca10ee0e098a3358c1ae8 data\ancientartifacts\advancement\recipes\misc\verdant_firefly_bud_from_smelting_verdant_froglight.json
 b89874033eb42f18970bf6a5f226ccd8f6f99b18 data\ancientartifacts\advancement\recipes\brewing\firefly_orb_120.json
+47c40f0e7ccb638173e7335216596471ca012a40 data\ancientartifacts\recipe\nender_bricks_craftable.json
 cda7d3dabbd648ad88e6c8df231a660bf284c226 data\ancientartifacts\recipe\firefly_orb_210.json
 2c502c08b6abfdb22bd2a8f04fb8f527f876d564 data\ancientartifacts\advancement\recipes\brewing\firefly_orb_012.json
 30947c68ee9f60684931f8abaa13d8e5fc732808 data\ancientartifacts\recipe\end_staff_right.json
