@@ -15,7 +15,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
-        getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
+        valueLookupBuilder(BlockTags.PICKAXE_MINEABLE)
                 .add(ModBlocks.CHACHAPOYAN_IDOL)
                 .add(ModBlocks.COPPER_WIRE)
                 .add(ModBlocks.DRAGON_PEDESTAL)
@@ -25,7 +25,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.TOTEM_OF_CHAOS)
                 .add(ModBlocks.TOTEM_OF_ORDER);
 
-        getOrCreateTagBuilder(BlockTags.NEEDS_STONE_TOOL)
+        valueLookupBuilder(BlockTags.NEEDS_STONE_TOOL)
                 .add(ModBlocks.NENDER_BRICK)
                 .add(ModBlocks.ETHER_LEVER)
                 .add(ModBlocks.COPPER_WIRE)
@@ -33,7 +33,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.TOTEM_OF_ORDER)
                 .add(ModBlocks.TOTEM_OF_CHAOS);
 
-        getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL)
+        valueLookupBuilder(BlockTags.NEEDS_IRON_TOOL)
                 .add(ModBlocks.CHACHAPOYAN_IDOL)
                 .add(ModBlocks.DRAGON_PEDESTAL);
     }
