@@ -1,6 +1,16 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
+    "has_nether_brick": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:nether_brick"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_the_recipe": {
       "conditions": {
         "recipe": "ancientartifacts:nender_bricks_craftable"
@@ -21,7 +31,8 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_warped_fungus"
+      "has_warped_fungus",
+      "has_nether_brick"
     ]
   ],
   "rewards": {

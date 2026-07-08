@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "N": {
-      "item": "minecraft:nether_brick"
-    },
-    "W": {
-      "item": "minecraft:warped_fungus"
-    }
+    "N": "minecraft:nether_brick",
+    "W": "minecraft:warped_fungus"
   },
   "pattern": [
     "NW ",

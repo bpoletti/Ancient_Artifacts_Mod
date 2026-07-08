@@ -14,12 +14,12 @@ import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldEvents;
+import net.minecraft.world.*;
+import net.minecraft.world.block.WireOrientation;
+import net.minecraft.world.tick.ScheduledTickView;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
@@ -27,7 +27,7 @@ import java.util.Map;
 public class CopperWire extends Block implements Waterloggable{
 
     public static final BooleanProperty WATERLOGGED;
-    public static final DirectionProperty FACING;
+    public static final EnumProperty<Direction> FACING = Properties.FACING;
     public static final BooleanProperty WIRE_CONNECTION_NORTH = Properties.NORTH;
     public static final BooleanProperty WIRE_CONNECTION_SOUTH = Properties.SOUTH;
     public static final BooleanProperty WIRE_CONNECTION_EAST = Properties.EAST;
@@ -37,7 +37,6 @@ public class CopperWire extends Block implements Waterloggable{
     public static final BooleanProperty IS_ROOT;
     public static final BooleanProperty IS_POWERED;
     public static final IntProperty POWER = IntProperty.of("power", 0, 15);
-    // protected static final VoxelShape ROD_CENTER_SHAPE;
     protected static final VoxelShape ROD_X_SHAPE;
     protected static final VoxelShape ROD_Y_SHAPE;
     protected static final VoxelShape ROD_Z_SHAPE;
@@ -162,7 +161,7 @@ public class CopperWire extends Block implements Waterloggable{
 
         // Call update for CopperWire and non-CopperWire neighbors
         for (Direction direction : Direction.values()) {
-            world.updateNeighborsAlways(pos.offset(direction), this);
+            world.updateNeighborsAlways(pos.offset(direction), this, null);
         }
 
         this.updateOffsetNeighbors(world, pos);
@@ -183,14 +182,29 @@ public class CopperWire extends Block implements Waterloggable{
         }
     }
     private void updateNeighbors(World world, BlockPos pos) {
-        world.updateNeighborsAlways(pos, this);
+        world.updateNeighborsAlways(pos, this, null);
         for (Direction direction : Direction.values()) {
-            world.updateNeighborsAlways(pos.offset(direction), this);
+            world.updateNeighborsAlways(pos.offset(direction), this, null);
         }
     }
+
     @Override
-    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
-        super.neighborUpdate(state, world, pos, block, fromPos, notify);
+    protected void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, @Nullable WireOrientation wireOrientation, boolean notify) {
+        super.neighborUpdate(state, world, pos, sourceBlock, wireOrientation, notify);
+
+        // Shim to reconstruct 'fromPos' since Mojang removed it.
+        // This allows the rest of your original logic to run entirely unmodified.
+        BlockPos fromPos = null;
+        for (Direction dir : Direction.values()) {
+            BlockPos offsetPos = pos.offset(dir);
+            if (world.getBlockState(offsetPos).getBlock() == sourceBlock) {
+                fromPos = offsetPos;
+                break;
+            }
+        }
+
+        // If we can't find the adjacent block that triggered it, abort to prevent null crashes
+        if (fromPos == null) return;
 
         int netPower = 0;
         BlockState copperPowerState = world.getBlockState(fromPos);
@@ -225,7 +239,7 @@ public class CopperWire extends Block implements Waterloggable{
                 for (Direction direction : Direction.values()) {
                     BlockPos neighborPos = pos.offset(direction);
                     BlockState neighborState = world.getBlockState(neighborPos);
-                    if(neighborState.getBlock() instanceof  CopperWire){
+                    if(neighborState.getBlock() instanceof CopperWire){
                         int powerRecieved = world.getEmittedRedstonePower(pos.offset(direction), direction);
                         strongestPower = Math.max(strongestPower, powerRecieved);
                     }
@@ -254,7 +268,7 @@ public class CopperWire extends Block implements Waterloggable{
             if (!hasCopperBlockNeighbor) {
                 state = state.with(POWER, 0).with(IS_POWERED, false).with(IS_ROOT, false);
             }
-        }else {
+        } else {
             boolean hasCopperWireNeighbors = false;
             for (Direction direction : Direction.values()) {
                 BlockPos neighborPos = pos.offset(direction);
@@ -293,12 +307,13 @@ public class CopperWire extends Block implements Waterloggable{
         }
         return pos;
     }
+
     @Override
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-        if (state.get(WATERLOGGED).booleanValue()) {
-            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+    protected BlockState getStateForNeighborUpdate(BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random) {
+        if (state.get(WATERLOGGED)) {
+            tickView.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
-        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+        return super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random);
     }
     @Override
     public BlockState rotate(BlockState state, BlockRotation rotation) {
@@ -308,24 +323,6 @@ public class CopperWire extends Block implements Waterloggable{
     @Override
     public BlockState mirror(BlockState state, BlockMirror mirror) {
         return state.rotate(mirror.getRotation(state.get(FACING)));
-    }
-    @Override
-    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-        if (moved || state.isOf(newState.getBlock())) {
-            return;
-        }
-        super.onStateReplaced(state, world, pos, newState, moved);
-        if (world.isClient) {
-            return;
-        }
-
-        // Update neighboring blocks when a CopperWire block is replaced
-        for (Direction direction : Direction.values()) {
-            world.updateNeighborsAlways(pos.offset(direction), this);
-        }
-
-        this.updateNeighbors(world, pos);
-        this.updateOffsetNeighbors(world, pos);
     }
 
     @Override
@@ -360,7 +357,6 @@ public class CopperWire extends Block implements Waterloggable{
 
     static {
         WATERLOGGED = Properties.WATERLOGGED;
-        FACING = Properties.FACING;
         IS_ROOT = BooleanProperty.of("is_root");
         IS_POWERED = BooleanProperty.of("is_powered");
         VoxelShape vx1 = Block.createCuboidShape(0,6.3,6.3,2.5,9.7,9.7);
@@ -380,8 +376,6 @@ public class CopperWire extends Block implements Waterloggable{
         VoxelShape vz3 = Block.createCuboidShape(6.3,6.3,13.5,9.7,9.7,16);
 
         ROD_Z_SHAPE = VoxelShapes.union(vz1, vz2, vz3).simplify();
-
-        //ROD_CENTER_SHAPE = Block.createCuboidShape(7,7,7,9,9,9);
 
         DIRECTION_TO_SIDE_SHAPE = Maps.newEnumMap(ImmutableMap.of(Direction.NORTH, ROD_Z_SHAPE, Direction.SOUTH, ROD_Z_SHAPE, Direction.EAST, ROD_X_SHAPE, Direction.WEST, ROD_X_SHAPE, Direction.UP, ROD_Y_SHAPE, Direction.DOWN, ROD_Y_SHAPE));
 

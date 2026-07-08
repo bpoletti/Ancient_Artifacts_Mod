@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "B": {
-      "item": "minecraft:blaze_rod"
-    },
-    "E": {
-      "item": "minecraft:echo_shard"
-    },
-    "W": {
-      "item": "minecraft:wither_skeleton_skull"
-    }
+    "B": "minecraft:blaze_rod",
+    "E": "minecraft:echo_shard",
+    "W": "minecraft:wither_skeleton_skull"
   },
   "pattern": [
     " W ",

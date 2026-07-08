@@ -10,38 +10,38 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.enums.DoubleBlockHalf;
-import net.minecraft.block.pattern.BlockPattern;
-import net.minecraft.block.pattern.BlockPatternBuilder;
-import net.minecraft.block.pattern.CachedBlockPosition;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.predicate.block.BlockStatePredicate;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ItemActionResult;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
+import net.minecraft.world.tick.ScheduledTickView;
 import org.jetbrains.annotations.Nullable;
 
+import static net.minecraft.state.property.Properties.WATERLOGGED;
 
-@SuppressWarnings("deprecation")
+
 public class DragonPedestal extends BlockWithEntity implements BlockEntityProvider {
 
     public static final BooleanProperty GILDED = BooleanProperty.of("gilded");
@@ -50,7 +50,7 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
     public static final BooleanProperty ORB_INFINIUM = BooleanProperty.of("orb_of_infinium");
 
     public static final BooleanProperty END_READY = BooleanProperty.of("end_ready");
-    public final static DirectionProperty FACING = HorizontalFacingBlock.FACING;
+    public static final EnumProperty<Direction> FACING = Properties.HOPPER_FACING;
     public static final EnumProperty<DoubleBlockHalf> HALF = Properties.DOUBLE_BLOCK_HALF;
     protected static final VoxelShape SHAPE_UPPER;
     protected static final VoxelShape SHAPE_UPPER_F;
@@ -87,7 +87,8 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
                 .with(FOSSIL_HEAD, false)
                 .with(HEART_SEA, false)
                 .with(ORB_INFINIUM, false)
-                .with(END_READY, false));
+                .with(END_READY, false)
+                .with(WATERLOGGED, false));
     }
 
     public static final MapCodec<DragonPedestal> CODEC = createCodec(DragonPedestal::new);
@@ -106,8 +107,11 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
     }
 
     @Override
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+    protected BlockState getStateForNeighborUpdate(BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random) {
+        if (state.get(WATERLOGGED)) {
+            tickView.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+        }
+        return super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random);
     }
 
     @Override
@@ -146,10 +150,13 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
         BlockPos blockPos = ctx.getBlockPos();
         var world = ctx.getWorld();
 
-        if (blockPos.getY() < world.getTopY() - 1 && world.getBlockState(blockPos.up()).canReplace(ctx)) {
+        if (blockPos.getY() < world.getTopYInclusive() && world.getBlockState(blockPos.up()).canReplace(ctx)) {
+            FluidState fluidState = world.getFluidState(blockPos);
+            boolean isWaterlogged = fluidState.getFluid() == Fluids.WATER;
             return this.getDefaultState()
                     .with(FACING, ctx.getHorizontalPlayerFacing().getOpposite())
-                    .with(HALF, DoubleBlockHalf.LOWER);
+                    .with(HALF, DoubleBlockHalf.LOWER)
+                    .with(WATERLOGGED, isWaterlogged);
         } else {
             return null;
         }
@@ -163,7 +170,8 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
                 FOSSIL_HEAD,
                 HEART_SEA,
                 ORB_INFINIUM,
-                END_READY);
+                END_READY,
+                WATERLOGGED);
     }
 
     @Override
@@ -172,18 +180,7 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
     }
 
     @Override
-    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-        if (state.getBlock() != newState.getBlock()) {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof DragonPedestalEntity) {
-                world.updateComparators(pos, this);
-            }
-            super.onStateReplaced(state, world, pos, newState, moved);
-        }
-    }
-
-    @Override
-    protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world,
+    protected ActionResult onUseWithItem(ItemStack stack, BlockState state, World world,
                                              BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
 
         // Switch on the full registry id, e.g. "ancientartifacts:orb_infinium", "minecraft:heart_of_the_sea"
@@ -196,11 +193,11 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
                     world.playSound(null, pos, SoundEvents.ENTITY_ENDER_DRAGON_GROWL, SoundCategory.HOSTILE, 0.2f, 0.9f);
                     world.playSound(null, pos, SoundEvents.ENTITY_PLAYER_LEVELUP,   SoundCategory.NEUTRAL, 0.2f, 1.0f);
                     if (!player.isCreative()) {
-                        player.sendMessage(Text.literal("End Gateway is now Unlocked!"));
+                        player.sendMessage(Text.literal("End Gateway is now Unlocked!"), false);
                     }
                 }
                 // Do not consume the staff; let default block action run if needed
-                return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+                return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
             }
 
             case "ancientartifacts:orb_infinium" -> {
@@ -209,7 +206,7 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
                     world.playSound(null, pos, SoundEvents.BLOCK_BEACON_ACTIVATE, SoundCategory.AMBIENT, 1.0f, 0.6f);
                     if (!player.isCreative()) stack.decrement(1);
                 }
-                return ItemActionResult.CONSUME;
+                return ActionResult.CONSUME;
             }
 
             case "minecraft:heart_of_the_sea" -> {
@@ -218,7 +215,7 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
                     world.playSound(null, pos, SoundEvents.BLOCK_CONDUIT_ACTIVATE, SoundCategory.BLOCKS, 1.0f, 0.4f);
                     if (!player.isCreative()) stack.decrement(1);
                 }
-                return ItemActionResult.CONSUME;
+                return ActionResult.CONSUME;
             }
 
             case "ancientartifacts:dragon_fossil" -> {
@@ -249,13 +246,13 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
 
                     world.playSound(null, basePos, SoundEvents.BLOCK_BONE_BLOCK_PLACE, SoundCategory.BLOCKS, 0.8f, 0.3f);
                     if (!player.isCreative()) stack.decrement(1);
-                    return ItemActionResult.CONSUME;
+                    return ActionResult.CONSUME;
                 }
-                return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+                return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
             }
             default -> {
 
-                return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+                return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
             }
         }
     }

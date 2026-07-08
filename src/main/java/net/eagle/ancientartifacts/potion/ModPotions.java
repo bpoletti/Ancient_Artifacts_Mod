@@ -23,17 +23,16 @@ public class ModPotions {
         if ("elixir_of_drake".equals(name)) {
             return Registry.register(
                     Registries.POTION, id,
-                    new Potion(new StatusEffectInstance(StatusEffects.LEVITATION, 200, 0))
+                    new Potion(name, new StatusEffectInstance(StatusEffects.LEVITATION, 200, 0))
             );
         } else {
             return Registry.register(
                     Registries.POTION, id,
-                    new Potion(new StatusEffectInstance(StatusEffects.NAUSEA, 100, 0))
+                    new Potion(name, new StatusEffectInstance(StatusEffects.NAUSEA, 100, 0))
             );
         }
     }
 
-    /** Call this during mod init (before you add brewing recipes). */
     public static void registerPotions() {
         ELIXIR_BASE_I   = registerPotion("elixir_base_i");
         ELIXIR_BASE_II  = registerPotion("elixir_base_ii");

@@ -19,7 +19,9 @@ repositories {
 }
 
 fabricApi {
-	configureDataGeneration()
+	configureDataGeneration {
+		client = true
+	}
 }
 
 dependencies {
@@ -64,7 +66,11 @@ jar {
 		rename { "${it}_${project.archivesBaseName}"}
 	}
 }
-
+tasks.withType(ProcessResources).configureEach {
+	// If Gradle finds duplicate files, it will exclude the generated one
+	// and prioritize any custom file you manually wrote in src/main/resources
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
 // configure the maven publication
 publishing {
 	publications {

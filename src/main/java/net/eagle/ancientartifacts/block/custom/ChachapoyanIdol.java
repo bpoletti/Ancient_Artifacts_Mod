@@ -20,7 +20,8 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.state.property.EnumProperty;
+import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
 import net.minecraft.util.*;
 import net.minecraft.util.hit.BlockHitResult;
@@ -37,7 +38,7 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
 
     public static final MapCodec<ChachapoyanIdol> CODEC = createCodec(ChachapoyanIdol::new);
 
-    public static final DirectionProperty FACING;
+    public static final EnumProperty<Direction> FACING = Properties.HOPPER_FACING;
 
     private static final VoxelShape SHAPE;
     private BlockPattern elderianMonumentPatternOC; // O ^ C
@@ -89,9 +90,8 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
             int radius = 16;
             boolean creeperExploded = false;
             for (CreeperEntity entity : world.getEntitiesByClass(CreeperEntity.class, new Box(pos).expand(radius), e -> e instanceof CreeperEntity)) {
-                CreeperEntity creeper = entity;
-                creeper.ignite();
-                creeper.setFuseSpeed(5);
+                entity.ignite();
+                entity.setFuseSpeed(5);
                 creeperExploded = true;
             }
             if (creeperExploded) {
@@ -109,15 +109,15 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
 
 
     @Override
-    protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world,
+    protected ActionResult onUseWithItem(ItemStack stack, BlockState state, World world,
                                              BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         // Gate on the full monument pattern like before
         BlockPattern.Result result = findMonument(world, pos);
         if (result == null) {
             if (!world.isClient) {
-                player.sendMessage(Text.literal("Full Monument needs to be built first"));
+                player.sendMessage(Text.literal("Full Monument needs to be built first"), false);
             }
-            return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
         }
 
         // We'll switch on the item id; potions get a special case
@@ -157,11 +157,11 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
                                 SoundEvents.ENTITY_PLAYER_LEVELUP,
                                 SoundCategory.NEUTRAL, 0.7f, 1.0f
                         );
-                        return ItemActionResult.CONSUME;
+                        return ActionResult.CONSUME;
                     }
                 }
                 // Not our specific potion → let default logic continue
-                return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+                return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
             }
 
             // --- ELDER_GUARDIAN_SCALES ---
@@ -177,9 +177,9 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
                             SoundEvents.BLOCK_FLOWERING_AZALEA_PLACE,
                             SoundCategory.NEUTRAL, 0.7f, 0.2f
                     );
-                    return ItemActionResult.CONSUME;
+                    return ActionResult.CONSUME;
                 }
-                return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+                return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
             }
 
             // --- ANKH_PENDANT ---
@@ -195,9 +195,9 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
                             SoundEvents.BLOCK_AMETHYST_BLOCK_PLACE,
                             SoundCategory.NEUTRAL, 0.8f, 0.3f
                     );
-                    return ItemActionResult.CONSUME;
+                    return ActionResult.CONSUME;
                 }
-                return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+                return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
             }
 
             // --- EVOKER_KEY ---
@@ -210,14 +210,13 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
                             SoundEvents.BLOCK_IRON_DOOR_OPEN,
                             SoundCategory.NEUTRAL, 0.7f, 0.45f
                     );
-                    return ItemActionResult.CONSUME;
+                    return ActionResult.CONSUME;
                 }
-                return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+                return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
             }
 
-            // --- Not handled here ---
             default -> {
-                return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+                return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
             }
         }
     }
@@ -306,8 +305,6 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
     }
 
     static {
-        FACING = HorizontalFacingBlock.FACING;
         SHAPE = Block.createCuboidShape(1, 0, 2, 14, 15.5, 14);
-
     }
 }

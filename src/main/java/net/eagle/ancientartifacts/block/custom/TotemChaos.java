@@ -8,7 +8,8 @@ import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.state.property.EnumProperty;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
@@ -20,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class TotemChaos extends HorizontalFacingBlock {
 
-    public static final DirectionProperty FACING;
+    public static final EnumProperty<Direction> FACING = Properties.HOPPER_FACING;
     public TotemChaos(Settings settings) {
         super(settings);
         setDefaultState(getStateManager().getDefaultState()
@@ -62,7 +63,6 @@ public class TotemChaos extends HorizontalFacingBlock {
     }
 
     static {
-        FACING = HorizontalFacingBlock.FACING;
         VoxelShape vs1 = Block.createCuboidShape(6,0,6,10,4,10);
         VoxelShape vs2 = Block.createCuboidShape(4,4,4,12,9,12);
         VoxelShape vs3 = Block.createCuboidShape(5,9,5,11,13,11);

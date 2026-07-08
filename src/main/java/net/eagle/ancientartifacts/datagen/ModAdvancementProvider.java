@@ -11,12 +11,14 @@ import net.minecraft.advancement.AdvancementFrame;
 import net.minecraft.advancement.AdvancementRewards;
 import net.minecraft.advancement.criterion.InventoryChangedCriterion;
 import net.minecraft.advancement.criterion.ItemCriterion;
+import net.minecraft.component.ComponentMap;
 import net.minecraft.component.type.PotionContentsComponent;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.potion.Potion;
 import net.minecraft.predicate.BlockPredicate;
-import net.minecraft.predicate.ComponentPredicate;
+import net.minecraft.predicate.component.ComponentMapPredicate;
+import net.minecraft.predicate.component.ComponentsPredicate;
 import net.minecraft.predicate.entity.LocationPredicate;
 import net.minecraft.predicate.item.ItemPredicate;
 import net.minecraft.registry.*;
@@ -26,6 +28,8 @@ import net.minecraft.util.Identifier;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 import net.minecraft.component.DataComponentTypes;
+import net.minecraft.item.Item;
+import net.minecraft.block.Block;
 
 public class ModAdvancementProvider extends FabricAdvancementProvider {
 
@@ -35,20 +39,23 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
 
     @Override
     public void generateAdvancement(RegistryWrapper.WrapperLookup wrapperLookup, Consumer<AdvancementEntry> consumer) {
+
+        RegistryEntryLookup<Item> itemLookup = wrapperLookup.getOrThrow(RegistryKeys.ITEM);
+        RegistryEntryLookup<Block> blockLookup = wrapperLookup.getOrThrow(RegistryKeys.BLOCK);
+
         AdvancementEntry root = Advancement.Builder.create()
                 .display(
-                        ModBlocks.CHACHAPOYAN_IDOL.asItem(),              // icon must be an item
+                        ModBlocks.CHACHAPOYAN_IDOL.asItem(),
                         Text.literal("Not Today Dr. Jones!"),
                         Text.literal("Found the Chachapoyan Idol"),
                         Identifier.of("ancientartifacts", "textures/block/nender_brick.png"),
                         AdvancementFrame.TASK,
-                        true,   // show toast
-                        true,   // announce to chat
-                        false   // hidden
+                        true,
+                        true,
+                        false
                 )
                 .criterion("golden_head",
                         InventoryChangedCriterion.Conditions.items(ModBlocks.CHACHAPOYAN_IDOL.asItem()))
-                // hand the built advancement to the sink:
                 .build(consumer, "ancientartifacts/root");
 
         AdvancementEntry key_to_everything = Advancement.Builder.create()
@@ -59,9 +66,9 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                         Text.literal("Found the Evoker's Key"),
                         null,
                         AdvancementFrame.TASK,
-                        true,                  // show_toast
-                        true,                  // announce_to_chat
-                        false                  // hidden
+                        true,
+                        true,
+                        false
                 )
                 .criterion("key_nabbed",
                         InventoryChangedCriterion.Conditions.items(ModItems.EVOKER_KEY))
@@ -75,9 +82,9 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                         Text.literal("Crafted the Firefly Orb"),
                         null,
                         AdvancementFrame.TASK,
-                        true,                  // show_toast
-                        true,                  // announce_to_chat
-                        false                  // hidden
+                        true,
+                        true,
+                        false
                 )
                 .criterion("star_orb",
                         InventoryChangedCriterion.Conditions.items(ModItems.FIREFLY_ORB))
@@ -86,25 +93,26 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
         RegistryEntry<Potion> drakePotionEntry = Registries.POTION.getEntry(ModPotions.ELIXIR_OF_DRAKE);
 
         PotionContentsComponent potionContents = new PotionContentsComponent(drakePotionEntry);
-
-        // 2. Create the ItemStack using Data Components
         ItemStack customPotionStack = new ItemStack(Items.POTION);
         customPotionStack.set(DataComponentTypes.POTION_CONTENTS, potionContents);
 
-        ComponentPredicate potionPredicate = ComponentPredicate.builder() // Call the static method to get an instance
+        ComponentMapPredicate componentMap = ComponentMapPredicate.builder()
                 .add(DataComponentTypes.POTION_CONTENTS, potionContents)
                 .build();
 
-        ItemPredicate itemPredicate = ItemPredicate.Builder.create()
-                .items(Items.POTION) // Specify the item type
-                .component(potionPredicate) // Add the constructed component predicate
+        ComponentsPredicate potionPredicate = ComponentsPredicate.Builder.create()
+                .exact(componentMap)
                 .build();
 
-        // 2. Build the advancement
+        ItemPredicate itemPredicate = ItemPredicate.Builder.create()
+                .items(itemLookup, Items.POTION)
+                .components(potionPredicate)
+                .build();
+
         AdvancementEntry dragons_potion = Advancement.Builder.create()
                 .parent(ball_of_stars)
                 .display(
-                        customPotionStack.getItem(), // Item for icon
+                        customPotionStack.getItem(),
                         Text.literal("Taste Like Crap!"),
                         Text.literal("Brewed the Elixir of Drake"),
                         null,
@@ -112,9 +120,9 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                         true, true, false
                 )
                 .criterion(
-                "drake_potion",
+                        "drake_potion",
                         InventoryChangedCriterion.Conditions.items(itemPredicate)
-        )
+                )
                 .build(consumer, "ancientartifacts/elixir_of_drake");
 
 
@@ -126,9 +134,9 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                         Text.literal("Crafted the End Staff"),
                         null,
                         AdvancementFrame.TASK,
-                        true,                  // show_toast
-                        true,                  // announce_to_chat
-                        false                  // hidden
+                        true,
+                        true,
+                        false
                 )
                 .criterion("end_staff",
                         InventoryChangedCriterion.Conditions.items(ModItems.END_STAFF))
@@ -142,20 +150,19 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                         Text.literal("The Elderian Monument was activated and the End Gate has opened"),
                         null,
                         AdvancementFrame.GOAL,
-                        true,                  // show_toast
-                        true,                  // announce_to_chat
-                        false                  // hidden
+                        true,
+                        true,
+                        false
                 )
                 .criterion("pedestal_final",
                         ItemCriterion.Conditions.createItemUsedOnBlock(
                                 LocationPredicate.Builder.create()
                                         .block(BlockPredicate.Builder.create()
-                                                .blocks(ModBlocks.DRAGON_PEDESTAL)),
+                                                .blocks(blockLookup, ModBlocks.DRAGON_PEDESTAL)),
                                 ItemPredicate.Builder.create()
-                                        .items(ModItems.END_STAFF)
+                                        .items(itemLookup, ModItems.END_STAFF)
                         )
                 )
-                // +500 xp reward
                 .rewards(AdvancementRewards.Builder.experience(500).build())
                 .build(consumer, "ancientartifacts/monument_opened");
     }

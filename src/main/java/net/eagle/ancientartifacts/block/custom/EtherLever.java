@@ -189,16 +189,6 @@ public class EtherLever extends LeverBlock {
     public int getWeakRedstonePower(BlockState state, BlockView world, BlockPos pos, Direction direction) {
         return super.getWeakRedstonePower(state, world, pos, direction);
     }
-    @Override
-    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-        if (moved || state.isOf(newState.getBlock())) {
-            return;
-        }
-        if (state.get(POWERED)) {
-            this.updateNeighbors(state, world, pos);
-        }
-        super.onStateReplaced(state, world, pos, newState, moved);
-    }
 
     private static void spawnParticles(BlockState state, WorldAccess world, BlockPos pos, float alpha) {
         Direction direction = state.get(FACING).getOpposite();
@@ -206,12 +196,15 @@ public class EtherLever extends LeverBlock {
         double d = (double)pos.getX() + 0.5 + 0.1 * (double)direction.getOffsetX() + 0.2 * (double)direction2.getOffsetX();
         double e = (double)pos.getY() + 0.5 + 0.1 * (double)direction.getOffsetY() + 0.2 * (double)direction2.getOffsetY();
         double f = (double)pos.getZ() + 0.5 + 0.1 * (double)direction.getOffsetZ() + 0.2 * (double)direction2.getOffsetZ();
-        world.addParticle(new DustParticleEffect(BLUE, alpha), d, e, f, 0.0, 0.0, 0.0);
+
+        int blueColor = 0x0000FF;
+
+        world.addParticleClient(new DustParticleEffect(blueColor, alpha), d, e, f, 0.0, 0.0, 0.0);
     }
 
     private void updateNeighbors(BlockState state, World world, BlockPos pos) {
-        world.updateNeighborsAlways(pos, this);
-        world.updateNeighborsAlways(pos.offset(LeverBlock.getDirection(state).getOpposite()), this);
+        world.updateNeighborsAlways(pos, this, null);
+        world.updateNeighborsAlways(pos.offset(LeverBlock.getDirection(state).getOpposite()), this, null);
     }
 
     public BlockState togglePower(BlockState state, World world, BlockPos pos) {

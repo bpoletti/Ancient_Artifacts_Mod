@@ -4,9 +4,7 @@
   "cookingtime": 160,
   "experience": 0.1,
   "group": "firefly_buds",
-  "ingredient": {
-    "item": "minecraft:verdant_froglight"
-  },
+  "ingredient": "minecraft:verdant_froglight",
   "result": {
     "id": "ancientartifacts:verdant_firefly_bud"
   }
