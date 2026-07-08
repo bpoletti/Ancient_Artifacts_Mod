@@ -18,13 +18,11 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.event.GameEvent;
-import org.joml.Vector3f;
 
 import java.util.Objects;
 
 
 
-@SuppressWarnings("deprecation")
 public class EtherLever extends LeverBlock {
 
     public static final BooleanProperty POWERED = Properties.POWERED;
@@ -37,7 +35,6 @@ public class EtherLever extends LeverBlock {
     protected static final VoxelShape CEILING_Z_AXIS_SHAPE;
     protected static final VoxelShape CEILING_X_AXIS_SHAPE;
 
-    public static final Vector3f BLUE = new Vector3f((float)65 / 255, (float)102 / 255, (float)245 / 255);
 
     static {
         NORTH_WALL_SHAPE = Block.createCuboidShape(6.0, 5.0, 4.0, 10.0, 11.0, 16.0);
@@ -91,7 +88,7 @@ public class EtherLever extends LeverBlock {
     @Override
     protected ActionResult onUse(BlockState state, World world, BlockPos pos,
                                  PlayerEntity player, BlockHitResult hit) {
-        if (world.isClient) {
+        if (world.isClient()) {
             BlockState blockState = state.cycle(POWERED);
 
             if (blockState.get(POWERED)) {

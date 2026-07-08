@@ -154,7 +154,7 @@ public class CopperWire extends Block implements Waterloggable{
     }
     @Override
     public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
-        if (oldState.isOf(state.getBlock()) || world.isClient) {
+        if (oldState.isOf(state.getBlock()) || world.isClient()) {
             return;
         }
         this.updateNeighbors(world, pos);
@@ -345,7 +345,7 @@ public class CopperWire extends Block implements Waterloggable{
     }
     @Override
     public FluidState getFluidState(BlockState state) {
-        if (state.get(WATERLOGGED).booleanValue()) {
+        if (state.get(WATERLOGGED)) {
             return Fluids.WATER.getStill(false);
         }
         return super.getFluidState(state);

@@ -54,7 +54,7 @@ public class EndStaff extends Item {
 
         // Calculate the end position of the lightning beam based on the player's look direction and range
         double range = 25.0; // 25 blocks
-        Vec3d playerPos = user.getPos();
+        Vec3d playerPos = user.getEyePos();
         Vec3d lookVec = user.getRotationVec(1.0F);
         Vec3d endPos = playerPos.add(lookVec.multiply(range));
 

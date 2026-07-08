@@ -33,7 +33,6 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-@SuppressWarnings("deprecation")
 public class ChachapoyanIdol extends HorizontalFacingBlock {
 
     public static final MapCodec<ChachapoyanIdol> CODEC = createCodec(ChachapoyanIdol::new);
@@ -86,7 +85,7 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
 
         world.setBlockState(pos, state);
 
-        if (!world.isClient) {
+        if (!world.isClient()) {
             int radius = 16;
             boolean creeperExploded = false;
             for (CreeperEntity entity : world.getEntitiesByClass(CreeperEntity.class, new Box(pos).expand(radius), e -> e instanceof CreeperEntity)) {
@@ -114,7 +113,7 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
         // Gate on the full monument pattern like before
         BlockPattern.Result result = findMonument(world, pos);
         if (result == null) {
-            if (!world.isClient) {
+            if (!world.isClient()) {
                 player.sendMessage(Text.literal("Full Monument needs to be built first"), false);
             }
             return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;

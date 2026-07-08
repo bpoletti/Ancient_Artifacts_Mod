@@ -118,7 +118,7 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
     public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
 
         super.onBlockAdded(state, world, pos, oldState, notify);
-        if (!world.isClient) {
+        if (!world.isClient()) {
             Block down = world.getBlockState(pos.down()).getBlock();
             if (down == ModBlocks.GILDED_PLATE && !state.get(GILDED)) {
                 BlockState lower = state.with(HALF, DoubleBlockHalf.LOWER).with(GILDED, true);
