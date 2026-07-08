@@ -6,12 +6,12 @@
 		"2": "ancientartifacts:block/prong_a",
 		"3": "ancientartifacts:block/prong_b",
 		"4": "ancientartifacts:block/prong_m",
-		"5": "ancientartifacts:item/back_mouth_dark",
-		"6": "ancientartifacts:item/eyes_dark",
-		"7": "ancientartifacts:item/head_bone",
-		"8": "ancientartifacts:item/horns_grey",
-		"9": "ancientartifacts:item/jaws_bone",
-		"10": "ancientartifacts:item/teeth_gray",
+		"5": "ancientartifacts:block/back_mouth_dark",
+		"6": "ancientartifacts:block/eyes_dark",
+		"7": "ancientartifacts:block/head_bone",
+		"8": "ancientartifacts:block/horns_grey",
+		"9": "ancientartifacts:block/jaws_bone",
+		"10": "ancientartifacts:block/teeth_gray",
 		"particle": "ancientartifacts:block/pedestal_head"
 	},
 	"elements": [

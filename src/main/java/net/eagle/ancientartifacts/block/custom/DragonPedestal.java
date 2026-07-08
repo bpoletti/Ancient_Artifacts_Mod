@@ -181,77 +181,89 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
 
     @Override
     protected ActionResult onUseWithItem(ItemStack stack, BlockState state, World world,
-                                             BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+                                         BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
 
-        // Switch on the full registry id, e.g. "ancientartifacts:orb_infinium", "minecraft:heart_of_the_sea"
+        // Switch on the full registry id
         final String id = net.minecraft.registry.Registries.ITEM.getId(stack.getItem()).toString();
+
+        // 1. ALWAYS identify the absolute bottom and top positions, regardless of which half the player clicked!
+        BlockPos botPos = state.get(HALF) == DoubleBlockHalf.UPPER ? pos.down() : pos;
+        BlockPos topPos = botPos.up();
+
+        // 2. Always base logic on the bottom state to ensure both halves stay in perfect sync
+        BlockState botState = world.getBlockState(botPos);
+
+        // Safety check in case the top half is missing or corrupted
+        if (!world.getBlockState(topPos).isOf(this)) {
+            return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+        }
 
         switch (id) {
             case "ancientartifacts:end_staff" -> {
-                if (!state.get(DragonPedestal.END_READY) && state.get(DragonPedestal.ORB_INFINIUM)) {
-                    world.setBlockState(pos, state.with(END_READY, true).with(HALF, DoubleBlockHalf.UPPER));
+                if (!botState.get(END_READY) && botState.get(ORB_INFINIUM)) {
+                    BlockState newBot = botState.with(END_READY, true);
+
+                    world.setBlockState(botPos, newBot, Block.NOTIFY_ALL);
+                    world.setBlockState(topPos, newBot.with(HALF, DoubleBlockHalf.UPPER), Block.NOTIFY_ALL);
+
                     world.playSound(null, pos, SoundEvents.ENTITY_ENDER_DRAGON_GROWL, SoundCategory.HOSTILE, 0.2f, 0.9f);
                     world.playSound(null, pos, SoundEvents.ENTITY_PLAYER_LEVELUP,   SoundCategory.NEUTRAL, 0.2f, 1.0f);
                     if (!player.isCreative()) {
                         player.sendMessage(Text.literal("End Gateway is now Unlocked!"), false);
                     }
+                    return ActionResult.SUCCESS;
                 }
-                // Do not consume the staff; let default block action run if needed
                 return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
             }
 
             case "ancientartifacts:orb_infinium" -> {
-                if (!state.get(DragonPedestal.ORB_INFINIUM) && state.get(DragonPedestal.HEART_SEA)) {
-                    world.setBlockState(pos, state.with(ORB_INFINIUM, true).with(HALF, DoubleBlockHalf.UPPER));
+                if (!botState.get(ORB_INFINIUM) && botState.get(HEART_SEA)) {
+                    BlockState newBot = botState.with(ORB_INFINIUM, true);
+
+                    world.setBlockState(botPos, newBot, Block.NOTIFY_ALL);
+                    world.setBlockState(topPos, newBot.with(HALF, DoubleBlockHalf.UPPER), Block.NOTIFY_ALL);
+
                     world.playSound(null, pos, SoundEvents.BLOCK_BEACON_ACTIVATE, SoundCategory.AMBIENT, 1.0f, 0.6f);
                     if (!player.isCreative()) stack.decrement(1);
-                }
-                return ActionResult.CONSUME;
-            }
-
-            case "minecraft:heart_of_the_sea" -> {
-                if (!state.get(DragonPedestal.HEART_SEA) && state.get(DragonPedestal.FOSSIL_HEAD)) {
-                    world.setBlockState(pos, state.with(HEART_SEA, true).with(HALF, DoubleBlockHalf.UPPER));
-                    world.playSound(null, pos, SoundEvents.BLOCK_CONDUIT_ACTIVATE, SoundCategory.BLOCKS, 1.0f, 0.4f);
-                    if (!player.isCreative()) stack.decrement(1);
-                }
-                return ActionResult.CONSUME;
-            }
-
-            case "ancientartifacts:dragon_fossil" -> {
-                BlockPos basePos = state.get(HALF) == DoubleBlockHalf.UPPER ? pos.down() : pos;
-
-                if (!state.get(FOSSIL_HEAD)            // current clicked half says no head
-                        && world.getBlockState(basePos).get(GILDED)  // the actual base is gilded
-                        && !world.getBlockState(basePos).get(HEART_SEA)
-                        && hasNearbyRitual(world, basePos)) {
-
-                    BlockState base = world.getBlockState(basePos)
-                            .with(HALF, DoubleBlockHalf.LOWER);
-
-                    BlockPos topPos = basePos.up();
-                    BlockState top = world.getBlockState(topPos);
-
-                    // Ensure upper half exists and mirrors base props
-                    if (!top.isOf(ModBlocks.DRAGON_PEDESTAL) || top.get(HALF) != DoubleBlockHalf.UPPER) {
-                        world.setBlockState(topPos, base.with(HALF, DoubleBlockHalf.UPPER), Block.NOTIFY_ALL);
-                    }
-
-                    // Now toggle the visible flag on the UPPER half
-                    BlockState newTop = world.getBlockState(topPos)
-                            .with(FOSSIL_HEAD, true); // add other props if your model cares
-
-                    world.setBlockState(topPos, newTop, Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD);
-                    world.updateListeners(topPos, top, newTop, Block.NOTIFY_ALL);
-
-                    world.playSound(null, basePos, SoundEvents.BLOCK_BONE_BLOCK_PLACE, SoundCategory.BLOCKS, 0.8f, 0.3f);
-                    if (!player.isCreative()) stack.decrement(1);
-                    return ActionResult.CONSUME;
+                    return ActionResult.SUCCESS;
                 }
                 return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
             }
-            default -> {
 
+            case "minecraft:heart_of_the_sea" -> {
+                if (!botState.get(HEART_SEA) && botState.get(FOSSIL_HEAD)) {
+                    BlockState newBot = botState.with(HEART_SEA, true);
+
+                    world.setBlockState(botPos, newBot, Block.NOTIFY_ALL);
+                    world.setBlockState(topPos, newBot.with(HALF, DoubleBlockHalf.UPPER), Block.NOTIFY_ALL);
+
+                    world.playSound(null, pos, SoundEvents.BLOCK_CONDUIT_ACTIVATE, SoundCategory.BLOCKS, 1.0f, 0.4f);
+                    if (!player.isCreative()) stack.decrement(1);
+                    return ActionResult.SUCCESS;
+                }
+                return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+            }
+
+            case "ancientartifacts:dragon_fossil" -> {
+                if (!botState.get(FOSSIL_HEAD)
+                        && botState.get(GILDED)
+                        && !botState.get(HEART_SEA)
+                        && hasNearbyRitual(world, botPos)) {
+
+                    // Calculate the final state
+                    BlockState newBot = botState.with(FOSSIL_HEAD, true);
+
+                    world.setBlockState(botPos, newBot, Block.NOTIFY_ALL);
+                    world.setBlockState(topPos, newBot.with(HALF, DoubleBlockHalf.UPPER), Block.NOTIFY_ALL);
+
+                    world.playSound(null, botPos, SoundEvents.BLOCK_BONE_BLOCK_PLACE, SoundCategory.BLOCKS, 0.8f, 0.3f);
+                    if (!player.isCreative()) stack.decrement(1);
+                    return ActionResult.SUCCESS;
+                }
+                return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+            }
+
+            default -> {
                 return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
             }
         }
