@@ -1,29 +1,29 @@
 package net.eagle.ancientartifacts.datagen;
 
 import net.eagle.ancientartifacts.block.ModBlocks;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.BlockTags;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.tags.BlockTags;
 
 import java.util.concurrent.CompletableFuture;
 
-public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
-    public ModBlockTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
-        super(output, registriesFuture);
+public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
+    public ModBlockTagsProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registryLookupFuture) {
+        super(output, registryLookupFuture);
     }
 
     @Override
-    protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
-        valueLookupBuilder(BlockTags.PICKAXE_MINEABLE)
-                .add(ModBlocks.CHACHAPOYAN_IDOL)
-                .add(ModBlocks.COPPER_WIRE)
+    protected void addTags(HolderLookup.Provider registries) {
+        valueLookupBuilder(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(ModBlocks.DRAGON_PEDESTAL)
                 .add(ModBlocks.ETHER_LEVER)
                 .add(ModBlocks.GILDED_PLATE)
-                .add(ModBlocks.NENDER_BRICK)
                 .add(ModBlocks.TOTEM_OF_CHAOS)
-                .add(ModBlocks.TOTEM_OF_ORDER);
+                .add(ModBlocks.TOTEM_OF_ORDER)
+                .add(ModBlocks.NENDER_BRICK)
+                .add(ModBlocks.CHACHAPOYAN_IDOL)
+                .add(ModBlocks.COPPER_WIRE);
 
         valueLookupBuilder(BlockTags.NEEDS_STONE_TOOL)
                 .add(ModBlocks.NENDER_BRICK)

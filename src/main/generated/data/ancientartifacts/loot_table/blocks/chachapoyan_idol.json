@@ -3,15 +3,48 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "ancientartifacts:chachapoyan_idol"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
       "conditions": [
         {
-          "condition": "minecraft:survives_explosion"
+          "block": "ancientartifacts:chachapoyan_idol",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "pendant": "true"
+          }
         }
       ],
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "ancientartifacts:chachapoyan_idol"
+          "name": "ancientartifacts:ankh_pendant"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "ancientartifacts:chachapoyan_idol",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "scales": "true"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "ancientartifacts:elder_guardian_scales"
         }
       ],
       "rolls": 1.0

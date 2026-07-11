@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:ancientartifacts/evoker_key",
+  "parent": "ancientartifacts:evoker_key",
   "criteria": {
     "star_orb": {
       "conditions": {
@@ -13,9 +13,9 @@
     }
   },
   "display": {
+    "background": "ancientartifacts:block/nender_brick",
     "description": "Crafted the Firefly Orb",
     "icon": {
-      "count": 1,
       "id": "ancientartifacts:firefly_orb"
     },
     "title": "Ball of Stars"

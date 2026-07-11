@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:ancientartifacts/elixir_of_drake",
+  "parent": "ancientartifacts:elixir_of_drake",
   "criteria": {
     "end_staff": {
       "conditions": {
@@ -13,9 +13,9 @@
     }
   },
   "display": {
+    "background": "ancientartifacts:block/nender_brick",
     "description": "Crafted the End Staff",
     "icon": {
-      "count": 1,
       "id": "ancientartifacts:end_staff"
     },
     "title": "Wingardium Leviosa"

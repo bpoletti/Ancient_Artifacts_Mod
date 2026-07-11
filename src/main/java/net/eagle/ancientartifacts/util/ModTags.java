@@ -1,17 +1,17 @@
 package net.eagle.ancientartifacts.util;
 
 import net.eagle.ancientartifacts.AncientArtifacts;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 
 public class ModTags {
     public static class Blocks {
 
         private static TagKey<Block> createTag(String name) {
-            return TagKey.of(RegistryKeys.BLOCK, Identifier.of(AncientArtifacts.MOD_ID, name));
+            return TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(AncientArtifacts.MOD_ID, name));
         }
     }
 
@@ -19,7 +19,7 @@ public class ModTags {
         public static final TagKey<Item> TRANSFORMABLE_ITEMS = createTag("transformable_items");
 
         private static TagKey<Item> createTag(String name) {
-            return TagKey.of(RegistryKeys.ITEM, Identifier.of(AncientArtifacts.MOD_ID, name));
+            return TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(AncientArtifacts.MOD_ID, name));
         }
     }
 }

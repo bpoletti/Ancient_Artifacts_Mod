@@ -1,15 +1,10 @@
 {
-  "parent": "minecraft:ancientartifacts/firefly_orb",
+  "parent": "ancientartifacts:firefly_orb",
   "criteria": {
     "drake_potion": {
       "conditions": {
         "items": [
           {
-            "components": {
-              "minecraft:potion_contents": {
-                "potion": "ancientartifacts:elixir_of_drake"
-              }
-            },
             "items": "minecraft:potion"
           }
         ]
@@ -18,9 +13,9 @@
     }
   },
   "display": {
+    "background": "ancientartifacts:block/nender_brick",
     "description": "Brewed the Elixir of Drake",
     "icon": {
-      "count": 1,
       "id": "minecraft:potion"
     },
     "title": "Taste Like Crap!"

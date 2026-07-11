@@ -2,20 +2,25 @@ package net.eagle.ancientartifacts.mixin;
 
 import net.eagle.ancientartifacts.block.ModBlocks;
 import net.eagle.ancientartifacts.block.custom.CopperWire;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.RedstoneWireBlock;
-import net.minecraft.util.math.Direction;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.RedStoneWireBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(RedstoneWireBlock.class)
+@Mixin(RedStoneWireBlock.class)
 public abstract class CopperToRedstoneWire {
-    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;emitsRedstonePower()Z"), method = "connectsTo(Lnet/minecraft/block/BlockState;Lnet/minecraft/util/math/Direction;)Z", cancellable = true)
-    private static void connectsTo(BlockState state, Direction dir, CallbackInfoReturnable<Boolean> cir){
-        if (dir != null && state.isOf(ModBlocks.COPPER_WIRE)) {
-            cir.setReturnValue(state.get(CopperWire.FACING) == dir);
+
+    @Inject(
+            method = "shouldConnectTo(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/Direction;)Z",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;isSignalSource()Z"),
+            cancellable = true
+    )
+    private static void shouldConnectTo(BlockState state, Direction dir, CallbackInfoReturnable<Boolean> cir){
+        if (dir != null && state.is(ModBlocks.COPPER_WIRE)) {
+            cir.setReturnValue(state.getValue(CopperWire.FACING) == dir);
         }
     }
 }

@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_pearlescent_froglight": {
+    "has_ochre_froglight": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:pearlescent_froglight"
+            "items": "minecraft:ochre_froglight"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "ancientartifacts:pearlescent_firefly_bud_from_smelting_pearlescent_froglight"
+        "recipe": "ancientartifacts:ochre_firefly_bud"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_pearlescent_froglight"
+      "has_ochre_froglight"
     ]
   ],
   "rewards": {
     "recipes": [
-      "ancientartifacts:pearlescent_firefly_bud_from_smelting_pearlescent_froglight"
+      "ancientartifacts:ochre_firefly_bud"
     ]
   }
 }

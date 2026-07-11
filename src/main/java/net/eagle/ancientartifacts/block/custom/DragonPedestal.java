@@ -5,53 +5,62 @@ import net.eagle.ancientartifacts.block.ModBlocks;
 import net.eagle.ancientartifacts.block.entity.DragonPedestalEntity;
 import net.eagle.ancientartifacts.block.entity.ModBlockEntities;
 import net.eagle.ancientartifacts.item.ModItems;
-import net.minecraft.block.*;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityTicker;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.block.enums.DoubleBlockHalf;
-import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.EnumProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.text.Text;
-import net.minecraft.util.Hand;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldView;
-import net.minecraft.world.tick.ScheduledTickView;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-import static net.minecraft.state.property.Properties.WATERLOGGED;
+public class DragonPedestal extends BaseEntityBlock implements EntityBlock {
 
+    public static final BooleanProperty GILDED = BooleanProperty.create("gilded");
+    public static final BooleanProperty FOSSIL_HEAD = BooleanProperty.create("fossil_head");
+    public static final BooleanProperty HEART_SEA = BooleanProperty.create("heart_sea");
+    public static final BooleanProperty ORB_INFINIUM = BooleanProperty.create("orb_of_infinium");
+    public static final BooleanProperty END_READY = BooleanProperty.create("end_ready");
 
-public class DragonPedestal extends BlockWithEntity implements BlockEntityProvider {
+    // Explicitly declaring WATERLOGGED to ensure no inheritance issues
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-    public static final BooleanProperty GILDED = BooleanProperty.of("gilded");
-    public static final BooleanProperty FOSSIL_HEAD = BooleanProperty.of("fossil_head");
-    public static final BooleanProperty HEART_SEA = BooleanProperty.of("heart_sea");
-    public static final BooleanProperty ORB_INFINIUM = BooleanProperty.of("orb_of_infinium");
+    public static final EnumProperty<Direction> FACING = BlockStateProperties.FACING_HOPPER;
+    public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
 
-    public static final BooleanProperty END_READY = BooleanProperty.of("end_ready");
-    public static final EnumProperty<Direction> FACING = Properties.HOPPER_FACING;
-    public static final EnumProperty<DoubleBlockHalf> HALF = Properties.DOUBLE_BLOCK_HALF;
     protected static final VoxelShape SHAPE_UPPER;
     protected static final VoxelShape SHAPE_UPPER_F;
     protected static final VoxelShape SHAPE_LOWER;
@@ -59,111 +68,109 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
 
     static {
         //TOP
-        VoxelShape su1 = Block.createCuboidShape(5.5, 0, 5.5, 10.5, 1, 10.5);
-        VoxelShape su2 = Block.createCuboidShape(3.5, 1, 3.5, 12.5, 4, 12.5);
-        VoxelShape su3_f = Block.createCuboidShape(1, 3, 3.25, 15.5, 11.7, 12.75);
-        VoxelShape su3 = Block.createCuboidShape(3.5, 3, 3.25, 12.5, 6, 12.75);
+        VoxelShape su1 = Block.box(5.5, 0, 5.5, 10.5, 1, 10.5);
+        VoxelShape su2 = Block.box(3.5, 1, 3.5, 12.5, 4, 12.5);
+        VoxelShape su3_f = Block.box(1, 3, 3.25, 15.5, 11.7, 12.75);
+        VoxelShape su3 = Block.box(3.5, 3, 3.25, 12.5, 6, 12.75);
 
         //BOTTOM
-        VoxelShape sl1_g = Block.createCuboidShape(1, 0, 1, 15, 1, 15);
-        VoxelShape sl1 = Block.createCuboidShape(2, 0, 2, 14, 1, 14);
-        VoxelShape sl2 = Block.createCuboidShape(3, 1, 3, 13, 3, 13);
-        VoxelShape sl3 = Block.createCuboidShape(5.5, 3, 5.5, 10.5, 12, 10.5);
+        VoxelShape sl1_g = Block.box(1, 0, 1, 15, 1, 15);
+        VoxelShape sl1 = Block.box(2, 0, 2, 14, 1, 14);
+        VoxelShape sl2 = Block.box(3, 1, 3, 13, 3, 13);
+        VoxelShape sl3 = Block.box(5.5, 3, 5.5, 10.5, 12, 10.5);
 
-        SHAPE_UPPER = VoxelShapes.union(su1, su2, su3).simplify();
-        SHAPE_UPPER_F = VoxelShapes.union(su1, su2, su3_f).simplify();
-        SHAPE_LOWER = VoxelShapes.union(sl1, sl2, sl3).simplify();
-        SHAPE_LOWER_G = VoxelShapes.union(sl1_g, sl2, sl3).simplify();
-
+        SHAPE_UPPER = Shapes.or(su1, su2, su3).optimize();
+        SHAPE_UPPER_F = Shapes.or(su1, su2, su3_f).optimize();
+        SHAPE_LOWER = Shapes.or(sl1, sl2, sl3).optimize();
+        SHAPE_LOWER_G = Shapes.or(sl1_g, sl2, sl3).optimize();
     }
 
 
-    public DragonPedestal(Settings settings) {
-        super(settings);
-        this.setDefaultState(getStateManager().getDefaultState()
-                .with(HALF, DoubleBlockHalf.LOWER)
-                .with(FACING, Direction.NORTH)
-                .with(GILDED, false)
-                .with(FOSSIL_HEAD, false)
-                .with(HEART_SEA, false)
-                .with(ORB_INFINIUM, false)
-                .with(END_READY, false)
-                .with(WATERLOGGED, false));
+    public DragonPedestal(Properties properties) {
+        super(properties);
+        this.registerDefaultState(this.getStateDefinition().any()
+                .setValue(HALF, DoubleBlockHalf.LOWER)
+                .setValue(FACING, Direction.NORTH)
+                .setValue(GILDED, false)
+                .setValue(FOSSIL_HEAD, false)
+                .setValue(HEART_SEA, false)
+                .setValue(ORB_INFINIUM, false)
+                .setValue(END_READY, false)
+                .setValue(WATERLOGGED, false));
     }
 
-    public static final MapCodec<DragonPedestal> CODEC = createCodec(DragonPedestal::new);
+    public static final MapCodec<DragonPedestal> CODEC = simpleCodec(DragonPedestal::new);
 
     @Override
-    protected MapCodec<? extends BlockWithEntity> getCodec() {
+    protected MapCodec<? extends BaseEntityBlock> codec() {
         return CODEC;
     }
 
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext ctx) {
-        if (state.get(HALF) == DoubleBlockHalf.UPPER) {
-            return state.get(FOSSIL_HEAD) ? SHAPE_UPPER_F : SHAPE_UPPER;
+    @Override
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext ctx) {
+        if (state.getValue(HALF) == DoubleBlockHalf.UPPER) {
+            return state.getValue(FOSSIL_HEAD) ? SHAPE_UPPER_F : SHAPE_UPPER;
         } else {
-            return state.get(GILDED) ? SHAPE_LOWER_G : SHAPE_LOWER;
+            return state.getValue(GILDED) ? SHAPE_LOWER_G : SHAPE_LOWER;
         }
     }
 
     @Override
-    protected BlockState getStateForNeighborUpdate(BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random) {
-        if (state.get(WATERLOGGED)) {
-            tickView.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+    protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess tickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
+        if (state.getValue(WATERLOGGED)) {
+            tickAccess.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
-        return super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random);
+        return super.updateShape(state, level, tickAccess, pos, direction, neighborPos, neighborState, random);
     }
 
     @Override
-    public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
+    protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
+        super.onPlace(state, level, pos, oldState, isMoving);
+        if (!level.isClientSide()) {
+            Block down = level.getBlockState(pos.below()).getBlock();
+            if (down == ModBlocks.GILDED_PLATE && !state.getValue(GILDED)) {
+                BlockState lower = state.setValue(HALF, DoubleBlockHalf.LOWER).setValue(GILDED, true);
+                BlockState upper = lower.setValue(HALF, DoubleBlockHalf.UPPER);
 
-        super.onBlockAdded(state, world, pos, oldState, notify);
-        if (!world.isClient()) {
-            Block down = world.getBlockState(pos.down()).getBlock();
-            if (down == ModBlocks.GILDED_PLATE && !state.get(GILDED)) {
-                BlockState lower = state.with(HALF, DoubleBlockHalf.LOWER).with(GILDED, true);
-                BlockState upper = lower.with(HALF, DoubleBlockHalf.UPPER);
-
-                world.removeBlock(pos, false); // removing current (lower) placeholder
-                world.setBlockState(pos.down(), lower, Block.NOTIFY_ALL);
-                world.setBlockState(pos, upper, Block.NOTIFY_ALL);
+                level.removeBlock(pos, false); // removing current (lower) placeholder
+                level.setBlock(pos.below(), lower, 3);
+                level.setBlock(pos, upper, 3);
             }
         }
-
     }
 
     @Override
-    public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
-        if (state.get(HALF) == DoubleBlockHalf.UPPER) {
-            super.onPlaced(world, pos, state, placer, itemStack);
+    public void setPlacedBy(Level level, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
+        if (state.getValue(HALF) == DoubleBlockHalf.UPPER) {
+            super.setPlacedBy(level, pos, state, placer, itemStack);
             return;
         }
         // Mirror all props into the top half at place time
-        BlockState top = state.with(HALF, DoubleBlockHalf.UPPER);
-        world.setBlockState(pos.up(), top, Block.NOTIFY_ALL);
-        super.onPlaced(world, pos, state, placer, itemStack);
+        BlockState top = state.setValue(HALF, DoubleBlockHalf.UPPER);
+        level.setBlock(pos.above(), top, 3);
+        super.setPlacedBy(level, pos, state, placer, itemStack);
     }
 
     @Nullable
     @Override
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        BlockPos blockPos = ctx.getBlockPos();
-        var world = ctx.getWorld();
+    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+        BlockPos blockPos = ctx.getClickedPos();
+        var level = ctx.getLevel();
 
-        if (blockPos.getY() < world.getTopYInclusive() && world.getBlockState(blockPos.up()).canReplace(ctx)) {
-            FluidState fluidState = world.getFluidState(blockPos);
-            boolean isWaterlogged = fluidState.getFluid() == Fluids.WATER;
-            return this.getDefaultState()
-                    .with(FACING, ctx.getHorizontalPlayerFacing().getOpposite())
-                    .with(HALF, DoubleBlockHalf.LOWER)
-                    .with(WATERLOGGED, isWaterlogged);
+        if (blockPos.getY() < level.getMaxY() - 1 && level.getBlockState(blockPos.above()).canBeReplaced(ctx)) {
+            FluidState fluidState = level.getFluidState(blockPos);
+            boolean isWaterlogged = fluidState.getType() == Fluids.WATER;
+            return this.defaultBlockState()
+                    .setValue(FACING, ctx.getHorizontalDirection().getOpposite())
+                    .setValue(HALF, DoubleBlockHalf.LOWER)
+                    .setValue(WATERLOGGED, isWaterlogged);
         } else {
             return null;
         }
     }
 
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(HALF,
                 FACING,
                 GILDED,
@@ -175,120 +182,114 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
     }
 
     @Override
-    public BlockRenderType getRenderType(BlockState state) {
-        return BlockRenderType.MODEL;
+    public RenderShape getRenderShape(BlockState state) {
+        return RenderShape.MODEL;
     }
 
     @Override
-    protected ActionResult onUseWithItem(ItemStack stack, BlockState state, World world,
-                                         BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level,
+                                          BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 
-        // Switch on the full registry id
-        final String id = net.minecraft.registry.Registries.ITEM.getId(stack.getItem()).toString();
+        final String id = BuiltInRegistries.ITEM.getKey(stack.getItem()).toString();
 
-        // 1. ALWAYS identify the absolute bottom and top positions, regardless of which half the player clicked!
-        BlockPos botPos = state.get(HALF) == DoubleBlockHalf.UPPER ? pos.down() : pos;
-        BlockPos topPos = botPos.up();
+        BlockPos botPos = state.getValue(HALF) == DoubleBlockHalf.UPPER ? pos.below() : pos;
+        BlockPos topPos = botPos.above();
 
-        // 2. Always base logic on the bottom state to ensure both halves stay in perfect sync
-        BlockState botState = world.getBlockState(botPos);
+        BlockState botState = level.getBlockState(botPos);
 
-        // Safety check in case the top half is missing or corrupted
-        if (!world.getBlockState(topPos).isOf(this)) {
-            return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+        if (!level.getBlockState(topPos).is(this)) {
+            return InteractionResult.PASS;
         }
 
         switch (id) {
             case "ancientartifacts:end_staff" -> {
-                if (!botState.get(END_READY) && botState.get(ORB_INFINIUM)) {
-                    BlockState newBot = botState.with(END_READY, true);
+                if (!botState.getValue(END_READY) && botState.getValue(ORB_INFINIUM)) {
+                    BlockState newBot = botState.setValue(END_READY, true);
 
-                    world.setBlockState(botPos, newBot, Block.NOTIFY_ALL);
-                    world.setBlockState(topPos, newBot.with(HALF, DoubleBlockHalf.UPPER), Block.NOTIFY_ALL);
+                    level.setBlock(botPos, newBot, 3);
+                    level.setBlock(topPos, newBot.setValue(HALF, DoubleBlockHalf.UPPER), 3);
 
-                    world.playSound(null, pos, SoundEvents.ENTITY_ENDER_DRAGON_GROWL, SoundCategory.HOSTILE, 0.2f, 0.9f);
-                    world.playSound(null, pos, SoundEvents.ENTITY_PLAYER_LEVELUP,   SoundCategory.NEUTRAL, 0.2f, 1.0f);
+                    level.playSound(null, pos, SoundEvents.ENDER_DRAGON_GROWL, SoundSource.HOSTILE, 0.2f, 0.9f);
+                    level.playSound(null, pos, SoundEvents.PLAYER_LEVELUP,   SoundSource.NEUTRAL, 0.2f, 1.0f);
                     if (!player.isCreative()) {
-                        player.sendMessage(Text.literal("End Gateway is now Unlocked!"), false);
+                        player.sendOverlayMessage(Component.literal("End Gateway is now Unlocked!"));
                     }
-                    return ActionResult.SUCCESS;
+                    return InteractionResult.CONSUME;
                 }
-                return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+                return InteractionResult.PASS;
             }
 
             case "ancientartifacts:orb_infinium" -> {
-                if (!botState.get(ORB_INFINIUM) && botState.get(HEART_SEA)) {
-                    BlockState newBot = botState.with(ORB_INFINIUM, true);
+                if (!botState.getValue(ORB_INFINIUM) && botState.getValue(HEART_SEA)) {
+                    BlockState newBot = botState.setValue(ORB_INFINIUM, true);
 
-                    world.setBlockState(botPos, newBot, Block.NOTIFY_ALL);
-                    world.setBlockState(topPos, newBot.with(HALF, DoubleBlockHalf.UPPER), Block.NOTIFY_ALL);
+                    level.setBlock(botPos, newBot, 3);
+                    level.setBlock(topPos, newBot.setValue(HALF, DoubleBlockHalf.UPPER), 3);
 
-                    world.playSound(null, pos, SoundEvents.BLOCK_BEACON_ACTIVATE, SoundCategory.AMBIENT, 1.0f, 0.6f);
-                    if (!player.isCreative()) stack.decrement(1);
-                    return ActionResult.SUCCESS;
+                    level.playSound(null, pos, SoundEvents.BEACON_ACTIVATE, SoundSource.AMBIENT, 1.0f, 0.6f);
+                    if (!player.isCreative()) stack.shrink(1);
+                    return InteractionResult.CONSUME;
                 }
-                return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+                return InteractionResult.PASS;
             }
 
             case "minecraft:heart_of_the_sea" -> {
-                if (!botState.get(HEART_SEA) && botState.get(FOSSIL_HEAD)) {
-                    BlockState newBot = botState.with(HEART_SEA, true);
+                if (!botState.getValue(HEART_SEA) && botState.getValue(FOSSIL_HEAD)) {
+                    BlockState newBot = botState.setValue(HEART_SEA, true);
 
-                    world.setBlockState(botPos, newBot, Block.NOTIFY_ALL);
-                    world.setBlockState(topPos, newBot.with(HALF, DoubleBlockHalf.UPPER), Block.NOTIFY_ALL);
+                    level.setBlock(botPos, newBot, 3);
+                    level.setBlock(topPos, newBot.setValue(HALF, DoubleBlockHalf.UPPER), 3);
 
-                    world.playSound(null, pos, SoundEvents.BLOCK_CONDUIT_ACTIVATE, SoundCategory.BLOCKS, 1.0f, 0.4f);
-                    if (!player.isCreative()) stack.decrement(1);
-                    return ActionResult.SUCCESS;
+                    level.playSound(null, pos, SoundEvents.CONDUIT_ACTIVATE, SoundSource.BLOCKS, 1.0f, 0.4f);
+                    if (!player.isCreative()) stack.shrink(1);
+                    return InteractionResult.CONSUME;
                 }
-                return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+                return InteractionResult.PASS;
             }
 
             case "ancientartifacts:dragon_fossil" -> {
-                if (!botState.get(FOSSIL_HEAD)
-                        && botState.get(GILDED)
-                        && !botState.get(HEART_SEA)
-                        && hasNearbyRitual(world, botPos)) {
+                if (!botState.getValue(FOSSIL_HEAD)
+                        && botState.getValue(GILDED)
+                        && !botState.getValue(HEART_SEA)
+                        && hasNearbyRitual(level, botPos)) {
 
-                    // Calculate the final state
-                    BlockState newBot = botState.with(FOSSIL_HEAD, true);
+                    BlockState newBot = botState.setValue(FOSSIL_HEAD, true);
 
-                    world.setBlockState(botPos, newBot, Block.NOTIFY_ALL);
-                    world.setBlockState(topPos, newBot.with(HALF, DoubleBlockHalf.UPPER), Block.NOTIFY_ALL);
+                    level.setBlock(botPos, newBot, 3);
+                    level.setBlock(topPos, newBot.setValue(HALF, DoubleBlockHalf.UPPER), 3);
 
-                    world.playSound(null, botPos, SoundEvents.BLOCK_BONE_BLOCK_PLACE, SoundCategory.BLOCKS, 0.8f, 0.3f);
-                    if (!player.isCreative()) stack.decrement(1);
-                    return ActionResult.SUCCESS;
+                    level.playSound(null, botPos, SoundEvents.BONE_BLOCK_PLACE, SoundSource.BLOCKS, 0.8f, 0.3f);
+                    if (!player.isCreative()) stack.shrink(1);
+                    return InteractionResult.CONSUME;
                 }
-                return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+                return InteractionResult.PASS;
             }
 
             default -> {
-                return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+                return InteractionResult.PASS;
             }
         }
     }
 
-    private static boolean hasNearbyRitual(World world, BlockPos basePos) {
+    private static boolean hasNearbyRitual(Level level, BlockPos basePos) {
         final int r = 2;
-        // scan one block below to one block above, and 2 blocks out in X/Z
-        BlockPos min = basePos.add(-r, -1, -r);
-        BlockPos max = basePos.add( r,  1,  r);
+        BlockPos min = basePos.offset(-r, -1, -r);
+        BlockPos max = basePos.offset( r,  1,  r);
 
         boolean hasDirt  = false;
         boolean hasBrick = false;
         boolean hasLever = false;
 
-        for (BlockPos p : BlockPos.iterate(min, max)) {
-            BlockState s = world.getBlockState(p);
+        for (BlockPos p : BlockPos.betweenClosed(min, max)) {
+            BlockState s = level.getBlockState(p);
 
-            if (!hasDirt && (s.isOf(Blocks.DIRT) /* or a tag: || s.isIn(BlockTags.DIRT) */)) {
+            if (!hasDirt && (s.is(Blocks.DIRT))) {
                 hasDirt = true;
             }
-            if (!hasBrick && s.isOf(ModBlocks.NENDER_BRICK)) {
+            if (!hasBrick && s.is(ModBlocks.NENDER_BRICK)) {
                 hasBrick = true;
             }
-            if (!hasLever && s.isOf(ModBlocks.ETHER_LEVER)) {
+            if (!hasLever && s.is(ModBlocks.ETHER_LEVER)) {
                 hasLever = true;
             }
 
@@ -297,59 +298,56 @@ public class DragonPedestal extends BlockWithEntity implements BlockEntityProvid
         return false;
     }
 
-
-
     @Nullable
     @Override
-    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return state.get(HALF) == DoubleBlockHalf.UPPER ? null : new DragonPedestalEntity(pos, state);
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return state.getValue(HALF) == DoubleBlockHalf.UPPER ? null : new DragonPedestalEntity(pos, state);
     }
 
     @Override
-    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
         BlockPos topPos;
         BlockPos botPos;
-        if (state.get(HALF) == DoubleBlockHalf.UPPER) {
+        if (state.getValue(HALF) == DoubleBlockHalf.UPPER) {
             topPos = pos;
-            botPos = pos.down();
+            botPos = pos.below();
         } else {
-            topPos = pos.up();
+            topPos = pos.above();
             botPos = pos;
         }
-        world.removeBlock(topPos, false);
-        world.removeBlock(botPos, false);
-        world.updateNeighbors(topPos, Blocks.AIR);
+        level.removeBlock(topPos, false);
+        level.removeBlock(botPos, false);
+        level.updateNeighborsAt(topPos, Blocks.AIR);
 
-        super.onBreak(world, pos, state, player);
+        super.playerWillDestroy(level, pos, state, player);
 
         if (!player.isCreative()) {
             ItemStack pedestal = new ItemStack(ModBlocks.DRAGON_PEDESTAL);
-            world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), pedestal));
-            if(state.get(DragonPedestal.GILDED)){
+            level.addFreshEntity(new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), pedestal));
+            if(state.getValue(DragonPedestal.GILDED)){
                 ItemStack plate = new ItemStack(ModBlocks.GILDED_PLATE);
-                BlockPos dropPos = pos.up();
-                world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), plate));
-                if(state.get(DragonPedestal.FOSSIL_HEAD)){
+                BlockPos dropPos = pos.above();
+                level.addFreshEntity(new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), plate));
+                if(state.getValue(DragonPedestal.FOSSIL_HEAD)){
                     ItemStack fossil = new ItemStack(ModItems.DRAGON_FOSSIL);
-                    world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), fossil));
-                    if(state.get(DragonPedestal.HEART_SEA)){
+                    level.addFreshEntity(new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), fossil));
+                    if(state.getValue(DragonPedestal.HEART_SEA)){
                         ItemStack heart_sea = new ItemStack(Items.HEART_OF_THE_SEA);
-                        world.spawnEntity(new ItemEntity(world, dropPos.getX(), dropPos.getY(), dropPos.getZ(), heart_sea));
-                        if(state.get(DragonPedestal.ORB_INFINIUM)){
+                        level.addFreshEntity(new ItemEntity(level, dropPos.getX(), dropPos.getY(), dropPos.getZ(), heart_sea));
+                        if(state.getValue(DragonPedestal.ORB_INFINIUM)){
                             ItemStack orb_infinuim = new ItemStack(ModItems.ORB_INFINIUM);
-                            world.spawnEntity(new ItemEntity(world, dropPos.getX(), dropPos.getY(), dropPos.getZ(), orb_infinuim));
+                            level.addFreshEntity(new ItemEntity(level, dropPos.getX(), dropPos.getY(), dropPos.getZ(), orb_infinuim));
                         }
                     }
                 }
             }
         }
-
         return state;
     }
 
     @Nullable
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         return type == ModBlockEntities.DRAGON_PEDESTAL_ENTITY ?
                 (worldIn, pos, stateIn, blockEntity) -> DragonPedestalEntity.tick(worldIn, pos, stateIn, (DragonPedestalEntity) blockEntity) :
                 null;

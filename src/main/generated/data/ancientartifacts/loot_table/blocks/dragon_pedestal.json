@@ -3,15 +3,86 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "ancientartifacts:dragon_pedestal"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
       "conditions": [
         {
-          "condition": "minecraft:survives_explosion"
+          "block": "ancientartifacts:dragon_pedestal",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "gilded": "true"
+          }
         }
       ],
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "ancientartifacts:dragon_pedestal"
+          "name": "ancientartifacts:gilded_plate"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "ancientartifacts:dragon_pedestal",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "fossil_head": "true"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "ancientartifacts:dragon_fossil"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "ancientartifacts:dragon_pedestal",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "heart_sea": "true"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:heart_of_the_sea"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "ancientartifacts:dragon_pedestal",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "orb_of_infinium": "true"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "ancientartifacts:orb_infinium"
         }
       ],
       "rolls": 1.0

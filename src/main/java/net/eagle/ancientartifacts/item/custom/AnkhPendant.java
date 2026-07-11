@@ -1,20 +1,23 @@
 package net.eagle.ancientartifacts.item.custom;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.text.Text;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
 public class AnkhPendant extends Item {
 
-    public AnkhPendant(Settings settings) { super(settings); }
+    public AnkhPendant(Properties properties) {
+        super(properties);
+    }
 
     @Override
-    public boolean hasGlint(ItemStack stack) {
+    public boolean isFoil(ItemStack stack) {
         return true;
     }
 
     @Override
-    public Text getName(ItemStack stack) {
-        return Text.of("§e" + super.getName(stack).getString());
+    public Component getName(ItemStack stack) {
+        return super.getName(stack).copy().withStyle(ChatFormatting.YELLOW);
     }
 }

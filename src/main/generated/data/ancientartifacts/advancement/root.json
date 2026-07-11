@@ -12,10 +12,9 @@
     }
   },
   "display": {
-    "background": "ancientartifacts:textures/block/nender_brick.png",
+    "background": "ancientartifacts:block/nender_brick",
     "description": "Found the Chachapoyan Idol",
     "icon": {
-      "count": 1,
       "id": "ancientartifacts:chachapoyan_idol"
     },
     "title": "Not Today Dr. Jones!"

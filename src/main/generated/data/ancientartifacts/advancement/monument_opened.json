@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:ancientartifacts/end_staff",
+  "parent": "ancientartifacts:end_staff",
   "criteria": {
     "pedestal_final": {
       "conditions": {
@@ -24,10 +24,10 @@
     }
   },
   "display": {
+    "background": "ancientartifacts:block/nender_brick",
     "description": "The Elderian Monument was activated and the End Gate has opened",
     "frame": "goal",
     "icon": {
-      "count": 1,
       "id": "ancientartifacts:orb_infinium"
     },
     "title": "§5The Beginning of the End?"

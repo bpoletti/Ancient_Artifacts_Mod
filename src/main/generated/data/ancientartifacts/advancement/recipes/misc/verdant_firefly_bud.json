@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "ancientartifacts:verdant_firefly_bud_from_smelting_verdant_froglight"
+        "recipe": "ancientartifacts:verdant_firefly_bud"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "ancientartifacts:verdant_firefly_bud_from_smelting_verdant_froglight"
+      "ancientartifacts:verdant_firefly_bud"
     ]
   }
 }

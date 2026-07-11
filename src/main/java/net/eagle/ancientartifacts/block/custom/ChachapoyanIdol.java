@@ -4,233 +4,227 @@ import com.mojang.serialization.MapCodec;
 import net.eagle.ancientartifacts.block.ModBlocks;
 import net.eagle.ancientartifacts.item.ModItems;
 import net.eagle.ancientartifacts.potion.ModPotions;
-import net.minecraft.block.*;
-import net.minecraft.block.pattern.BlockPattern;
-import net.minecraft.block.pattern.BlockPatternBuilder;
-import net.minecraft.block.pattern.CachedBlockPosition;
-import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.mob.CreeperEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.predicate.block.BlockStatePredicate;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.EnumProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.text.Text;
-import net.minecraft.util.*;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.monster.Creeper;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.pattern.BlockInWorld;
+import net.minecraft.world.level.block.state.pattern.BlockPattern;
+import net.minecraft.world.level.block.state.pattern.BlockPattern.*;
+import net.minecraft.world.level.block.state.pattern.BlockPatternBuilder;
+import net.minecraft.world.level.block.state.predicate.BlockStatePredicate;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class ChachapoyanIdol extends HorizontalFacingBlock {
+public class ChachapoyanIdol extends HorizontalDirectionalBlock {
 
-    public static final MapCodec<ChachapoyanIdol> CODEC = createCodec(ChachapoyanIdol::new);
+    public static final MapCodec<ChachapoyanIdol> CODEC = simpleCodec(ChachapoyanIdol::new);
 
-    public static final EnumProperty<Direction> FACING = Properties.HOPPER_FACING;
+    public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
+
+    public static final BooleanProperty KEY = BooleanProperty.create("key");
+    public static final BooleanProperty PENDANT = BooleanProperty.create("pendant");
+    public static final BooleanProperty SCALES = BooleanProperty.create("scales");
+    public static final BooleanProperty ELDERIAN_MONUMENT = BooleanProperty.create("elderian_monument");
 
     private static final VoxelShape SHAPE;
     private BlockPattern elderianMonumentPatternOC; // O ^ C
     private BlockPattern elderianMonumentPatternCO; // C ^ O
 
-    public static final BooleanProperty KEY = BooleanProperty.of("key");
-    public static final BooleanProperty PENDANT = BooleanProperty.of("pendant");
-    public static final BooleanProperty SCALES = BooleanProperty.of("scales");
-    public static final BooleanProperty ELDERIAN_MONUMENT = BooleanProperty.of("elderian_monument");
-
-    public ChachapoyanIdol(Settings settings) {
-        super(settings);
-        setDefaultState(getStateManager().getDefaultState()
-                .with(FACING, Direction.NORTH)
-                .with(KEY, false)
-                .with(PENDANT, false)
-                .with(SCALES, false)
-                .with(ELDERIAN_MONUMENT, false));
+    public ChachapoyanIdol(Properties properties) {
+        super(properties);
+        registerDefaultState(getStateDefinition().any()
+                .setValue(FACING, Direction.NORTH)
+                .setValue(KEY, false)
+                .setValue(PENDANT, false)
+                .setValue(SCALES, false)
+                .setValue(ELDERIAN_MONUMENT, false));
     }
 
     @Override
-    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+    protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
         return CODEC;
     }
 
     @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 
     @Override
-    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
-        world.playSound(
+    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        level.playSound(
                 null,
                 pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
-                SoundEvents.BLOCK_ANVIL_PLACE,
-                SoundCategory.BLOCKS, 0.2f, 0.4f
+                SoundEvents.ANVIL_PLACE,
+                SoundSource.BLOCKS, 0.2f, 0.4f
         );
-        world.playSound(
+        level.playSound(
                 null,
                 pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
-                SoundEvents.BLOCK_ANVIL_PLACE,
-                SoundCategory.BLOCKS, 0.4f, 0.4f
+                SoundEvents.ANVIL_PLACE,
+                SoundSource.BLOCKS, 0.4f, 0.4f
         );
 
-        world.setBlockState(pos, state);
+        level.setBlock(pos, state, 3);
 
-        if (!world.isClient()) {
+        if (!level.isClientSide()) {
             int radius = 16;
             boolean creeperExploded = false;
-            for (CreeperEntity entity : world.getEntitiesByClass(CreeperEntity.class, new Box(pos).expand(radius), e -> e instanceof CreeperEntity)) {
+
+            // Box is now AABB (Axis-Aligned Bounding Box), expand is inflate
+            for (Creeper entity : level.getEntitiesOfClass(Creeper.class, new AABB(pos).inflate(radius), e -> true)) {
                 entity.ignite();
-                entity.setFuseSpeed(5);
                 creeperExploded = true;
             }
             if (creeperExploded) {
-                world.playSound(
+                level.playSound(
                         null,
                         pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
-                        SoundEvents.ITEM_TRIDENT_THUNDER,
-                        SoundCategory.NEUTRAL, 1.0f, 0.3f
+                        SoundEvents.TRIDENT_THUNDER,
+                        SoundSource.NEUTRAL, 1.0f, 0.3f
                 );
-                world.breakBlock(pos, false);
+                level.destroyBlock(pos, false);
             }
         }
-        super.onPlaced(world, pos, state, placer, itemStack);
+        super.setPlacedBy(level, pos, state, placer, itemStack);
     }
 
-
     @Override
-    protected ActionResult onUseWithItem(ItemStack stack, BlockState state, World world,
-                                             BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        // Gate on the full monument pattern like before
-        BlockPattern.Result result = findMonument(world, pos);
+    protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
+                                              Player player, InteractionHand hand, BlockHitResult hit) {
+
+        BlockPatternMatch result = findMonument(level, pos);
         if (result == null) {
-            if (!world.isClient()) {
-                player.sendMessage(Text.literal("Full Monument needs to be built first"), false);
+            if (!level.isClientSide()) {
+                player.sendSystemMessage(Component.literal("Full Monument needs to be built first"));
             }
-            return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+            return InteractionResult.PASS;
         }
 
-        // We'll switch on the item id; potions get a special case
-        final String id = net.minecraft.registry.Registries.ITEM.getId(stack.getItem()).toString();
+        // Registries -> BuiltInRegistries
+        final String id = BuiltInRegistries.ITEM.getKey(stack.getItem()).toString();
 
         switch (id) {
-            // --- Special case: potion bottle w/ ELIXIR_OF_DRAKE ---
             case "minecraft:potion" -> {
-                // In 1.21, potions are a data component on the item stack
-                var contents = stack.get(net.minecraft.component.DataComponentTypes.POTION_CONTENTS);
-                net.minecraft.registry.entry.RegistryEntry<net.minecraft.potion.Potion> potionEntry =
-                        contents != null ? contents.potion().orElse(null) : null;
+                // DataComponentTypes -> DataComponents
+                var contents = stack.get(DataComponents.POTION_CONTENTS);
+                if (contents != null && contents.potion().isPresent() && contents.potion().get().value().equals(ModPotions.ELIXIR_OF_DRAKE)) {
 
-                if (potionEntry != null
-                        && potionEntry.equals(net.minecraft.registry.Registries.POTION.getEntry(ModPotions.ELIXIR_OF_DRAKE))) {
+                    if (!state.getValue(ChachapoyanIdol.ELDERIAN_MONUMENT)
+                            && state.getValue(ChachapoyanIdol.SCALES)) {
 
-                    if (!state.get(ChachapoyanIdol.ELDERIAN_MONUMENT)
-                            && state.get(ChachapoyanIdol.SCALES)) {
-
-                        world.setBlockState(pos, state.with(ChachapoyanIdol.ELDERIAN_MONUMENT, true));
+                        level.setBlock(pos, state.setValue(ChachapoyanIdol.ELDERIAN_MONUMENT, true), 3);
 
                         if (!player.isCreative()) {
-                            stack.decrement(1);
-                            player.giveItemStack(new ItemStack(Items.GLASS_BOTTLE));
+                            stack.shrink(1);
+                            player.getInventory().add(new ItemStack(Items.GLASS_BOTTLE));
                         }
 
-                        // Drop ORB_INFINIUM one block above
-                        BlockPos dropPos = pos.up();
-                        world.spawnEntity(new ItemEntity(world,
+                        BlockPos dropPos = pos.above();
+                        level.addFreshEntity(new ItemEntity(level,
                                 dropPos.getX(), dropPos.getY(), dropPos.getZ(),
                                 new ItemStack(ModItems.ORB_INFINIUM)));
 
-                        // play sound (coords overload in 1.21)
-                        world.playSound(
+                        level.playSound(
                                 null,
                                 pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
-                                SoundEvents.ENTITY_PLAYER_LEVELUP,
-                                SoundCategory.NEUTRAL, 0.7f, 1.0f
+                                SoundEvents.PLAYER_LEVELUP,
+                                SoundSource.NEUTRAL, 0.7f, 1.0f
                         );
-                        return ActionResult.CONSUME;
+                        return InteractionResult.CONSUME;
                     }
                 }
-                // Not our specific potion → let default logic continue
-                return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+                return InteractionResult.PASS;
             }
 
-            // --- ELDER_GUARDIAN_SCALES ---
             case "ancientartifacts:elder_guardian_scales" -> {
-                if (!state.get(ChachapoyanIdol.SCALES)
-                        && state.get(ChachapoyanIdol.PENDANT)) {
-                    world.setBlockState(pos, state.with(ChachapoyanIdol.SCALES, true));
-                    if (!player.isCreative()) stack.decrement(1);
+                if (!state.getValue(ChachapoyanIdol.SCALES)
+                        && state.getValue(ChachapoyanIdol.PENDANT)) {
+                    level.setBlock(pos, state.setValue(ChachapoyanIdol.SCALES, true), 3);
+                    if (!player.isCreative()) stack.shrink(1);
 
-                    world.playSound(
-                            null,
-                            pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
-                            SoundEvents.BLOCK_FLOWERING_AZALEA_PLACE,
-                            SoundCategory.NEUTRAL, 0.7f, 0.2f
+                    level.playSound(
+                            null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
+                            SoundEvents.FLOWERING_AZALEA_PLACE, SoundSource.NEUTRAL, 0.7f, 0.2f
                     );
-                    return ActionResult.CONSUME;
+                    return InteractionResult.CONSUME;
                 }
-                return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+                return InteractionResult.PASS;
             }
 
-            // --- ANKH_PENDANT ---
             case "ancientartifacts:ankh_pendant" -> {
-                if (!state.get(ChachapoyanIdol.PENDANT)
-                        && state.get(ChachapoyanIdol.KEY)) {
-                    world.setBlockState(pos, state.with(ChachapoyanIdol.PENDANT, true));
-                    if (!player.isCreative()) stack.decrement(1);
+                if (!state.getValue(ChachapoyanIdol.PENDANT)
+                        && state.getValue(ChachapoyanIdol.KEY)) {
+                    level.setBlock(pos, state.setValue(ChachapoyanIdol.PENDANT, true), 3);
+                    if (!player.isCreative()) stack.shrink(1);
 
-                    world.playSound(
-                            null,
-                            pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
-                            SoundEvents.BLOCK_AMETHYST_BLOCK_PLACE,
-                            SoundCategory.NEUTRAL, 0.8f, 0.3f
+                    level.playSound(
+                            null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
+                            SoundEvents.AMETHYST_BLOCK_PLACE, SoundSource.NEUTRAL, 0.8f, 0.3f
                     );
-                    return ActionResult.CONSUME;
+                    return InteractionResult.CONSUME;
                 }
-                return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+                return InteractionResult.PASS;
             }
 
-            // --- EVOKER_KEY ---
             case "ancientartifacts:evoker_key" -> {
-                if (!state.get(ChachapoyanIdol.KEY)) {
-                    world.setBlockState(pos, state.with(ChachapoyanIdol.KEY, true));
-                    world.playSound(
-                            null,
-                            pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
-                            SoundEvents.BLOCK_IRON_DOOR_OPEN,
-                            SoundCategory.NEUTRAL, 0.7f, 0.45f
+                if (!state.getValue(ChachapoyanIdol.KEY)) {
+                    level.setBlock(pos, state.setValue(ChachapoyanIdol.KEY, true), 3);
+                    level.playSound(
+                            null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
+                            SoundEvents.IRON_DOOR_OPEN, SoundSource.NEUTRAL, 0.7f, 0.45f
                     );
-                    return ActionResult.CONSUME;
+                    return InteractionResult.CONSUME;
                 }
-                return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+                return InteractionResult.PASS;
             }
 
             default -> {
-                return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+                return InteractionResult.PASS;
             }
         }
     }
 
     @Override
-    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-        super.onBreak(world, pos, state, player);
-        if(!player.isCreative()){
-            if(state.get(ChachapoyanIdol.PENDANT)){
+    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        super.playerWillDestroy(level, pos, state, player);
+        if (!player.isCreative()) {
+            if (state.getValue(ChachapoyanIdol.PENDANT)) {
                 ItemStack pendant = new ItemStack(ModItems.ANKH_PENDANT);
-                BlockPos dropPos = pos.up();
-                world.spawnEntity(new ItemEntity(world, dropPos.getX(), dropPos.getY(), dropPos.getZ(), pendant));
-                if(state.get(ChachapoyanIdol.SCALES)){
+                BlockPos dropPos = pos.above();
+                level.addFreshEntity(new ItemEntity(level, dropPos.getX(), dropPos.getY(), dropPos.getZ(), pendant));
+                if (state.getValue(ChachapoyanIdol.SCALES)) {
                     ItemStack scales = new ItemStack(ModItems.ELDER_GUARDIAN_SCALES);
-                    world.spawnEntity(new ItemEntity(world, dropPos.getX(), dropPos.getY(), dropPos.getZ(), scales));
+                    level.addFreshEntity(new ItemEntity(level, dropPos.getX(), dropPos.getY(), dropPos.getZ(), scales));
                 }
             }
         }
@@ -239,33 +233,32 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
 
     @Nullable
     @Override
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
+    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+        return this.defaultBlockState().setValue(FACING, ctx.getHorizontalDirection().getOpposite());
     }
 
     @Override
-    public BlockState rotate(BlockState state, BlockRotation rotation) {
-        return state.with(FACING, rotation.rotate(state.get(FACING)));
+    public BlockState rotate(BlockState state, Rotation rotation) {
+        return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
     }
 
     @Override
-    public BlockState mirror(BlockState state, BlockMirror mirror) {
-        return state.rotate(mirror.getRotation(state.get(FACING)));
+    public BlockState mirror(BlockState state, Mirror mirror) {
+        return state.rotate(mirror.getRotation(state.getValue(FACING)));
     }
 
     private BlockPattern getMonumentPatternOC() {
         if (this.elderianMonumentPatternOC == null) {
             this.elderianMonumentPatternOC = BlockPatternBuilder.start()
-                    // y = 0 (top layer): O ^ C  (idol at center ^)
                     .aisle("O^C",
                             "NDN",
                             "~N~")
-                    .where('O', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.TOTEM_OF_ORDER)))
-                    .where('C', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.TOTEM_OF_CHAOS)))
-                    .where('^', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.CHACHAPOYAN_IDOL)))
-                    .where('N', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.NENDER_BRICK)))
-                    .where('D', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(Blocks.DIRT)))
-                    .where('~', pos -> pos.getBlockState().isAir())
+                    .where('O', BlockInWorld.hasState(BlockStatePredicate.forBlock(ModBlocks.TOTEM_OF_ORDER)))
+                    .where('C', BlockInWorld.hasState(BlockStatePredicate.forBlock(ModBlocks.TOTEM_OF_CHAOS)))
+                    .where('^', BlockInWorld.hasState(BlockStatePredicate.forBlock(ModBlocks.CHACHAPOYAN_IDOL)))
+                    .where('N', BlockInWorld.hasState(BlockStatePredicate.forBlock(ModBlocks.NENDER_BRICK)))
+                    .where('D', BlockInWorld.hasState(BlockStatePredicate.forBlock(Blocks.DIRT)))
+                    .where('~', pos -> pos.getState().isAir())
                     .build();
         }
         return this.elderianMonumentPatternOC;
@@ -277,33 +270,32 @@ public class ChachapoyanIdol extends HorizontalFacingBlock {
                     .aisle("C^O",
                             "NDN",
                             "~N~")
-                    .where('O', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.TOTEM_OF_ORDER)))
-                    .where('C', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.TOTEM_OF_CHAOS)))
-                    .where('^', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.CHACHAPOYAN_IDOL)))
-                    .where('N', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.NENDER_BRICK)))
-                    .where('D', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(Blocks.DIRT)))
-                    .where('~', pos -> pos.getBlockState().isAir())
+                    .where('O', BlockInWorld.hasState(BlockStatePredicate.forBlock(ModBlocks.TOTEM_OF_ORDER)))
+                    .where('C', BlockInWorld.hasState(BlockStatePredicate.forBlock(ModBlocks.TOTEM_OF_CHAOS)))
+                    .where('^', BlockInWorld.hasState(BlockStatePredicate.forBlock(ModBlocks.CHACHAPOYAN_IDOL)))
+                    .where('N', BlockInWorld.hasState(BlockStatePredicate.forBlock(ModBlocks.NENDER_BRICK)))
+                    .where('D', BlockInWorld.hasState(BlockStatePredicate.forBlock(Blocks.DIRT)))
+                    .where('~', pos -> pos.getState().isAir())
                     .build();
         }
         return this.elderianMonumentPatternCO;
     }
 
     @Nullable
-    private BlockPattern.Result findMonument(World world, BlockPos pos) {
-        BlockPattern.Result res = this.getMonumentPatternOC().searchAround(world, pos);
+    private BlockPatternMatch findMonument(Level level, BlockPos pos) {
+        BlockPatternMatch res = this.getMonumentPatternOC().find(level, pos);
         if (res == null) {
-            res = this.getMonumentPatternCO().searchAround(world, pos);
+            res = this.getMonumentPatternCO().find(level, pos);
         }
         return res;
     }
 
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING, KEY, PENDANT, SCALES, ELDERIAN_MONUMENT);
     }
 
     static {
-        SHAPE = Block.createCuboidShape(1, 0, 2, 14, 15.5, 14);
+        SHAPE = Block.box(1, 0, 2, 14, 15.5, 14);
     }
 }

@@ -2,41 +2,49 @@ package net.eagle.ancientartifacts.block.custom;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-import net.minecraft.block.*;
-import net.minecraft.entity.ai.pathing.NavigationType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.*;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.*;
-import net.minecraft.world.block.WireOrientation;
-import net.minecraft.world.tick.ScheduledTickView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LevelEvent;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.*;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.level.redstone.Orientation;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 import java.util.Map;
 
-public class CopperWire extends Block implements Waterloggable{
+public class CopperWire extends Block implements SimpleWaterloggedBlock {
 
     public static final BooleanProperty WATERLOGGED;
-    public static final EnumProperty<Direction> FACING = Properties.FACING;
-    public static final BooleanProperty WIRE_CONNECTION_NORTH = Properties.NORTH;
-    public static final BooleanProperty WIRE_CONNECTION_SOUTH = Properties.SOUTH;
-    public static final BooleanProperty WIRE_CONNECTION_EAST = Properties.EAST;
-    public static final BooleanProperty WIRE_CONNECTION_WEST = Properties.WEST;
-    public static final BooleanProperty WIRE_CONNECTION_UP = Properties.UP;
-    public static final BooleanProperty WIRE_CONNECTION_DOWN = Properties.DOWN;
+    public static final EnumProperty<Direction> FACING = BlockStateProperties.FACING;
+    public static final BooleanProperty WIRE_CONNECTION_NORTH = BlockStateProperties.NORTH;
+    public static final BooleanProperty WIRE_CONNECTION_SOUTH = BlockStateProperties.SOUTH;
+    public static final BooleanProperty WIRE_CONNECTION_EAST = BlockStateProperties.EAST;
+    public static final BooleanProperty WIRE_CONNECTION_WEST = BlockStateProperties.WEST;
+    public static final BooleanProperty WIRE_CONNECTION_UP = BlockStateProperties.UP;
+    public static final BooleanProperty WIRE_CONNECTION_DOWN = BlockStateProperties.DOWN;
     public static final BooleanProperty IS_ROOT;
     public static final BooleanProperty IS_POWERED;
-    public static final IntProperty POWER = IntProperty.of("power", 0, 15);
+    public static final IntegerProperty POWER = IntegerProperty.create("power", 0, 15);
     protected static final VoxelShape ROD_X_SHAPE;
     protected static final VoxelShape ROD_Y_SHAPE;
     protected static final VoxelShape ROD_Z_SHAPE;
@@ -45,37 +53,38 @@ public class CopperWire extends Block implements Waterloggable{
     private static final Map<BlockState, VoxelShape> SHAPES = Maps.newHashMap();
     public static final Map<Direction, BooleanProperty> DIRECTION_TO_WIRE_CONNECTION_PROPERTY = Maps.newHashMap(ImmutableMap.of(Direction.NORTH, WIRE_CONNECTION_NORTH, Direction.EAST, WIRE_CONNECTION_EAST, Direction.SOUTH, WIRE_CONNECTION_SOUTH, Direction.WEST, WIRE_CONNECTION_WEST, Direction.UP, WIRE_CONNECTION_UP, Direction.DOWN, WIRE_CONNECTION_DOWN));
 
-
-    public CopperWire(Settings settings) {
-        super(settings);
-        this.setDefaultState(this.stateManager.getDefaultState().with(IS_ROOT, false).with(IS_POWERED, false).with(WATERLOGGED, false).with(FACING, Direction.DOWN).with(WIRE_CONNECTION_DOWN, false).with(WIRE_CONNECTION_UP, false).with(WIRE_CONNECTION_NORTH, false).with(WIRE_CONNECTION_SOUTH,false).with(WIRE_CONNECTION_EAST,false).with(WIRE_CONNECTION_WEST,false).with(POWER,0));
-        for (BlockState blockState : this.getStateManager().getStates()) {
-            if (blockState.get(POWER) != 0) continue;
+    public CopperWire(Properties properties) {
+        super(properties);
+        this.registerDefaultState(this.stateDefinition.any().setValue(IS_ROOT, false).setValue(IS_POWERED, false).setValue(WATERLOGGED, false).setValue(FACING, Direction.DOWN).setValue(WIRE_CONNECTION_DOWN, false).setValue(WIRE_CONNECTION_UP, false).setValue(WIRE_CONNECTION_NORTH, false).setValue(WIRE_CONNECTION_SOUTH,false).setValue(WIRE_CONNECTION_EAST,false).setValue(WIRE_CONNECTION_WEST,false).setValue(POWER,0));
+        for (BlockState blockState : this.getStateDefinition().getPossibleStates()) {
+            if (blockState.getValue(POWER) != 0) continue;
             SHAPES.put(blockState, this.getShapeForState(blockState));
         }
     }
+
     @Override
-    protected boolean canPathfindThrough(BlockState state, NavigationType type) {
+    protected boolean isPathfindable(BlockState state, PathComputationType type) {
         return false;
     }
-    
+
     @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return SHAPES.get(state.with(POWER, 0).with(IS_POWERED, false));
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return SHAPES.get(state.setValue(POWER, 0).setValue(IS_POWERED, false));
     }
 
     private VoxelShape getShapeForState(BlockState state) {
         VoxelShape shape = getBaseShape(state);
         for (Direction direction : Direction.values()) {
-            if (state.get(DIRECTION_TO_WIRE_CONNECTION_PROPERTY.get(direction))) {
+            if (state.getValue(DIRECTION_TO_WIRE_CONNECTION_PROPERTY.get(direction))) {
                 VoxelShape tempShape = DIRECTION_TO_SIDE_SHAPE.get(direction);
-                shape = VoxelShapes.union(tempShape, shape);
+                shape = Shapes.or(tempShape, shape);
             }
         }
         return shape;
     }
+
     public VoxelShape getBaseShape(BlockState state) {
-        switch (state.get(FACING).getAxis()) {
+        switch (state.getValue(FACING).getAxis()) {
             default: {
                 return ROD_X_SHAPE;
             }
@@ -86,221 +95,223 @@ public class CopperWire extends Block implements Waterloggable{
         }
         return ROD_Y_SHAPE;
     }
+
     @Nullable
     @Override
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        boolean waterlogged = ctx.getWorld().getFluidState(ctx.getBlockPos()).getFluid() == Fluids.WATER;
-        return this.getPlacementState(ctx.getWorld(), this.getDefaultState(), ctx.getBlockPos())
-                .with(FACING, ctx.getSide()).with(WATERLOGGED, waterlogged);
+    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+        boolean waterlogged = ctx.getLevel().getFluidState(ctx.getClickedPos()).getType() == Fluids.WATER;
+        return this.getPlacementState(ctx.getLevel(), this.defaultBlockState(), ctx.getClickedPos())
+                .setValue(FACING, ctx.getClickedFace()).setValue(WATERLOGGED, waterlogged);
     }
-    private BlockState getPlacementState(World world, BlockState state, BlockPos pos){
+
+    private BlockState getPlacementState(Level level, BlockState state, BlockPos pos){
         int strongestPower = 0;
         for (Direction direction : Direction.values()) {
-            BlockPos neighborPos = pos.offset(direction);
-            BlockState neighborState = world.getBlockState(neighborPos);
+            BlockPos neighborPos = pos.relative(direction);
+            BlockState neighborState = level.getBlockState(neighborPos);
             if(neighborState.getBlock() == Blocks.COPPER_BLOCK || neighborState.getBlock() == Blocks.WAXED_COPPER_BLOCK){
-                BlockPos leverPos = findEtherLever(world, neighborPos);
-                BlockState leverPowerState = world.getBlockState(leverPos);
+                BlockPos leverPos = findEtherLever(level, neighborPos);
+                BlockState leverPowerState = level.getBlockState(leverPos);
                 if(leverPos != pos && leverPowerState.getBlock() instanceof EtherLever){
-                    state = state.with(DIRECTION_TO_WIRE_CONNECTION_PROPERTY.get(direction), true).with(IS_ROOT, true).with(POWER, world.getReceivedRedstonePower(neighborPos));
+                    state = state.setValue(DIRECTION_TO_WIRE_CONNECTION_PROPERTY.get(direction), true).setValue(IS_ROOT, true).setValue(POWER, level.getBestNeighborSignal(neighborPos));
                 } else {
-                    state = state.with(DIRECTION_TO_WIRE_CONNECTION_PROPERTY.get(direction), true).with(IS_ROOT, false);
+                    state = state.setValue(DIRECTION_TO_WIRE_CONNECTION_PROPERTY.get(direction), true).setValue(IS_ROOT, false);
                 }
             }
             else if (neighborState.getBlock() instanceof CopperWire) {
-                state = state.with(DIRECTION_TO_WIRE_CONNECTION_PROPERTY.get(direction), true); // Set the property based on the direction
-                world.setBlockState(neighborPos, neighborState.with(DIRECTION_TO_WIRE_CONNECTION_PROPERTY.get(direction.getOpposite()), true), 3);
+                state = state.setValue(DIRECTION_TO_WIRE_CONNECTION_PROPERTY.get(direction), true);
+                level.setBlock(neighborPos, neighborState.setValue(DIRECTION_TO_WIRE_CONNECTION_PROPERTY.get(direction.getOpposite()), true), 3);
             } else {
-                if(neighborState.isSolidBlock(world, neighborPos)){
-                    state = state.with(DIRECTION_TO_WIRE_CONNECTION_PROPERTY.get(direction), true);
+                if(neighborState.isSolidRender()){
+                    state = state.setValue(DIRECTION_TO_WIRE_CONNECTION_PROPERTY.get(direction), true);
                 }
             }
         }
-        strongestPower = getStrongestRestonePower(world, pos);
+        strongestPower = getStrongestRestonePower(level, pos);
         if(strongestPower == 0){
-            state = state.with(POWER, strongestPower);
+            state = state.setValue(POWER, strongestPower);
         } else{
-            state = state.with(POWER, strongestPower - 1);
-            world.syncWorldEvent(WorldEvents.ELECTRICITY_SPARKS, pos, state.get(FACING).getAxis().ordinal());
+            state = state.setValue(POWER, strongestPower - 1);
+            level.levelEvent(LevelEvent.PARTICLES_ELECTRIC_SPARK, pos, state.getValue(FACING).getAxis().ordinal());
         }
-        if(state.get(POWER) > 0){
-            state = state.with(IS_POWERED, true);
-
+        if(state.getValue(POWER) > 0){
+            state = state.setValue(IS_POWERED, true);
         } else {
-            state = state.with(IS_POWERED, false);
+            state = state.setValue(IS_POWERED, false);
         }
         return state;
     }
-    @Override
-    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-        super.onBreak(world, pos, state, player);
 
-        // Update the neighboring CopperWire blocks when a block is broken
+    @Override
+    public @NonNull BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        super.playerWillDestroy(level, pos, state, player);
+
         for (Direction direction : Direction.values()) {
-            BlockPos neighborPos = pos.offset(direction);
-            BlockState neighborState = world.getBlockState(neighborPos);
+            BlockPos neighborPos = pos.relative(direction);
+            BlockState neighborState = level.getBlockState(neighborPos);
             if (neighborState.getBlock() instanceof CopperWire) {
-                if(state.get(IS_ROOT)){
-                    BlockState updatedNeighborState = neighborState.with(DIRECTION_TO_WIRE_CONNECTION_PROPERTY.get(direction.getOpposite()), false).with(POWER, 0).with(IS_POWERED, false);
-                    world.setBlockState(neighborPos, updatedNeighborState, 3);
+                if(state.getValue(IS_ROOT)){
+                    BlockState updatedNeighborState = neighborState.setValue(DIRECTION_TO_WIRE_CONNECTION_PROPERTY.get(direction.getOpposite()), false).setValue(POWER, 0).setValue(IS_POWERED, false);
+                    level.setBlock(neighborPos, updatedNeighborState, 3);
                 } else{
-                    BlockState updatedNeighborState = neighborState.with(DIRECTION_TO_WIRE_CONNECTION_PROPERTY.get(direction.getOpposite()), false);
-                    world.setBlockState(neighborPos, updatedNeighborState, 3);
+                    BlockState updatedNeighborState = neighborState.setValue(DIRECTION_TO_WIRE_CONNECTION_PROPERTY.get(direction.getOpposite()), false);
+                    level.setBlock(neighborPos, updatedNeighborState, 3);
                 }
-                this.updateNeighbors(world, pos);
+                this.updateNeighbors(level, pos);
             }
         }
         return state;
     }
+
     @Override
-    public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
-        if (oldState.isOf(state.getBlock()) || world.isClient()) {
+    protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
+        if (oldState.is(state.getBlock()) || level.isClientSide()) {
             return;
         }
-        this.updateNeighbors(world, pos);
+        this.updateNeighbors(level, pos);
 
-        // Call update for CopperWire and non-CopperWire neighbors
         for (Direction direction : Direction.values()) {
-            world.updateNeighborsAlways(pos.offset(direction), this, null);
+            level.updateNeighborsAt(pos.relative(direction), this);
         }
 
-        this.updateOffsetNeighbors(world, pos);
+        this.updateOffsetNeighbors(level, pos);
     }
-    private void updateOffsetNeighbors(World world, BlockPos pos) {
-        // Update all offset neighbors
+
+    private void updateOffsetNeighbors(Level level, BlockPos pos) {
         for (Direction direction : Direction.values()) {
-            this.updateNeighbors(world, pos.offset(direction));
+            this.updateNeighbors(level, pos.relative(direction));
         }
         for (Direction direction : Direction.values()) {
-            BlockPos blockPos = pos.offset(direction);
-            if (world.getBlockState(blockPos).isSolidBlock(world, blockPos)) {
-                this.updateNeighbors(world, blockPos.up());
+            BlockPos blockPos = pos.relative(direction);
+            if (level.getBlockState(blockPos).isSolidRender()) {
+                this.updateNeighbors(level, blockPos.above());
                 continue;
             }
-            this.updateNeighbors(world, blockPos.down());
-
+            this.updateNeighbors(level, blockPos.below());
         }
     }
-    private void updateNeighbors(World world, BlockPos pos) {
-        world.updateNeighborsAlways(pos, this, null);
+
+    private void updateNeighbors(Level level, BlockPos pos) {
+        level.updateNeighborsAt(pos, this);
         for (Direction direction : Direction.values()) {
-            world.updateNeighborsAlways(pos.offset(direction), this, null);
+            level.updateNeighborsAt(pos.relative(direction), this);
         }
     }
 
     @Override
-    protected void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, @Nullable WireOrientation wireOrientation, boolean notify) {
-        super.neighborUpdate(state, world, pos, sourceBlock, wireOrientation, notify);
+    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block sourceBlock, @Nullable Orientation wireOrientation, boolean isMoving) {
+        super.neighborChanged(state, level, pos, sourceBlock, wireOrientation, isMoving);
 
-        // Shim to reconstruct 'fromPos' since Mojang removed it.
-        // This allows the rest of your original logic to run entirely unmodified.
         BlockPos fromPos = null;
         for (Direction dir : Direction.values()) {
-            BlockPos offsetPos = pos.offset(dir);
-            if (world.getBlockState(offsetPos).getBlock() == sourceBlock) {
+            BlockPos offsetPos = pos.relative(dir);
+            if (level.getBlockState(offsetPos).getBlock() == sourceBlock) {
                 fromPos = offsetPos;
                 break;
             }
         }
 
-        // If we can't find the adjacent block that triggered it, abort to prevent null crashes
         if (fromPos == null) return;
 
         int netPower = 0;
-        BlockState copperPowerState = world.getBlockState(fromPos);
-        BlockState fromState = world.getBlockState(fromPos);
+        BlockState copperPowerState = level.getBlockState(fromPos);
+        BlockState fromState = level.getBlockState(fromPos);
+
         if(copperPowerState.getBlock() == Blocks.COPPER_BLOCK || copperPowerState.getBlock() == Blocks.WAXED_COPPER_BLOCK) {
-            BlockPos leverPos = findEtherLever(world, fromPos);
-            BlockState leverState = world.getBlockState(leverPos);
+            BlockPos leverPos = findEtherLever(level, fromPos);
+            BlockState leverState = level.getBlockState(leverPos);
             if(leverState.getBlock() instanceof EtherLever){
-                netPower = world.getReceivedRedstonePower(fromPos);
-                state = state.with(POWER, netPower).with(IS_ROOT, true);
-                if(state.get(POWER) > 0){
-                    state = state.with(IS_POWERED, true);
-                    world.syncWorldEvent(WorldEvents.ELECTRICITY_SPARKS, pos, state.get(FACING).getAxis().ordinal());
+                netPower = level.getBestNeighborSignal(fromPos);
+                state = state.setValue(POWER, netPower).setValue(IS_ROOT, true);
+                if(state.getValue(POWER) > 0){
+                    state = state.setValue(IS_POWERED, true);
+                    level.levelEvent(LevelEvent.PARTICLES_ELECTRIC_SPARK, pos, state.getValue(FACING).getAxis().ordinal());
                 } else {
-                    state = state.with(IS_POWERED, false);
+                    state = state.setValue(IS_POWERED, false);
                 }
-                world.setBlockState(pos, state, 3);
+                level.setBlock(pos, state, 3);
                 return;
             } else {
-                state = state.with(POWER, netPower).with(IS_ROOT, false);
-                if(state.get(POWER) > 0){
-                    state = state.with(IS_POWERED, true);
+                state = state.setValue(POWER, netPower).setValue(IS_ROOT, false);
+                if(state.getValue(POWER) > 0){
+                    state = state.setValue(IS_POWERED, true);
                 } else {
-                    state = state.with(IS_POWERED, false);
+                    state = state.setValue(IS_POWERED, false);
                 }
-                world.setBlockState(pos, state, 3);
+                level.setBlock(pos, state, 3);
                 return;
             }
         } else if(fromState.getBlock() instanceof CopperWire){
-            if(!state.get(IS_ROOT)){
-                int strongestPower = getStrongestRestonePower(world, pos);
+            if(!state.getValue(IS_ROOT)){
+                int strongestPower = getStrongestRestonePower(level, pos);
                 for (Direction direction : Direction.values()) {
-                    BlockPos neighborPos = pos.offset(direction);
-                    BlockState neighborState = world.getBlockState(neighborPos);
+                    BlockPos neighborPos = pos.relative(direction);
+                    BlockState neighborState = level.getBlockState(neighborPos);
                     if(neighborState.getBlock() instanceof CopperWire){
-                        int powerRecieved = world.getEmittedRedstonePower(pos.offset(direction), direction);
+                        int powerRecieved = level.getSignal(pos.relative(direction), direction);
                         strongestPower = Math.max(strongestPower, powerRecieved);
                     }
                 }
                 if(strongestPower == 0){
-                    state = state.with(POWER, strongestPower);
+                    state = state.setValue(POWER, strongestPower);
                 } else{
-                    state = state.with(POWER, strongestPower - 1);
+                    state = state.setValue(POWER, strongestPower - 1);
                 }
             }
         }
-        if(state.get(POWER) > 0){
-            state = state.with(IS_POWERED, true);
+
+        if(state.getValue(POWER) > 0){
+            state = state.setValue(IS_POWERED, true);
         } else {
-            state = state.with(IS_POWERED, false);
+            state = state.setValue(IS_POWERED, false);
         }
-        if(state.get(IS_ROOT)){
+
+        if(state.getValue(IS_ROOT)){
             boolean hasCopperBlockNeighbor = false;
             for (Direction direction : Direction.values()) {
-                BlockPos neighborPos = pos.offset(direction);
-                if (world.getBlockState(neighborPos).getBlock() == Blocks.COPPER_BLOCK || world.getBlockState(neighborPos).getBlock() == Blocks.WAXED_COPPER_BLOCK) {
+                BlockPos neighborPos = pos.relative(direction);
+                if (level.getBlockState(neighborPos).getBlock() == Blocks.COPPER_BLOCK || level.getBlockState(neighborPos).getBlock() == Blocks.WAXED_COPPER_BLOCK) {
                     hasCopperBlockNeighbor = true;
                     break;
                 }
             }
             if (!hasCopperBlockNeighbor) {
-                state = state.with(POWER, 0).with(IS_POWERED, false).with(IS_ROOT, false);
+                state = state.setValue(POWER, 0).setValue(IS_POWERED, false).setValue(IS_ROOT, false);
             }
         } else {
             boolean hasCopperWireNeighbors = false;
             for (Direction direction : Direction.values()) {
-                BlockPos neighborPos = pos.offset(direction);
-                if (world.getBlockState(neighborPos).getBlock() instanceof CopperWire) {
+                BlockPos neighborPos = pos.relative(direction);
+                if (level.getBlockState(neighborPos).getBlock() instanceof CopperWire) {
                     hasCopperWireNeighbors = true;
                     break;
                 }
             }
 
-            // If no CopperWire neighbors are found, reset the power to 0
             if (!hasCopperWireNeighbors) {
-                state = state.with(POWER, 0).with(IS_POWERED, false);
+                state = state.setValue(POWER, 0).setValue(IS_POWERED, false);
             }
         }
-        world.setBlockState(pos, state, 3);
+        level.setBlock(pos, state, 3);
     }
-    private int getStrongestRestonePower(World world, BlockPos pos){
+
+    private int getStrongestRestonePower(Level level, BlockPos pos){
         int strongestPower = 0;
         for (Direction direction : Direction.values()) {
-            BlockPos neighborPos = pos.offset(direction);
-            BlockState neighborState = world.getBlockState(neighborPos);
+            BlockPos neighborPos = pos.relative(direction);
+            BlockState neighborState = level.getBlockState(neighborPos);
             if(neighborState.getBlock() instanceof CopperWire){
-                int powerReceived = neighborState.get(POWER);
+                int powerReceived = neighborState.getValue(POWER);
                 strongestPower = Math.max(strongestPower, powerReceived);
             }
         }
         return strongestPower;
     }
-    private BlockPos findEtherLever(World world, BlockPos pos){
+
+    private BlockPos findEtherLever(Level level, BlockPos pos){
         for (Direction direction : Direction.values()) {
-            BlockPos leverPos = pos.offset(direction);
-            BlockState leverState = world.getBlockState(leverPos);
+            BlockPos leverPos = pos.relative(direction);
+            BlockState leverState = level.getBlockState(leverPos);
             if(leverState.getBlock() instanceof EtherLever){
                 return leverPos;
             }
@@ -309,76 +320,79 @@ public class CopperWire extends Block implements Waterloggable{
     }
 
     @Override
-    protected BlockState getStateForNeighborUpdate(BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random) {
-        if (state.get(WATERLOGGED)) {
-            tickView.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+    protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess tickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
+        if (state.getValue(WATERLOGGED)) {
+            tickAccess.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
-        return super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random);
-    }
-    @Override
-    public BlockState rotate(BlockState state, BlockRotation rotation) {
-        return state.with(FACING, rotation.rotate(state.get(FACING)));
+        return super.updateShape(state, level, tickAccess, pos, direction, neighborPos, neighborState, random);
     }
 
     @Override
-    public BlockState mirror(BlockState state, BlockMirror mirror) {
-        return state.rotate(mirror.getRotation(state.get(FACING)));
+    public BlockState rotate(BlockState state, Rotation rotation) {
+        return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
     }
 
     @Override
-    public boolean emitsRedstonePower(BlockState state) {
+    public BlockState mirror(BlockState state, Mirror mirror) {
+        return state.rotate(mirror.getRotation(state.getValue(FACING)));
+    }
+
+    @Override
+    public boolean isSignalSource(BlockState state) {
         return true;
     }
+
     @Override
-    public int getWeakRedstonePower(BlockState state, BlockView world, BlockPos pos, Direction direction) {
-        if(state.get(POWER) == 0){
+    public int getSignal(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+        if(state.getValue(POWER) == 0){
             return 0;
         }
-        if (state.get(DIRECTION_TO_WIRE_CONNECTION_PROPERTY.get(direction))) {
-            return state.get(POWER);
+        if (state.getValue(DIRECTION_TO_WIRE_CONNECTION_PROPERTY.get(direction))) {
+            return state.getValue(POWER);
         }
         return 0;
     }
+
     @Override
-    public int getStrongRedstonePower(BlockState state, BlockView world, BlockPos pos, Direction direction) {
-        return state.getWeakRedstonePower(world, pos, direction);
+    public int getDirectSignal(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+        return state.getSignal(level, pos, direction);
     }
+
     @Override
     public FluidState getFluidState(BlockState state) {
-        if (state.get(WATERLOGGED)) {
-            return Fluids.WATER.getStill(false);
+        if (state.getValue(WATERLOGGED)) {
+            return Fluids.WATER.getSource(false);
         }
         return super.getFluidState(state);
     }
+
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(IS_ROOT, WATERLOGGED, IS_POWERED, POWER, FACING, WIRE_CONNECTION_NORTH, WIRE_CONNECTION_SOUTH, WIRE_CONNECTION_EAST, WIRE_CONNECTION_WEST, WIRE_CONNECTION_UP, WIRE_CONNECTION_DOWN);
     }
 
     static {
-        WATERLOGGED = Properties.WATERLOGGED;
-        IS_ROOT = BooleanProperty.of("is_root");
-        IS_POWERED = BooleanProperty.of("is_powered");
-        VoxelShape vx1 = Block.createCuboidShape(0,6.3,6.3,2.5,9.7,9.7);
-        VoxelShape vx2 = Block.createCuboidShape(2.5,7,7,13.5,9,9);
-        VoxelShape vx3 = Block.createCuboidShape(13.5,6.3,6.3,16,9.7,9.7);
+        WATERLOGGED = BlockStateProperties.WATERLOGGED;
+        IS_ROOT = BooleanProperty.create("is_root");
+        IS_POWERED = BooleanProperty.create("is_powered");
+        VoxelShape vx1 = Block.box(0,6.3,6.3,2.5,9.7,9.7);
+        VoxelShape vx2 = Block.box(2.5,7,7,13.5,9,9);
+        VoxelShape vx3 = Block.box(13.5,6.3,6.3,16,9.7,9.7);
 
-        ROD_X_SHAPE = VoxelShapes.union(vx1, vx2, vx3).simplify();
+        ROD_X_SHAPE = Shapes.or(vx1, vx2, vx3).optimize();
 
-        VoxelShape vy1 = Block.createCuboidShape(6.3,0,6.3,9.7,2.5,9.7);
-        VoxelShape vy2 = Block.createCuboidShape(7,2.5,7,9,13.5,9);
-        VoxelShape vy3 = Block.createCuboidShape(6.3,13.5,6.3,9.7,16,9.7);
+        VoxelShape vy1 = Block.box(6.3,0,6.3,9.7,2.5,9.7);
+        VoxelShape vy2 = Block.box(7,2.5,7,9,13.5,9);
+        VoxelShape vy3 = Block.box(6.3,13.5,6.3,9.7,16,9.7);
 
-        ROD_Y_SHAPE = VoxelShapes.union(vy1, vy2, vy3).simplify();
+        ROD_Y_SHAPE = Shapes.or(vy1, vy2, vy3).optimize();
 
-        VoxelShape vz1 = Block.createCuboidShape(6.3,6.3,0,9.7,9.7,2.5);
-        VoxelShape vz2 = Block.createCuboidShape(7,7,2.5,9,9,13.5);
-        VoxelShape vz3 = Block.createCuboidShape(6.3,6.3,13.5,9.7,9.7,16);
+        VoxelShape vz1 = Block.box(6.3,6.3,0,9.7,9.7,2.5);
+        VoxelShape vz2 = Block.box(7,7,2.5,9,9,13.5);
+        VoxelShape vz3 = Block.box(6.3,6.3,13.5,9.7,9.7,16);
 
-        ROD_Z_SHAPE = VoxelShapes.union(vz1, vz2, vz3).simplify();
+        ROD_Z_SHAPE = Shapes.or(vz1, vz2, vz3).optimize();
 
         DIRECTION_TO_SIDE_SHAPE = Maps.newEnumMap(ImmutableMap.of(Direction.NORTH, ROD_Z_SHAPE, Direction.SOUTH, ROD_Z_SHAPE, Direction.EAST, ROD_X_SHAPE, Direction.WEST, ROD_X_SHAPE, Direction.UP, ROD_Y_SHAPE, Direction.DOWN, ROD_Y_SHAPE));
-
     }
-
 }

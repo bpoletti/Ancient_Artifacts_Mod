@@ -2,168 +2,144 @@ package net.eagle.ancientartifacts.datagen;
 
 import net.eagle.ancientartifacts.block.ModBlocks;
 import net.eagle.ancientartifacts.item.ModItems;
-import net.eagle.ancientartifacts.potion.ModPotions;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
-import net.minecraft.advancement.Advancement;
-import net.minecraft.advancement.AdvancementEntry;
-import net.minecraft.advancement.AdvancementFrame;
-import net.minecraft.advancement.AdvancementRewards;
-import net.minecraft.advancement.criterion.InventoryChangedCriterion;
-import net.minecraft.advancement.criterion.ItemCriterion;
-import net.minecraft.component.ComponentMap;
-import net.minecraft.component.type.PotionContentsComponent;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.potion.Potion;
-import net.minecraft.predicate.BlockPredicate;
-import net.minecraft.predicate.component.ComponentMapPredicate;
-import net.minecraft.predicate.component.ComponentsPredicate;
-import net.minecraft.predicate.entity.LocationPredicate;
-import net.minecraft.predicate.item.ItemPredicate;
-import net.minecraft.registry.*;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
+
+import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementHolder;
+import net.minecraft.advancements.AdvancementRewards;
+import net.minecraft.advancements.AdvancementType;
+import net.minecraft.advancements.criterion.*;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
+import org.jspecify.annotations.NonNull;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.item.Item;
-import net.minecraft.block.Block;
 
 public class ModAdvancementProvider extends FabricAdvancementProvider {
 
-    public ModAdvancementProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+    public ModAdvancementProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
         super(output, registryLookup);
     }
 
     @Override
-    public void generateAdvancement(RegistryWrapper.WrapperLookup wrapperLookup, Consumer<AdvancementEntry> consumer) {
+    public void generateAdvancement(HolderLookup.Provider wrapperLookup, @NonNull Consumer<AdvancementHolder> consumer) {
 
-        RegistryEntryLookup<Item> itemLookup = wrapperLookup.getOrThrow(RegistryKeys.ITEM);
-        RegistryEntryLookup<Block> blockLookup = wrapperLookup.getOrThrow(RegistryKeys.BLOCK);
+        HolderGetter<Item> itemLookup = wrapperLookup.lookupOrThrow(Registries.ITEM);
+        HolderGetter<Block> blockLookup = wrapperLookup.lookupOrThrow(Registries.BLOCK);
 
-        AdvancementEntry root = Advancement.Builder.create()
+        AdvancementHolder root = Advancement.Builder.advancement()
                 .display(
-                        ModBlocks.CHACHAPOYAN_IDOL.asItem(),
-                        Text.literal("Not Today Dr. Jones!"),
-                        Text.literal("Found the Chachapoyan Idol"),
-                        Identifier.of("ancientartifacts", "textures/block/nender_brick.png"),
-                        AdvancementFrame.TASK,
+                        ModBlocks.CHACHAPOYAN_IDOL.asItem(), // Restored to your working state
+                        Component.literal("Not Today Dr. Jones!"),
+                        Component.literal("Found the Chachapoyan Idol"),
+                        Identifier.fromNamespaceAndPath("ancientartifacts", "block/nender_brick"),
+                        AdvancementType.TASK,
                         true,
                         true,
                         false
                 )
-                .criterion("golden_head",
-                        InventoryChangedCriterion.Conditions.items(ModBlocks.CHACHAPOYAN_IDOL.asItem()))
-                .build(consumer, "ancientartifacts/root");
+                .addCriterion("golden_head",
+                        InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.CHACHAPOYAN_IDOL.asItem()))
+                .save(consumer, "ancientartifacts:root");
 
-        AdvancementEntry key_to_everything = Advancement.Builder.create()
+        AdvancementHolder key_to_everything = Advancement.Builder.advancement()
                 .parent(root)
                 .display(
-                        ModItems.EVOKER_KEY,
-                        Text.literal("The Key to Everything!"),
-                        Text.literal("Found the Evoker's Key"),
-                        null,
-                        AdvancementFrame.TASK,
+                        ModItems.EVOKER_KEY, // Restored
+                        Component.literal("The Key to Everything!"),
+                        Component.literal("Found the Evoker's Key"),
+                        Identifier.fromNamespaceAndPath("ancientartifacts", "block/nender_brick"),
+                        AdvancementType.TASK,
                         true,
                         true,
                         false
                 )
-                .criterion("key_nabbed",
-                        InventoryChangedCriterion.Conditions.items(ModItems.EVOKER_KEY))
-                .build(consumer, "ancientartifacts/evoker_key");
+                .addCriterion("key_nabbed",
+                        InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.EVOKER_KEY))
+                .save(consumer, "ancientartifacts:evoker_key");
 
-        AdvancementEntry ball_of_stars = Advancement.Builder.create()
+        AdvancementHolder ball_of_stars = Advancement.Builder.advancement()
                 .parent(key_to_everything)
                 .display(
-                        ModItems.FIREFLY_ORB,
-                        Text.literal("Ball of Stars"),
-                        Text.literal("Crafted the Firefly Orb"),
-                        null,
-                        AdvancementFrame.TASK,
+                        ModItems.FIREFLY_ORB, // Restored
+                        Component.literal("Ball of Stars"),
+                        Component.literal("Crafted the Firefly Orb"),
+                        Identifier.fromNamespaceAndPath("ancientartifacts", "block/nender_brick"),
+                        AdvancementType.TASK,
                         true,
                         true,
                         false
                 )
-                .criterion("star_orb",
-                        InventoryChangedCriterion.Conditions.items(ModItems.FIREFLY_ORB))
-                .build(consumer, "ancientartifacts/firefly_orb");
+                .addCriterion("star_orb",
+                        InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.FIREFLY_ORB))
+                .save(consumer, "ancientartifacts:firefly_orb");
 
-        RegistryEntry<Potion> drakePotionEntry = Registries.POTION.getEntry(ModPotions.ELIXIR_OF_DRAKE);
-
-        PotionContentsComponent potionContents = new PotionContentsComponent(drakePotionEntry);
-        ItemStack customPotionStack = new ItemStack(Items.POTION);
-        customPotionStack.set(DataComponentTypes.POTION_CONTENTS, potionContents);
-
-        ComponentMapPredicate componentMap = ComponentMapPredicate.builder()
-                .add(DataComponentTypes.POTION_CONTENTS, potionContents)
+        ItemPredicate itemPredicate = ItemPredicate.Builder.item()
+                .of(itemLookup, Items.POTION)
                 .build();
 
-        ComponentsPredicate potionPredicate = ComponentsPredicate.Builder.create()
-                .exact(componentMap)
-                .build();
-
-        ItemPredicate itemPredicate = ItemPredicate.Builder.create()
-                .items(itemLookup, Items.POTION)
-                .components(potionPredicate)
-                .build();
-
-        AdvancementEntry dragons_potion = Advancement.Builder.create()
+        AdvancementHolder dragons_potion = Advancement.Builder.advancement()
                 .parent(ball_of_stars)
                 .display(
-                        customPotionStack.getItem(),
-                        Text.literal("Taste Like Crap!"),
-                        Text.literal("Brewed the Elixir of Drake"),
-                        null,
-                        AdvancementFrame.TASK,
+                        Items.POTION,
+                        Component.literal("Taste Like Crap!"),
+                        Component.literal("Brewed the Elixir of Drake"),
+                        Identifier.fromNamespaceAndPath("ancientartifacts", "block/nender_brick"),
+                        AdvancementType.TASK,
                         true, true, false
                 )
-                .criterion(
+                .addCriterion(
                         "drake_potion",
-                        InventoryChangedCriterion.Conditions.items(itemPredicate)
+                        InventoryChangeTrigger.TriggerInstance.hasItems(itemPredicate)
                 )
-                .build(consumer, "ancientartifacts/elixir_of_drake");
+                .save(consumer, "ancientartifacts:elixir_of_drake");
 
 
-        AdvancementEntry magic_staff = Advancement.Builder.create()
+        AdvancementHolder magic_staff = Advancement.Builder.advancement()
                 .parent(dragons_potion)
                 .display(
-                        ModItems.END_STAFF,
-                        Text.literal("Wingardium Leviosa"),
-                        Text.literal("Crafted the End Staff"),
-                        null,
-                        AdvancementFrame.TASK,
+                        ModItems.END_STAFF, // Restored
+                        Component.literal("Wingardium Leviosa"),
+                        Component.literal("Crafted the End Staff"),
+                        Identifier.fromNamespaceAndPath("ancientartifacts", "block/nender_brick"),
+                        AdvancementType.TASK,
                         true,
                         true,
                         false
                 )
-                .criterion("end_staff",
-                        InventoryChangedCriterion.Conditions.items(ModItems.END_STAFF))
-                .build(consumer, "ancientartifacts/end_staff");
+                .addCriterion("end_staff",
+                        InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.END_STAFF))
+                .save(consumer, "ancientartifacts:end_staff");
 
-        AdvancementEntry end_gate_activation = Advancement.Builder.create()
+        AdvancementHolder end_gate_activation = Advancement.Builder.advancement()
                 .parent(magic_staff)
                 .display(
-                        ModItems.ORB_INFINIUM,
-                        Text.literal("§5The Beginning of the End?"),
-                        Text.literal("The Elderian Monument was activated and the End Gate has opened"),
-                        null,
-                        AdvancementFrame.GOAL,
+                        ModItems.ORB_INFINIUM, // Restored
+                        Component.literal("§5The Beginning of the End?"),
+                        Component.literal("The Elderian Monument was activated and the End Gate has opened"),
+                        Identifier.fromNamespaceAndPath("ancientartifacts", "block/nender_brick"),
+                        AdvancementType.GOAL,
                         true,
                         true,
                         false
                 )
-                .criterion("pedestal_final",
-                        ItemCriterion.Conditions.createItemUsedOnBlock(
-                                LocationPredicate.Builder.create()
-                                        .block(BlockPredicate.Builder.create()
-                                                .blocks(blockLookup, ModBlocks.DRAGON_PEDESTAL)),
-                                ItemPredicate.Builder.create()
-                                        .items(itemLookup, ModItems.END_STAFF)
+                .addCriterion("pedestal_final",
+                        ItemUsedOnLocationTrigger.TriggerInstance.itemUsedOnBlock(
+                                LocationPredicate.Builder.location()
+                                        .setBlock(BlockPredicate.Builder.block()
+                                                .of(blockLookup, ModBlocks.DRAGON_PEDESTAL)),
+                                ItemPredicate.Builder.item()
+                                        .of(itemLookup, ModItems.END_STAFF)
                         )
                 )
                 .rewards(AdvancementRewards.Builder.experience(500).build())
-                .build(consumer, "ancientartifacts/monument_opened");
+                .save(consumer, "ancientartifacts:monument_opened");
     }
 }

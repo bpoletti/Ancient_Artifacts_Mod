@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:ancientartifacts/root",
+  "parent": "ancientartifacts:root",
   "criteria": {
     "key_nabbed": {
       "conditions": {
@@ -13,9 +13,9 @@
     }
   },
   "display": {
+    "background": "ancientartifacts:block/nender_brick",
     "description": "Found the Evoker's Key",
     "icon": {
-      "count": 1,
       "id": "ancientartifacts:evoker_key"
     },
     "title": "The Key to Everything!"

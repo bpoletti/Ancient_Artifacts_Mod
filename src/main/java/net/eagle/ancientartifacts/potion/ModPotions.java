@@ -1,12 +1,12 @@
 package net.eagle.ancientartifacts.potion;
 
 import net.eagle.ancientartifacts.AncientArtifacts;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.potion.Potion;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.item.alchemy.Potion;
 
 public class ModPotions {
 
@@ -18,17 +18,18 @@ public class ModPotions {
     public static Potion ELIXIR_OF_DRAKE;
 
     private static Potion registerPotion(String name) {
-        Identifier id = Identifier.of(AncientArtifacts.MOD_ID, name);
+        Identifier id = Identifier.fromNamespaceAndPath(AncientArtifacts.MOD_ID, name);
 
         if ("elixir_of_drake".equals(name)) {
             return Registry.register(
-                    Registries.POTION, id,
-                    new Potion(name, new StatusEffectInstance(StatusEffects.LEVITATION, 200, 0))
+                    BuiltInRegistries.POTION, id,
+                    new Potion(name ,new MobEffectInstance(MobEffects.LEVITATION, 200, 0))
             );
         } else {
             return Registry.register(
-                    Registries.POTION, id,
-                    new Potion(name, new StatusEffectInstance(StatusEffects.NAUSEA, 100, 0))
+                    BuiltInRegistries.POTION, id,
+
+                    new Potion(name ,new MobEffectInstance(MobEffects.NAUSEA, 100, 0))
             );
         }
     }
